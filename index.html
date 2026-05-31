@@ -168,10 +168,10 @@
     .resize-handle.br { bottom: -7px; right: -7px; cursor: nwse-resize; }
 
     /* Mid-side resize handles */
-    .resize-handle.left  { left: -9px; top: 50%; transform: translateY(-50%); width: 18px; height: 36px; border-radius: 4px; cursor: ew-resize; background: rgba(200,90,23,0.3); }
-    .resize-handle.right { right: -9px; top: 50%; transform: translateY(-50%); width: 18px; height: 36px; border-radius: 4px; cursor: ew-resize; background: rgba(200,90,23,0.3); }
-    .resize-handle.top   { top: -9px; left: 50%; transform: translateX(-50%); width: 36px; height: 18px; border-radius: 4px; cursor: ns-resize; background: rgba(200,90,23,0.3); }
-    .resize-handle.bottom{ bottom: -9px; left: 50%; transform: translateX(-50%); width: 36px; height: 18px; border-radius: 4px; cursor: ns-resize; background: rgba(200,90,23,0.3); }
+    .resize-handle.left  { left: -8px; top: 50%; transform: translateY(-50%); width: 16px; height: 50px; border-radius: 3px; cursor: ew-resize; background: #c85a17; border: 2px solid #fff; }
+    .resize-handle.right { right: -8px; top: 50%; transform: translateY(-50%); width: 16px; height: 50px; border-radius: 3px; cursor: ew-resize; background: #c85a17; border: 2px solid #fff; }
+    .resize-handle.top   { top: -8px; left: 50%; transform: translateX(-50%); width: 50px; height: 16px; border-radius: 3px; cursor: ns-resize; background: #c85a17; border: 2px solid #fff; }
+    .resize-handle.bottom{ bottom: -8px; left: 50%; transform: translateX(-50%); width: 50px; height: 16px; border-radius: 3px; cursor: ns-resize; background: #c85a17; border: 2px solid #fff; }
     .inspector input, .inspector select {
       width: 100%;
       padding: 4px 6px;
@@ -663,21 +663,22 @@
         } else {
           // IMAGE LAYER — real Supabase image or styled placeholder
           if (layer.imageUrl) {
-            const imgOffsetX = layer.imageOffsetX || 0;
-            const imgOffsetY = layer.imageOffsetY || 0;
             const fit = layer.objectFit || 'cover';
+            const ox = layer.imageOffsetX || 0;
+            const oy = layer.imageOffsetY || 0;
 
             if (fit === 'cover') {
-              // Use background for reliable panning without ever showing the layer background
+              // Clean "image in frame" model using background
               el.style.backgroundImage = `url('${layer.imageUrl}')`;
               el.style.backgroundSize = 'cover';
-              el.style.backgroundPosition = `${imgOffsetX}% ${imgOffsetY}%`;
+              el.style.backgroundPosition = `${ox}% ${oy}%`;
               el.style.backgroundRepeat = 'no-repeat';
+              el.style.backgroundColor = 'transparent';
               el.innerHTML = `
                 <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
               `;
             } else {
-              // Contain mode - use img so the whole photo can be seen
+              // Contain / letterbox mode
               el.innerHTML = `
                 <img src="${layer.imageUrl}" 
                      alt="${layer.imageName || 'LWS artwork'}" 
@@ -685,7 +686,7 @@
                      onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'padding:8px;font-size:11px;color:#c85a17\\'>Image failed to load</div>'">
                 <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
               `;
-              el.style.background = 'transparent';
+              el.style.background = '#2a2a2a';
             }
           } else {
             // Placeholder style (dashed orange + hatch) as requested
@@ -854,11 +855,15 @@
           h = Math.max(3, orig.h - dy);
         }
 
-        // Clamp to canvas
-        x = Math.max(0, Math.min(96, x));
-        y = Math.max(0, Math.min(96, y));
-        w = Math.min(100 - x, w);
-        h = Math.min(100 - y, h);
+        // Minimal clamping only (no aggressive snapping during resize)
+        x = Math.max(0, x);
+        y = Math.max(0, y);
+        w = Math.max(3, w);
+        h = Math.max(3, h);
+
+        // Prevent going outside canvas
+        if (x + w > 100) x = 100 - w;
+        if (y + h > 100) y = 100 - h;
 
         layer.x = x;
         layer.y = y;
