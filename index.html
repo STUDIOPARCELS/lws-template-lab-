@@ -313,8 +313,13 @@
             <button onclick="deleteSelectedLayer()" class="danger" style="width:100%;margin-top:8px;">Delete Layer (Del/Backspace)</button>
             <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
             <button onclick="toggleImageFit()" style="width:100%;margin-top:6px;">🔳 Image Fit: Fill ⇄ Fit (whole image)</button>
-            <button onclick="resetImagePosition()" style="width:100%;margin-top:4px;font-size:12px;">Reset Image Position (pan)</button>
-            <div style="font-size:10px;color:#888;margin-top:6px;">Drag = move layer • <strong>Alt/Shift + Drag</strong> = pan image inside (Fill mode) • Double-click text to edit</div>
+            <button onclick="resetImagePosition()" style="width:100%;margin-top:4px;font-size:12px;">Reset Image Position</button>
+
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;font-size:11px;">
+              <div>Pan X <input id="image-pan-x" type="number" step="1" style="width:100%" onchange="updateImagePan()"></div>
+              <div>Pan Y <input id="image-pan-y" type="number" step="1" style="width:100%" onchange="updateImagePan()"></div>
+            </div>
+            <div style="font-size:10px;color:#888;margin-top:4px;">Alt/Shift + Drag = slide image inside box (any amount)</div>
           </div>
         </div>
       </div>
@@ -612,6 +617,17 @@
       autoSave();
     }
 
+    function updateImagePan() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer || layer.type !== 'image') return;
+
+      layer.imageOffsetX = parseFloat(document.getElementById('image-pan-x').value) || 0;
+      layer.imageOffsetY = parseFloat(document.getElementById('image-pan-y').value) || 0;
+
+      renderCanvas();
+      autoSave();
+    }
+
     // Removed X/Y/W/H inputs — replaced by "Center in Page" button.
     // function updateSelectedTransform() { ... }  (no longer needed)
 
@@ -747,12 +763,9 @@
           const dx = ((ev.clientX - rect.left) / rect.width * 100) - panStart.x;
           const dy = ((ev.clientY - rect.top) / rect.height * 100) - panStart.y;
 
-          layer.imageOffsetX = panStartOffset.x + dx * 0.95; // reduced sensitivity
+          // Allow completely free panning of the image inside the box
+          layer.imageOffsetX = panStartOffset.x + dx * 0.95;
           layer.imageOffsetY = panStartOffset.y + dy * 0.95;
-
-          // Reasonable constraint so image doesn't fly away
-          layer.imageOffsetX = Math.max(-120, Math.min(120, layer.imageOffsetX));
-          layer.imageOffsetY = Math.max(-120, Math.min(120, layer.imageOffsetY));
 
           renderCanvas();
           updateInspectorLive();
@@ -880,6 +893,21 @@
       });
 
       // X/Y/W/H inputs removed — no longer setting numeric values here.
+
+      // Image pan controls (only meaningful for image layers)
+      const panX = document.getElementById('image-pan-x');
+      const panY = document.getElementById('image-pan-y');
+      if (panX && panY) {
+        if (layer.type === 'image') {
+          panX.value = (layer.imageOffsetX || 0).toFixed(0);
+          panY.value = (layer.imageOffsetY || 0).toFixed(0);
+          panX.style.display = '';
+          panY.parentElement.style.display = '';
+        } else {
+          panX.style.display = 'none';
+          panY.parentElement.style.display = 'none';
+        }
+      }
     }
 
     function updateInspectorLive() {
