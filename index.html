@@ -870,6 +870,7 @@
       }
       pushUndo();
       layers = [];
+      editingSectionIndex = null;
 
       const p = currentProject;
       const title = p.title;
@@ -1016,6 +1017,7 @@
 
     // ==================== PAGE BUILDER ====================
     let savedSections = [];
+    let editingSectionIndex = null; // index of the saved section currently loaded for editing (null = none)
 
     function loadSavedSections() {
       try {
@@ -1027,7 +1029,20 @@
     }
 
     function saveCurrentAsSection() {
-      if (!layers.length) { alert("Canvas is empty."); return; }
+      if (!layers.length) { alert("Canvas is empty — add something first."); return; }
+
+      // If a saved section is currently loaded for editing, offer to update it in place.
+      if (editingSectionIndex !== null && savedSections[editingSectionIndex]) {
+        const sec = savedSections[editingSectionIndex];
+        if (confirm(`Update the section "${sec.name}" with your changes?\n\nOK = update it   •   Cancel = save as a NEW section`)) {
+          sec.layers = JSON.parse(JSON.stringify(layers));
+          sec.projectId = currentProject?.id;
+          saveSavedSections();
+          openPageBuilder();
+          return;
+        }
+      }
+
       const name = prompt("Name this section (e.g. 'Greenland Full Image Hero')", currentProject ? currentProject.title + " Hero" : "Untitled Section");
       if (!name) return;
       savedSections.push({
@@ -1037,7 +1052,7 @@
         layers: JSON.parse(JSON.stringify(layers))
       });
       saveSavedSections();
-      alert("Section saved to Page Builder.");
+      editingSectionIndex = savedSections.length - 1; // keep editing the section we just saved
       openPageBuilder();
     }
 
@@ -1054,8 +1069,9 @@
           div.className = 'saved-section';
           div.innerHTML = `<span>${sec.name} <small style="color:#888">(${sec.layers.length} layers)</small></span>
             <span>
-              <button onclick="moveSection(${idx},-1)">↑</button>
-              <button onclick="moveSection(${idx},1)">↓</button>
+              <button onclick="editSection(${idx})" style="background:#2a7;color:#fff;border-color:#2a7;" title="Open this section on the canvas to see / move / re-edit its layers">✏️ Edit</button>
+              <button onclick="moveSection(${idx},-1)" title="Move section up">↑</button>
+              <button onclick="moveSection(${idx},1)" title="Move section down">↓</button>
               <button onclick="deleteSection(${idx})">Delete</button>
             </span>`;
           list.appendChild(div);
@@ -1078,6 +1094,32 @@
       savedSections.splice(idx,1);
       saveSavedSections();
       openPageBuilder();
+    }
+
+    function editSection(idx) {
+      const sec = savedSections[idx];
+      if (!sec) return;
+      pushUndo();
+      layers = JSON.parse(JSON.stringify(sec.layers));
+      // Restore the section's project context if we have it.
+      if (sec.projectId) {
+        const proj = SSOT_PROJECTS.find(p => p.id === sec.projectId);
+        if (proj) {
+          currentProject = proj;
+          recommendedImagePrefix = PROJECT_IMAGE_PREFIX_MAP[proj.id] || null;
+          const badge = document.getElementById('current-project-badge'); if (badge) badge.textContent = proj.title;
+          const psel = document.getElementById('project-select'); if (psel) psel.value = proj.id;
+          updateImageBrowseButton();
+        }
+      }
+      editingSectionIndex = idx;
+      selectedLayerId = null;
+      renderCanvas();
+      updateLayerList();
+      updateInspector();
+      autoSave();
+      closePageBuilder();
+      updateStatus(`Editing "${sec.name}" on the canvas. Move/resize/double-click to edit, then click "Save Current Canvas as Section" to update it.`);
     }
 
     function exportFullPageHTML() {
@@ -1489,6 +1531,7 @@
     function newBlankCanvas() {
       pushUndo();
       layers = [];
+      editingSectionIndex = null;
       currentProject = null;
       document.getElementById('current-project-badge').textContent = 'Blank canvas';
       document.getElementById('project-select').value = '';
