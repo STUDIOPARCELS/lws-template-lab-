@@ -1026,11 +1026,26 @@
         layers.push({id:generateId(), type:'text', role:'description-section-label', content:'SCIENTIFIC / FACTUAL', x:8, y:56, w:44, h:4});
         layers.push({id:generateId(), type:'text', role:'description-section-value', content: sci, x:8, y:61, w:84, h:18});
       } else if (name === 'triptych') {
-        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:6, w:84, h:7});
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 1', x:4, y:20, w:29.5, h:52});
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 2', x:35.25, y:20, w:29.5, h:52});
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 3', x:66.5, y:20, w:29.5, h:52});
-        layers.push({id:generateId(), type:'text', role:'description-section-label', content: `${year}  /  ${loc}`, x:4, y:75, w:88, h:4});
+        // Clean horizontal Reve-style Monochrome Triptych (matching reference wireframe)
+        const gap = 2.5;
+        const imgW = 30;
+        const imgH = 58;
+        const startY = 18;
+
+        // Image 1
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 1', x: 8, y: startY, w: imgW, h: imgH});
+        layers.push({id:generateId(), type:'text', role:'fine-print', content: '/ City of Rocks', x: 8, y: startY + 2, w: imgW - 2, h: 4});
+
+        // Image 2
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 2', x: 8 + imgW + gap, y: startY, w: imgW, h: imgH});
+        layers.push({id:generateId(), type:'text', role:'fine-print', content: '/ Surface Surveys', x: 8 + imgW + gap, y: startY + 2, w: imgW - 2, h: 4});
+
+        // Image 3
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 3', x: 8 + (imgW + gap) * 2, y: startY, w: imgW, h: imgH});
+        layers.push({id:generateId(), type:'text', role:'fine-print', content: '/ 2007', x: 8 + (imgW + gap) * 2, y: startY + 2, w: imgW - 2, h: 4});
+
+        // Optional subtle page title at very top (can be deleted)
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content: `${year}  •  ${loc}`, x:8, y: 6, w:84, h:4});
       } else if (name === 'specifications') {
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:8, w:84, h:7});
         layers.push({id:generateId(), type:'text', role:'metadata-key', content:'YEAR', x:8, y:22, w:14, h:4});
