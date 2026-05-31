@@ -279,6 +279,10 @@
       <option value="triptych">Triptych (3 images)</option>
       <option value="specifications">Specifications</option>
       <option value="duo">Duo (2 images + text)</option>
+      <option value="grid-8">Grid — 8 images (2×4)</option>
+      <option value="grid-4">Grid — 4 across</option>
+      <option value="quote">Quote / Testimonial</option>
+      <option value="annotated">Annotated Poster</option>
       <option value="blank">Blank Canvas</option>
     </select>
 
@@ -1012,6 +1016,24 @@
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 2', x:50, y:0, w:50, h:58});
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:63, w:84, h:7});
         layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,300), x:8, y:72, w:84, h:18});
+      } else if (name === 'grid-8') {
+        const _gw = 19, _gh = 40, _gx = 8.5, _gy = 8, _ggx = 2.5, _ggy = 4;
+        for (let _r = 0; _r < 2; _r++) for (let _c = 0; _c < 4; _c++)
+          layers.push({id:generateId(), type:'image', role:'', content:'IMAGE ' + (_r*4+_c+1), x:_gx + _c*(_gw+_ggx), y:_gy + _r*(_gh+_ggy), w:_gw, h:_gh});
+      } else if (name === 'grid-4') {
+        const _qw = 19, _qx = 8.5, _qgx = 2.5;
+        for (let _c = 0; _c < 4; _c++)
+          layers.push({id:generateId(), type:'image', role:'', content:'IMAGE ' + (_c+1), x:_qx + _c*(_qw+_qgx), y:22, w:_qw, h:56});
+      } else if (name === 'quote') {
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE', x:6, y:22, w:30, h:50});
+        layers.push({id:generateId(), type:'text', role:'pull-quote', content:'“The final film and image series didn’t just elevate our campaign — it redefined how our audience perceives us.”', x:42, y:24, w:50, h:34});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'NAME — ROLE  /  COMPANY', x:42, y:62, w:50, h:5});
+      } else if (name === 'annotated') {
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE', x:6, y:8, w:88, h:84});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'DESIGN & STRATEGY', x:7, y:3.5, w:40, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content: title, x:54, y:3.5, w:39, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'LISA WOOD STUDIO', x:7, y:92.5, w:40, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content: (loc || ''), x:54, y:92.5, w:39, h:4});
       } else if (name === 'blank') {
         // nothing
       }
@@ -1200,7 +1222,7 @@
         }
       }
 
-      const _labels = {'full-image-hero':'Full Image Hero','split-hero':'Split Hero','editorial':'Editorial','metadata-desc':'Metadata + Description','full-bleed':'Full-Bleed Image','text-first':'Text-First','triptych':'Triptych','specifications':'Specifications','duo':'Duo','blank':'Blank'};
+      const _labels = {'full-image-hero':'Full Image Hero','split-hero':'Split Hero','editorial':'Editorial','metadata-desc':'Metadata + Description','full-bleed':'Full-Bleed Image','text-first':'Text-First','triptych':'Triptych','specifications':'Specifications','duo':'Duo','grid-8':'Grid 8','grid-4':'Grid 4 Across','quote':'Quote','annotated':'Annotated Poster','blank':'Blank'};
       const _tlabel = _labels[currentTemplateName] || currentTemplateName || '';
       const _defaultName = currentProject ? (currentProject.title + (_tlabel ? ' — ' + _tlabel : '')) : (_tlabel || 'Untitled Section');
       const name = prompt("Name this section (it's saved to this project's page in the Page Builder)", _defaultName);
@@ -1395,6 +1417,7 @@
 .lws-section-subhead{font-family:var(--lws-mono);font-weight:700;font-size:18px;line-height:1.3;color:#2B2B2B;margin:0 0 .4em;}
 .lws-caption{font-family:var(--lws-sans);font-weight:400;font-size:11px;line-height:1.4;color:#8A8F96;}
 .lws-fine-print{font-family:var(--lws-sans);font-weight:400;font-size:11px;line-height:1.4;color:#8A8F96;}
+.lws-pull-quote{font-family:var(--lws-sans);font-weight:400;font-size:28px;line-height:1.3;color:#2B2B2B;}
 `;
     }
 
