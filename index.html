@@ -301,12 +301,9 @@
           <div id="inspector-content" style="display:none;">
             <div><strong>Role</strong></div>
             <select id="layer-role" onchange="updateSelectedRole()"></select>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;">
-              <div>X% <input id="layer-x" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
-              <div>Y% <input id="layer-y" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
-              <div>W% <input id="layer-w" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
-              <div>H% <input id="layer-h" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
-            </div>
+            <button onclick="centerSelectedInPage()" style="width:100%;margin-top:10px;background:#2a7;color:#fff;border:none;padding:8px 12px;border-radius:4px;cursor:pointer;font-weight:600;">
+              Center in Page
+            </button>
             <button onclick="deleteSelectedLayer()" class="danger" style="width:100%;margin-top:8px;">Delete Layer (Del/Backspace)</button>
             <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
             <button onclick="toggleImageFit()" style="width:100%;margin-top:6px;">🔳 Image Fit: Fill ⇄ Fit (whole image)</button>
@@ -578,16 +575,21 @@
       autoSave();
     }
 
-    function updateSelectedTransform() {
+    function centerSelectedInPage() {
       const layer = layers.find(l => l.id === selectedLayerId);
       if (!layer) return;
-      layer.x = parseFloat(document.getElementById('layer-x').value) || 0;
-      layer.y = parseFloat(document.getElementById('layer-y').value) || 0;
-      layer.w = parseFloat(document.getElementById('layer-w').value) || 10;
-      layer.h = parseFloat(document.getElementById('layer-h').value) || 5;
+
+      // Center both horizontally and vertically while preserving current size
+      layer.x = (100 - layer.w) / 2;
+      layer.y = (100 - layer.h) / 2;
+
       renderCanvas();
+      updateInspector();
       autoSave();
     }
+
+    // Removed X/Y/W/H inputs — replaced by "Center in Page" button.
+    // function updateSelectedTransform() { ... }  (no longer needed)
 
     // ==================== RENDERING ====================
     function renderCanvas() {
@@ -803,19 +805,13 @@
         roleSel.appendChild(o);
       });
 
-      document.getElementById('layer-x').value = layer.x.toFixed(1);
-      document.getElementById('layer-y').value = layer.y.toFixed(1);
-      document.getElementById('layer-w').value = layer.w.toFixed(1);
-      document.getElementById('layer-h').value = layer.h.toFixed(1);
+      // X/Y/W/H inputs removed — no longer setting numeric values here.
     }
 
     function updateInspectorLive() {
       const layer = layers.find(l => l.id === selectedLayerId);
       if (!layer) return;
-      document.getElementById('layer-x').value = layer.x.toFixed(1);
-      document.getElementById('layer-y').value = layer.y.toFixed(1);
-      document.getElementById('layer-w').value = layer.w.toFixed(1);
-      document.getElementById('layer-h').value = layer.h.toFixed(1);
+      // X/Y/W/H inputs removed — no longer updating numeric fields.
     }
 
     function updateLayerList() {
