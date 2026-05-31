@@ -1405,6 +1405,7 @@
         version: 3,
         timestamp: Date.now(),
         currentProjectId: currentProject?.id,
+        currentTemplate: currentTemplateName,
         layers,
         savedSections
       };
@@ -1424,6 +1425,7 @@
           const p = SSOT_PROJECTS.find(x => x.id === data.currentProjectId);
           if (p) currentProject = p;
         }
+        if (data.currentTemplate) currentTemplateName = data.currentTemplate;
         return true;
       } catch(e) { return false; }
     }
@@ -1718,17 +1720,10 @@
 
     // ==================== RESET / NEW ====================
     function resetCurrentLayout() {
-      if (!layers.length) return;
-      if (!confirm("Clear the canvas to a blank layout?\n\nYour project stays selected so you can keep building.")) return;
+      if (!currentProject) { alert("Select a project first."); return; }
+      if (!confirm("Reset this layout back to the original " + (currentTemplateName || 'template') + " template?\n\nYour images are kept; positions and text return to the template defaults.")) return;
       pushUndo();
-      layers = [];
-      editingSectionIndex = null;
-      selectedLayerId = null;
-      renderCanvas();
-      updateLayerList();
-      updateInspector();
-      autoSave();
-      updateStatus('Canvas cleared to blank — keep building on ' + (currentProject ? currentProject.title : 'your canvas') + '.');
+      loadTemplate(currentTemplateName || 'full-image-hero'); // rebuild the CURRENT template (your images carry over)
     }
     function resetAll() {
       if (!confirm("Clear EVERYTHING on the canvas? This cannot be undone (use Undo immediately after if needed).")) return;
