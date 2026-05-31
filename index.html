@@ -1275,25 +1275,42 @@
       const client = window.getSupabaseClient ? window.getSupabaseClient() : null;
       if (!client) throw new Error('No valid Supabase anon key. Please save it in Settings first.');
 
-      // Supabase Storage list returns an array of objects
-      const result = await client.listImages(prefix);
+      // Normalize folder path (single trailing slash) and fetch its immediate contents.
+      const folder = (prefix || '').replace(/^\/+|\/+$/g, '');
+      const base = folder ? folder + '/' : '';
+      const isImage = (n) => /\.(jpe?g|png|webp|gif|avif|tiff?|bmp)$/i.test(n || '');
+      const result = (await client.listImages(base)) || [];
       
-      // Filter to image files only (common formats in your archive)
-      const imageFiles = (result || []).filter(f => {
-        if (!f.name) return false;
-        const lower = f.name.toLowerCase();
-        return lower.endsWith('.jpg') || lower.endsWith('.jpeg') || lower.endsWith('.png') || 
-               lower.endsWith('.webp') || lower.endsWith('.gif') || lower.endsWith('.avif');
-      });
+      // 1) Flat folders (OMANI LANDSCAPES/, SURFACE SURVEYS/<chapter>/): direct image files.
+      const directFiles = result.filter(f => f && f.name && f.id && isImage(f.name));
+      if (directFiles.length) {
+        return directFiles.map(f => {
+          const full = base + f.name;
+          const url = client.getPublicUrl(full);
+          return { name: f.name, path: full, publicUrl: url, thumbUrl: url, size: f.metadata?.size };
+        });
+      }
 
-      // Build full public URLs
-      return imageFiles.map(f => ({
-        name: f.name,
-        path: prefix ? `${prefix.replace(/\/$/, '')}/${f.name}` : f.name,
-        publicUrl: client.getPublicUrl( prefix ? `${prefix.replace(/\/$/, '')}/${f.name}` : f.name ),
-        updated: f.updated_at,
-        size: f.metadata?.size
-      }));
+      // 2) Processed artwork tree (artwork/<project>/<id>/{thumb,display,...}): the children
+      //    are one sub-folder per artwork. Use the small "thumb" for the grid and the larger
+      //    "display" rendition when inserting/exporting.
+      const subFolders = result.filter(f => f && f.name && !f.id);
+      if (folder.indexOf('artwork/') === 0 && subFolders.length) {
+        return subFolders.map(dir => {
+          const id = dir.name.replace(/\/+$/, '');
+          const displayPath = `${base}${id}/display/${id}-max-2400.webp`;
+          const thumbPath   = `${base}${id}/thumb/${id}-max-480.webp`;
+          return {
+            name: id,
+            path: displayPath,
+            publicUrl: client.getPublicUrl(displayPath),
+            thumbUrl:  client.getPublicUrl(thumbPath)
+          };
+        });
+      }
+
+      // 3) Nothing usable at this level.
+      return [];
     }
 
     function renderImageGrid(files, prefixUsed) {
@@ -1311,7 +1328,7 @@
         
         card.innerHTML = `
           <div style="height:110px;background:#f4f2ed;position:relative;overflow:hidden;">
-            <img src="${file.publicUrl}" 
+            <img src="${file.thumbUrl || file.publicUrl}"
                  style="width:100%;height:100%;object-fit:cover;" 
                  loading="lazy"
                  onerror="this.style.opacity=0.2;this.parentNode.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;font-size:11px;color:#999\\'>Preview unavailable</div>'">

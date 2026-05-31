@@ -44,7 +44,9 @@ function getSupabaseClient() {
   return {
     async listImages(prefix = "", limit = 1000) {
       // Supabase Storage "list" is a POST with a JSON body (not a GET).
-      const cleanPrefix = prefix.replace(/^\/+|\/+$/g, '');
+      // Keep a single trailing slash so the API returns the folder's CONTENTS.
+      let cleanPrefix = prefix.replace(/^\/+/, '');
+      if (cleanPrefix && !cleanPrefix.endsWith('/')) cleanPrefix += '/';
       const url = `${LWS_SUPABASE.url}/storage/v1/object/list/${encodeURIComponent(LWS_SUPABASE.bucket)}`;
 
       const res = await fetch(url, {
