@@ -1060,23 +1060,55 @@
       loadSavedSections();
       const modal = document.getElementById('page-builder-modal');
       const list = document.getElementById('saved-sections-list');
+
+      // Widen the modal into a scrollable, full-page view.
+      const mc = modal.querySelector('.modal-content');
+      if (mc) { mc.style.maxWidth = '780px'; mc.style.width = '94vw'; }
+      list.style.maxHeight = '64vh';
+      list.style.overflowY = 'auto';
+      list.style.overflowX = 'hidden';
+      list.style.background = '#eceae4';
+      list.style.padding = '14px';
+      list.style.borderRadius = '6px';
       list.innerHTML = '';
+
       if (!savedSections.length) {
-        list.innerHTML = '<p style="color:#666;">No saved sections yet. Use "Save Current Canvas as Section" above.</p>';
-      } else {
-        savedSections.forEach((sec, idx) => {
-          const div = document.createElement('div');
-          div.className = 'saved-section';
-          div.innerHTML = `<span>${sec.name} <small style="color:#888">(${sec.layers.length} layers)</small></span>
-            <span>
-              <button onclick="editSection(${idx})" style="background:#2a7;color:#fff;border-color:#2a7;" title="Open this section on the canvas to see / move / re-edit its layers">✏️ Edit</button>
-              <button onclick="moveSection(${idx},-1)" title="Move section up">↑</button>
-              <button onclick="moveSection(${idx},1)" title="Move section down">↓</button>
-              <button onclick="deleteSection(${idx})">Delete</button>
-            </span>`;
-          list.appendChild(div);
-        });
+        list.innerHTML = '<p style="color:#666;text-align:center;padding:24px;">No sections yet. Build a layout on the canvas, then click “Save Current Canvas as Section.” Each one becomes a band of your page, shown here stacked top-to-bottom.</p>';
+        modal.classList.add('open');
+        return;
       }
+
+      const PREVIEW_W = 700, scale = PREVIEW_W / 1280, bandH = 720 * scale;
+
+      savedSections.forEach((sec, idx) => {
+        const inner = sec.layers.map(l => {
+          const pos = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
+          if (l.type === 'text') {
+            return `<div class="lws-${l.role}" style="${pos}overflow:hidden;">${l.content || ''}</div>`;
+          } else if (l.imageUrl) {
+            return `<img src="${l.imageUrl}" style="${pos}object-fit:${l.objectFit || 'cover'};">`;
+          }
+          return `<div style="${pos}background:repeating-linear-gradient(45deg,#fff,#fff 10px,#f5ecd9 10px,#f5ecd9 20px);border:1px dashed #e67e22;"></div>`;
+        }).join('');
+
+        const wrap = document.createElement('div');
+        wrap.style.cssText = 'margin:0 auto 16px;width:' + PREVIEW_W + 'px;max-width:100%;';
+        wrap.innerHTML = `
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
+            <span style="font-size:12px;font-weight:600;color:#333;">${idx + 1}. ${sec.name} <small style="color:#999;font-weight:400;">(${sec.layers.length} layer${sec.layers.length === 1 ? '' : 's'})</small></span>
+            <span style="display:flex;gap:4px;">
+              <button onclick="editSection(${idx})" style="background:#2a7;color:#fff;border-color:#2a7;font-size:11px;padding:3px 8px;" title="Open on the canvas to edit this section">✏️ Edit</button>
+              <button onclick="moveSection(${idx},-1)" title="Move up" style="font-size:11px;padding:3px 8px;">↑</button>
+              <button onclick="moveSection(${idx},1)" title="Move down" style="font-size:11px;padding:3px 8px;">↓</button>
+              <button onclick="deleteSection(${idx})" style="font-size:11px;padding:3px 8px;">Delete</button>
+            </span>
+          </div>
+          <div onclick="editSection(${idx})" title="Click to edit this section on the canvas" style="position:relative;width:${PREVIEW_W}px;max-width:100%;height:${bandH}px;overflow:hidden;background:#faf8f5;border:1px solid #ddd6cc;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;">
+            <div style="position:absolute;top:0;left:0;width:1280px;height:720px;transform:scale(${scale});transform-origin:top left;">${inner}</div>
+          </div>`;
+        list.appendChild(wrap);
+      });
+
       modal.classList.add('open');
     }
     function closePageBuilder() {
