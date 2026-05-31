@@ -360,6 +360,7 @@
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
         <button onclick="saveCurrentAsSection()" class="primary">Save Current Canvas as Section</button>
         <button onclick="exportFullPageHTML()" style="background:#2a7;color:#fff;border-color:#2a7;font-weight:600;">👁 Preview / Export Full Page →</button>
+        <button onclick="publishPage()" style="background:#a86b1f;color:#fff;border-color:#a86b1f;font-weight:600;">🚀 Publish to Live Site →</button>
         <button onclick="closePageBuilder()">Close</button>
       </div>
     </div>
@@ -1154,32 +1155,50 @@
       updateStatus(`Editing "${sec.name}" on the canvas. Move/resize/double-click to edit, then click "Save Current Canvas as Section" to update it.`);
     }
 
-    function exportFullPageHTML() {
-      if (!savedSections.length) { alert("No sections saved yet."); return; }
-      const selected = savedSections; // for simplicity export all in order
-      let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LWS — ${currentProject?.title || 'Composed Page'}</title><style>${document.querySelector('link[rel="stylesheet"]').outerHTML.includes('lws-type-system') ? '' : ''}</style></head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
+    function buildComposedPageHTML() {
+      let html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${currentProject?.title || 'LWS Composed Page'}</title>`;
       html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
-      selected.forEach(sec => {
+      html += `</head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
+      savedSections.forEach(sec => {
         html += `<section style="width:100%;max-width:1280px;aspect-ratio:1280 / 720;margin:0 auto;position:relative;background:#faf8f5;overflow:hidden;">`;
         sec.layers.forEach(l => {
           const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
           if (l.type === 'text') {
             html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
+          } else if (l.imageUrl) {
+            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
           } else {
-            if (l.imageUrl) {
-              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
-            } else {
-              html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:11px;">IMAGE PLACEHOLDER</div>`;
-            }
+            html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:11px;">IMAGE PLACEHOLDER</div>`;
           }
         });
         html += `</section>`;
       });
       html += `</body></html>`;
+      return html;
+    }
+
+    function exportFullPageHTML() {
+      if (!savedSections.length) { alert("No sections saved yet."); return; }
       const w = window.open('', '_blank');
       if (!w) { alert('Your browser blocked the pop-up window. Please allow pop-ups for this site, then click Preview again.'); return; }
-      w.document.write(html);
+      w.document.write(buildComposedPageHTML());
       w.document.close();
+    }
+
+    function publishPage() {
+      if (!savedSections.length) { alert("Nothing to publish yet — save at least one section first."); return; }
+      let slug = prompt("Name this page for its web address (letters, numbers, hyphens only).\nIt will go live at:  templatelab.lisawoodstudio.com/<name>", (currentProject?.id || 'page'));
+      if (!slug) return;
+      slug = slug.toLowerCase().trim().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '') || 'page';
+      const html = buildComposedPageHTML();
+      const blob = new Blob([html], { type: 'text/html' });
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = slug + '.html';
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+      updateStatus(`Page "${slug}.html" downloaded — send it to Claude to go live.`);
+      alert(`✅ Your page "${slug}.html" was downloaded to your computer.\n\nTo make it LIVE on the web at:\n    templatelab.lisawoodstudio.com/${slug}\n\n➡  Send me that file here in the chat (or just say "publish ${slug}") and I'll deploy it — about a minute.\n\n(For security, a website can't publish itself, so I handle that final step for you.)`);
     }
 
     function getEmbeddedTypeSystemCSS() {
