@@ -256,6 +256,8 @@
     <div style="display:flex;gap:8px;align-items:center;font-size:12px;">
       <span id="current-project-badge" style="background:#222;padding:2px 10px;border-radius:3px;">No project loaded</span>
       <button onclick="downloadFullBackup()" style="background:#2a7; color:#fff; border:none;padding:6px 14px;border-radius:4px;cursor:pointer;">⬇ Download Full Backup (Safe)</button>
+      <button onclick="cloudSyncNow()" title="Save/recall your built sections & pages on any device" style="background:#2d6cdf;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;margin-left:6px;">☁ Sync</button>
+      <span id="cloud-status" style="font-size:11px;color:#9ec5ff;margin-left:6px;"></span>
       <button onclick="document.getElementById('import-file').click()" style="background:#555;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;">Import Backup</button>
       <input type="file" id="import-file" accept=".json" style="display:none" onchange="importBackup(event)">
     </div>
@@ -1090,6 +1092,77 @@
     }
     function saveSavedSections() {
       localStorage.setItem('lws_saved_sections', JSON.stringify(savedSections));
+      cloudPush();
+    }
+
+    // ============ CLOUD SYNC (Supabase) — your built sections & pages on any device ============
+    const CLOUD_TABLE = 'lws_cloud_workspace';
+    const CLOUD_KEY = 'lisa-wood-studio';
+    let cloudPushTimer = null;
+
+    function cloudHeaders() {
+      const key = window.getSupabaseKey ? window.getSupabaseKey() : null;
+      if (!key || !window.LWS_SUPABASE) return null;
+      return { apikey: key, 'Authorization': 'Bearer ' + key, 'Content-Type': 'application/json' };
+    }
+
+    function cloudPush() {
+      const h = cloudHeaders();
+      if (!h) return;
+      clearTimeout(cloudPushTimer);
+      cloudPushTimer = setTimeout(async () => {
+        try {
+          const ts = Date.now();
+          localStorage.setItem('lws_cloud_ts', String(ts));
+          const res = await fetch(`${window.LWS_SUPABASE.url}/rest/v1/${CLOUD_TABLE}`, {
+            method: 'POST',
+            headers: { ...h, 'Prefer': 'resolution=merge-duplicates,return=minimal' },
+            body: JSON.stringify({ key: CLOUD_KEY, sections: savedSections, updated_ts: ts })
+          });
+          updateCloudStatus(res.ok ? ('☁ Saved to cloud · ' + new Date().toLocaleTimeString()) : ('☁ Cloud save failed (' + res.status + ') — local copy is safe'));
+        } catch (e) {
+          updateCloudStatus('☁ Offline — saved on this device; will sync when online');
+        }
+      }, 800);
+    }
+
+    async function cloudPull() {
+      const h = cloudHeaders();
+      if (!h) return null;
+      try {
+        const res = await fetch(`${window.LWS_SUPABASE.url}/rest/v1/${CLOUD_TABLE}?key=eq.${encodeURIComponent(CLOUD_KEY)}&select=sections,updated_ts`, { headers: h });
+        if (!res.ok) return null;
+        const rows = await res.json();
+        return (rows && rows[0]) || null;
+      } catch (e) { return null; }
+    }
+
+    async function cloudSyncOnLoad() {
+      const cloud = await cloudPull();
+      const localTs = parseInt(localStorage.getItem('lws_cloud_ts') || '0', 10);
+      if (cloud && Array.isArray(cloud.sections) && (cloud.updated_ts > localTs || !savedSections.length)) {
+        savedSections = cloud.sections;
+        localStorage.setItem('lws_saved_sections', JSON.stringify(savedSections));
+        localStorage.setItem('lws_cloud_ts', String(cloud.updated_ts));
+        updateCloudStatus('☁ Loaded your pages from the cloud (' + savedSections.length + ')');
+      } else if ((!cloud || !cloud.sections || !cloud.sections.length) && savedSections.length) {
+        cloudPush();
+        updateCloudStatus('☁ Backed your pages up to the cloud');
+      } else {
+        updateCloudStatus('☁ Cloud ready');
+      }
+    }
+
+    async function cloudSyncNow() {
+      updateCloudStatus('☁ Syncing…');
+      await cloudSyncOnLoad();
+      cloudPush();
+    }
+
+    function updateCloudStatus(msg) {
+      const el = document.getElementById('cloud-status');
+      if (el) el.textContent = msg;
+      if (typeof updateStatus === 'function') updateStatus(msg);
     }
 
     function saveCurrentAsSection() {
@@ -1744,6 +1817,9 @@
           updateImageBrowseButton();
         }
       }
+
+      // Pull your saved sections/pages from the cloud so they're here on any device.
+      await cloudSyncOnLoad();
 
       setupKeyboard();
 
