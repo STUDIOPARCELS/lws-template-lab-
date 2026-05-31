@@ -314,12 +314,7 @@
             <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
             <button onclick="toggleImageFit()" style="width:100%;margin-top:6px;">🔳 Image Fit: Fill ⇄ Fit (whole image)</button>
             <button onclick="resetImagePosition()" style="width:100%;margin-top:4px;font-size:12px;">Reset Image Position</button>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:6px;font-size:11px;">
-              <div>Pan X <input id="image-pan-x" type="number" step="1" style="width:100%" onchange="updateImagePan()"></div>
-              <div>Pan Y <input id="image-pan-y" type="number" step="1" style="width:100%" onchange="updateImagePan()"></div>
-            </div>
-            <div style="font-size:10px;color:#888;margin-top:4px;">Alt/Shift + Drag = slide image inside box (any amount)</div>
+            <div style="font-size:10px;color:#888;margin-top:4px;">Click + drag the image to slide it inside the box (Fill mode). Use side/corner handles to resize the frame.</div>
           </div>
         </div>
       </div>
@@ -617,16 +612,7 @@
       autoSave();
     }
 
-    function updateImagePan() {
-      const layer = layers.find(l => l.id === selectedLayerId);
-      if (!layer || layer.type !== 'image') return;
-
-      layer.imageOffsetX = parseFloat(document.getElementById('image-pan-x').value) || 0;
-      layer.imageOffsetY = parseFloat(document.getElementById('image-pan-y').value) || 0;
-
-      renderCanvas();
-      autoSave();
-    }
+    // Removed direct Pan X/Y sliders per user request. Image panning is now done by direct click+drag on the image.
 
     // Removed X/Y/W/H inputs — replaced by "Center in Page" button.
     // function updateSelectedTransform() { ... }  (no longer needed)
@@ -750,9 +736,12 @@
       const startY = (e.clientY - rect.top) / rect.height * 100;
 
       const isImageFill = layer.type === 'image' && (layer.objectFit || 'cover') === 'cover';
+      const isAlreadySelectedImage = selectedLayerId === layer.id && isImageFill;
 
-      // Image panning mode: Alt or Shift + drag on a filled image layer
-      if (isImageFill && (e.altKey || e.shiftKey)) {
+      // NEW BEHAVIOR: If this is an already-selected image layer in Fill mode,
+      // direct drag on the image content pans the photo inside the box.
+      // (This matches the requested "click in at the image and slide it" workflow.)
+      if (isAlreadySelectedImage) {
         isPanningImage = true;
         isDragging = false;
         panStart = { x: startX, y: startY };
@@ -763,7 +752,7 @@
           const dx = ((ev.clientX - rect.left) / rect.width * 100) - panStart.x;
           const dy = ((ev.clientY - rect.top) / rect.height * 100) - panStart.y;
 
-          // Allow completely free panning of the image inside the box
+          // Completely unconstrained panning (user can slide as far as they want)
           layer.imageOffsetX = panStartOffset.x + dx * 0.95;
           layer.imageOffsetY = panStartOffset.y + dy * 0.95;
 
@@ -785,7 +774,7 @@
         return;
       }
 
-      // Normal layer dragging
+      // Normal layer dragging (for moving the box itself)
       isDragging = true;
       dragOffset = { x: startX - layer.x, y: startY - layer.y };
 
