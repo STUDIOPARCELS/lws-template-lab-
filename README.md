@@ -55,17 +55,27 @@ git push origin main
 
 A few seconds later, Vercel will automatically build and deploy the new version.
 
-### If the Live Site is Not Updating
+### If You See a 403 / "Authentication Required" / Login Screen Instead of Your Site (Most Common)
 
-Sometimes Vercel projects get into a stuck state with domain provisioning (this happened during initial setup).
+If visiting your `.vercel.app` URL shows **"Authentication Required"**, a **Vercel login screen**, or a **403 Forbidden** error, your site is actually fine and fully deployed — it is just locked behind **Vercel Authentication** (a.k.a. Deployment Protection). Team projects turn this **ON by default**, so only people who are logged into your Vercel team can see the site. Everyone else (and you, in an incognito window) gets a 403.
 
-**Clean reset (recommended when stuck):**
-1. In Vercel, delete the current `lws-template-lab` project (this does **not** delete your GitHub repo or code).
-2. Go to Vercel → Add New Project → Import Git Repository.
-3. Select your repo `STUDIOPARCELS/lws-template-lab-`.
-4. Deploy.
+**Fix — makes the site publicly visible, ~30 seconds:**
+1. Open your project: https://vercel.com/lisa-woods-projects-87a1cfaa/lws-template-lab
+2. Go to **Settings** → **Deployment Protection**.
+3. Under **Vercel Authentication**, switch it to **Disabled** (Off).
+4. Click **Save**.
+5. Reload your site URL in a private/incognito window — it now loads for everyone.
 
-After this, the GitHub → Vercel connection will be clean, and future `git push` commands will reliably update the live site.
+This only controls *who is allowed to view* the deployed site. Your build and GitHub connection are unaffected.
+
+### If the Live Site is Not Updating After a Push
+
+The GitHub → Vercel connection auto-deploys every push to `main`. If a change does not appear:
+1. Make sure your local changes are committed **and** pushed: `git push origin main`. (Running `vercel --prod` from an uncommitted local folder can publish a different version than what is on GitHub.)
+2. Check the latest deployment at the project URL above — it should say **Ready**.
+3. Hard-refresh your browser (Ctrl/Cmd + Shift + R) to bypass cache.
+
+> Deleting and re-importing the Vercel project is almost never necessary, and it will **not** fix a 403/login wall — that is the Deployment Protection setting above, not the Git connection.
 
 See [DEPLOYMENT.md](./DEPLOYMENT.md) for more details.
 

@@ -35,18 +35,19 @@ You want all changes to go through Git. This is the correct setup:
 
 Your GitHub repo is: https://github.com/STUDIOPARCELS/lws-template-lab-
 
-### If the Live Site Stops Updating or Domains Are Stuck (Common)
+### Most Common Issue: Site Shows a 403 / Login Screen (Vercel Authentication)
 
-Vercel projects can get into a bad state with domain provisioning during initial setup.
+If your `.vercel.app` URL shows **"Authentication Required"**, a **Vercel login page**, or **403 Forbidden**, the deployment is healthy — it is just protected. Vercel **team** projects enable **Vercel Authentication** (Deployment Protection) by default, so only members logged into your team can view the site; the public gets a 403.
 
-**Clean reset (takes 2 minutes):**
+**Fix (makes it public, ~30 seconds):**
 
-1. In Vercel, delete the current `lws-template-lab` project (safe — does not delete your GitHub repo or code).
-2. Go to https://vercel.com → **Add New Project** → **Import Git Repository**.
-3. Select your repo `STUDIOPARCELS/lws-template-lab-`.
-4. Deploy.
+1. Open the project → **Settings** → **Deployment Protection**.
+2. Set **Vercel Authentication** to **Disabled**.
+3. Click **Save**, then reload your URL in an incognito window.
 
-After this, the connection is clean. From now on:
+> Tip: you can also create a temporary share link from the project's deployment page to preview a protected site without disabling protection.
+
+### Normal Git Workflow (Everything Through GitHub)
 
 ```powershell
 # Make changes, then:
@@ -55,9 +56,11 @@ git commit -m "Describe your change"
 git push origin main
 ```
 
-Vercel will automatically build and update the live site within ~30-60 seconds.
+Vercel automatically builds and updates the live site within ~30-60 seconds of each push to `main`.
 
-This is the reliable "everything through Git" workflow you asked for.
+If a push does not show up, confirm it actually reached GitHub (`git push origin main`) and that the newest deployment reads **Ready**. Avoid `vercel --prod` from an uncommitted local folder — it can publish a version that differs from GitHub.
+
+> Deleting and re-importing the project is a last resort only. It does **not** fix a 403/login wall (that is the Deployment Protection setting above) and it discards your project settings and any custom domains.
 
 ---
 
