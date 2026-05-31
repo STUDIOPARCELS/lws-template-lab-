@@ -1,0 +1,159 @@
+/* LWS Type System v1.0 — Canonical typography roles for Lisa Wood Studio website
+   Source: LWS-design-system_FINAL + SSOT FOR PROJECT PAGES
+   Use these exact class names on all text layers for correct mapping.
+   This file is embedded in all "Export Clean HTML" outputs.
+*/
+
+:root {
+  --lws-font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --lws-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --lws-font-mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
+
+  --lws-color-ink: #111111;
+  --lws-color-ink-muted: #444444;
+  --lws-color-ink-light: #666666;
+  --lws-color-paper: #FAF8F5;
+  --lws-color-accent: #8B5E3C; /* warm bronze for subtle emphasis */
+}
+
+/* 01. Project Title — Hero / Major Section Title */
+.lws-project-title-h1 {
+  font-family: var(--lws-font-serif);
+  font-size: 42px;
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--lws-color-ink);
+  margin: 0 0 0.6em 0;
+}
+
+/* 02. Narrative Description — Primary long-form body under hero */
+.lws-narrative-description-body {
+  font-family: var(--lws-font-serif);
+  font-size: 17px;
+  line-height: 1.68;
+  font-weight: 400;
+  color: var(--lws-color-ink);
+  max-width: 72ch;
+  margin: 0 0 1.8em 0;
+}
+
+/* 03. Description Section Label — e.g. "Scientific / Factual" */
+.lws-description-section-label {
+  font-family: var(--lws-font-sans);
+  font-size: 11px;
+  line-height: 1.4;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--lws-color-ink-light);
+  margin: 0 0 0.25em 0;
+}
+
+/* 04. Description Section Value — The actual paragraph content */
+.lws-description-section-value {
+  font-family: var(--lws-font-sans);
+  font-size: 15px;
+  line-height: 1.55;
+  font-weight: 400;
+  color: var(--lws-color-ink-muted);
+  margin: 0 0 1.1em 0;
+}
+
+/* 05. Metadata Key — Small label like "Year", "Location" */
+.lws-metadata-key {
+  font-family: var(--lws-font-sans);
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--lws-color-ink-light);
+  margin: 0 0 0.1em 0;
+}
+
+/* 06. Metadata Value — The data itself */
+.lws-metadata-value {
+  font-family: var(--lws-font-sans);
+  font-size: 15px;
+  line-height: 1.35;
+  font-weight: 500;
+  color: var(--lws-color-ink);
+  margin: 0 0 0.65em 0;
+}
+
+/* 07. Artwork Atom Label — "Material", "Printer", etc. */
+.lws-artwork-atom-label {
+  font-family: var(--lws-font-sans);
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--lws-color-ink-light);
+  margin: 0 0 0.15em 0;
+}
+
+/* 08. Artwork Atom Detail — The actual spec value */
+.lws-artwork-atom-detail {
+  font-family: var(--lws-font-sans);
+  font-size: 13.5px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--lws-color-ink-muted);
+  margin: 0 0 0.55em 0;
+}
+
+/* 09. Section Subhead — Used inside page builder sections */
+.lws-section-subhead {
+  font-family: var(--lws-font-serif);
+  font-size: 21px;
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--lws-color-ink);
+  margin: 0 0 0.4em 0;
+}
+
+/* 10. Fine Print / Legal / Edition line */
+.lws-fine-print {
+  font-family: var(--lws-font-sans);
+  font-size: 11px;
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--lws-color-ink-light);
+  letter-spacing: 0.01em;
+}
+
+/* 11. Caption / Image credit style */
+.lws-caption {
+  font-family: var(--lws-font-sans);
+  font-size: 12px;
+  line-height: 1.4;
+  font-weight: 400;
+  color: var(--lws-color-ink-light);
+  font-style: italic;
+}
+
+/* 12. Pull Quote / Atmospheric highlight */
+.lws-pull-quote {
+  font-family: var(--lws-font-serif);
+  font-size: 19px;
+  line-height: 1.45;
+  font-weight: 500;
+  color: var(--lws-color-ink);
+  border-left: 2px solid var(--lws-color-accent);
+  padding-left: 1em;
+  margin: 1.2em 0;
+}
+
+/* Utility: tight tracking for titles */
+.lws-tracking-tight {
+  letter-spacing: -0.025em;
+}
+
+/* Print / export friendly overrides */
+@media print {
+  .lws-project-title-h1 { font-size: 36pt; }
+  .lws-narrative-description-body { font-size: 12pt; }
+}

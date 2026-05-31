@@ -1,0 +1,204 @@
+{
+  "projects": [
+    {
+      "id": "surface-surveys",
+      "title": "Surface Surveys",
+      "type": "Collection Page",
+      "parent": "Photography",
+      "narrative": "Surface Surveys is a six-part photographic body of work made between 2015 and 2019 in remote and geologically significant terrains across four continents. The project studies how the Earth's surfaces record elemental force: sand, ice, lava, gypsum, granite, and parallel dune systems.",
+      "year": "2015-2019",
+      "location": "Oman; Idaho; Greenland; New Mexico; Australia",
+      "medium": "Photography / media",
+      "process": "Aerial and ground-based photographic survey with medium-format Leica S007",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2015-2019; six landscapes; four continents; medium-format Leica S007; aerial and ground-based surveys; three first artist-led aerial survey distinctions",
+        "visual": "elemental, abstract, evidentiary, mineral, glacial, volcanic, granular, wind-shaped, line-driven",
+        "geographic": "Greenland Ice Sheet; White Sands; Craters of the Moon; Simpson Desert; Wahiba Sands; City of Rocks",
+        "atmospheric": "remote, exposed, silent, glaring, wind-marked, cold, hot, immense",
+        "spatial": "aerial fields, close surfaces, vast terrain, compressed distance, serial landscape chapters"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "Variable by selected Surface Surveys artwork"
+      }
+    },
+    {
+      "id": "greenland",
+      "title": "Surface Surveys: Greenland",
+      "type": "Project Page",
+      "parent": "Surface Surveys",
+      "narrative": "Greenland is the ice-sheet chapter of Surface Surveys. Within a project concerned with planetary surfaces shaped by elemental force, Greenland turns frozen water into surface, archive, terrain, and abstraction. It connects the survey's larger desert logic to glacial scale: meltwater, crevasse, sediment, blue pools, white fields, and the visible record of climate held in ice.",
+      "year": "2015-2017",
+      "location": "Greenland Ice Sheet; Ilulissat Icefjord",
+      "medium": "Photography / media",
+      "process": "Aerial photographic survey and field observation of ice, meltwater, crevasses, sediment, and glacial surface systems",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2015 and 2017; Greenland Ice Sheet; largest ice sheet outside Antarctica; Ilulissat Icefjord context; first woman to complete a photographic aerial survey of the Greenland Ice Sheet in 2017",
+        "visual": "white, cobalt, turquoise, granular, fractured, pooled, veined, crystalline, sediment-speckled",
+        "geographic": "Greenland Ice Sheet; Ilulissat Icefjord; Arctic glacial terrain",
+        "atmospheric": "cold, remote, luminous, severe, quiet, suspended, immense",
+        "spatial": "aerial ice fields, crevasse networks, meltwater basins, broad white planes, blue channel systems"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "Variable by selected Greenland artwork"
+      }
+    },
+    {
+      "id": "white-sands",
+      "title": "Surface Surveys: White Sands",
+      "type": "Project Page",
+      "parent": "Surface Surveys",
+      "narrative": "White Sands is the gypsum chapter of Surface Surveys. It brings the project into restricted airspace over the world's largest gypsum dunefield, where mineral brightness, military boundary, basin geology, and aerial access make white surface both landscape and threshold.",
+      "year": "2018",
+      "location": "White Sands National Park, New Mexico, USA",
+      "medium": "Photography / media",
+      "process": "Aerial photographic survey of gypsum dunes, restricted airspace, white mineral sand, basin systems, and glare",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2018; world's largest gypsum dunefield; about 275 square miles; Tularosa Basin; restricted airspace; first artist-led photographic aerial survey of the gypsum dunefield",
+        "visual": "white, cool-toned, luminous, powdery, rippled, glaring, pale, wind-drawn",
+        "geographic": "White Sands National Park; Tularosa Basin; New Mexico; White Sands Missile Range and Holloman Air Force Base context",
+        "atmospheric": "bright, exposed, silent, reflective, austere, high-glare",
+        "spatial": "dune fields, basin floor, aerial distance, repeated ridges, open white expanse"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "Variable by selected White Sands artwork"
+      }
+    },
+    {
+      "id": "wahiba",
+      "title": "Surface Surveys: Wahiba",
+      "type": "Project Page",
+      "parent": "Surface Surveys",
+      "narrative": "Wahiba is the Oman sand-sea chapter of Surface Surveys. It places the larger project inside a living desert system where wind, monsoon cycles, Bedouin routes, sand color, and open night sky make surface both geological record and inhabited terrain.",
+      "year": "2017",
+      "location": "Wahiba Sands / Sharqiya Sands, Oman",
+      "medium": "Photography / media",
+      "process": "Ground-based desert field survey of wind-shaped sand, settlement routes, color, and surface movement",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2017; Sharqiya / Wahiba Sands; about 180 km north-south by 80 km east-west; about 12,500 sq km; wind and monsoon-shaped sand sea",
+        "visual": "golden, rust-red, orange, rippled, granular, wind-combed, open, dry",
+        "geographic": "eastern Oman; Sharqiya Sands; Wahiba Sands; Bedouin villages and camel routes",
+        "atmospheric": "hot, quiet, exposed, expansive, nocturnal, sun-struck",
+        "spatial": "dune corridors, open sand fields, low horizon, shifting surface, long desert distance"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "Variable by selected Wahiba artwork"
+      }
+    },
+    {
+      "id": "craters",
+      "title": "Surface Surveys: Craters",
+      "type": "Project Page",
+      "parent": "Surface Surveys",
+      "narrative": "Craters is the volcanic Idaho chapter of Surface Surveys and the local anchor for The Observatory commission. It translates the basalt surface of Craters of the Moon into evidence, abstraction, darkness, and mineral memory, connecting the global survey back to Central Idaho's lava field and dark-sky terrain.",
+      "year": "2018",
+      "location": "Craters of the Moon National Monument, Idaho, USA",
+      "medium": "Photography / media",
+      "process": "Aerial and ground-based survey of basaltic lava field, cinder cones, spatter cones, fissures, sagebrush plains, and dark-sky terrain",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2018; Craters of the Moon National Monument; basaltic lava field; aerial and ground-based study; first known artist-led photographic aerial survey of the monument",
+        "visual": "black, basaltic, fractured, matte, ridged, cooled, fissured, cratered, shadowed",
+        "geographic": "Central Idaho; Snake River Plain; Craters of the Moon National Monument; dark-sky landscape",
+        "atmospheric": "dark, volcanic, exposed, mineral, severe, ancient, lunar",
+        "spatial": "lava fields, pressure ridges, fissures, craters, black surface planes, panoramic wall scale"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "L1001569: 41\" W x 62\" H; L1002418: 52.5\" W x 79\" H; L1001955: 52.5\" W x 79\" H; L1008377P: 183\" W x 47\" H"
+      }
+    },
+    {
+      "id": "simpson",
+      "title": "Surface Surveys: Simpson Desert",
+      "type": "Project Page",
+      "parent": "Surface Surveys",
+      "narrative": "Simpson Desert is the parallel-dune chapter of Surface Surveys. It expands the project into the scale of Australia's Munga-Thirri sand country, where long dune ridges, traditional Country, aerial distance, and red surface repetition become the structure of the work.",
+      "year": "2019",
+      "location": "Simpson Desert / Munga-Thirri, Australia",
+      "medium": "Photography / media",
+      "process": "Aerial photographic survey of long parallel dunes, red sand systems, desert scale, and dune-line repetition",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2019; Simpson Desert / Munga-Thirri; about 176,500 sq km; parallel dunes; first known artist-led photographic aerial survey of the parallel dune field",
+        "visual": "red, linear, repetitive, wind-carved, immense, striated, dry, rhythmic",
+        "geographic": "South Australia; Queensland; Northern Territory; Munga-Thirri-Simpson Desert protected areas",
+        "atmospheric": "hot, remote, exposed, silent, expansive, ancient",
+        "spatial": "long dune ridges, parallel corridors, aerial bands, extended desert scale"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "Variable by selected Simpson Desert artwork"
+      }
+    },
+    {
+      "id": "city-of-rocks",
+      "title": "Surface Surveys: City of Rocks",
+      "type": "Project Page",
+      "parent": "Surface Surveys",
+      "narrative": "City of Rocks is the granite chapter of Surface Surveys. It brings the body of work into a sculptural Idaho landscape where spires, fins, domes, monoliths, historic trail language, and exposed geologic time turn stone into vertical surface.",
+      "year": "2017",
+      "location": "City of Rocks National Reserve, Idaho, USA",
+      "medium": "Photography / media",
+      "process": "Ground-based granite field survey of spires, fins, domes, monoliths, sagebrush, and weathered stone surfaces",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2017; City of Rocks National Reserve; protected 1988; Almo Pluton granite about 28 million years old; Green Creek Complex rocks over 2.5 billion years old",
+        "visual": "granite, vertical, weathered, pale, sculptural, fissured, sagebrush-framed",
+        "geographic": "southern Idaho; Albion Mountains; California Trail corridor; City of Rocks National Reserve",
+        "atmospheric": "dry, high-desert, quiet, historic, sunlit, resilient",
+        "spatial": "spires, fins, domes, monoliths, corridors, upright stone fields, sagebrush openings"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "Variable by selected City of Rocks artwork"
+      }
+    },
+    {
+      "id": "omani-landscapes",
+      "title": "Omani Landscapes",
+      "type": "Project Page",
+      "parent": "Photography",
+      "narrative": "Omani Landscapes extends the studio's photographic surface practice into the arid mountain and desert terrain of Oman. The project uses color intervention and digital layering to heighten landform, heat, culture, and visual memory rather than simply document place.",
+      "year": "2017 (source trip) / archive sequence",
+      "location": "Jebel Akhdar and desert landscapes, Oman",
+      "medium": "Photography / media",
+      "process": "Digital layering and color intervention over Omani landscape photographs",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "Oman archive sequence; Jebel Akhdar and desert landscape source folders; digital layering; color intervention over photographic landscape",
+        "visual": "pink, green, warm, saturated, arid, layered, graphic, mountain-shaped, dune-soft",
+        "geographic": "Jebel Akhdar; Oman; mountain and desert terrain",
+        "atmospheric": "warm, dry, vivid, spare, sunlit, heightened",
+        "spatial": "layered color fields, mountain faces, dune planes, constructed photographic surface"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "Variable by selected Omani Landscapes artwork"
+      }
+    }
+  ]
+}

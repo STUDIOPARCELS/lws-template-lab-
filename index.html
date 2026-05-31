@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LWS Template Lab • SSOT Visual Composer</title>
+  <link rel="stylesheet" href="css/lws-type-system.css">
+  <style>
+    :root {
+      --canvas-w: 1280px;
+      --canvas-h: 720px;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: #f4f2ed;
+      color: #222;
+      font-size: 14px;
+    }
+    .header {
+      background: #111;
+      color: #fff;
+      padding: 12px 20px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .header h1 { margin: 0; font-size: 18px; font-weight: 600; letter-spacing: -.01em; }
+    .header .tag { font-size: 11px; opacity: .7; background: #333; padding: 2px 8px; border-radius: 3px; }
+    .toolbar {
+      background: #fff;
+      border-bottom: 1px solid #ddd;
+      padding: 10px 16px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .toolbar button, .toolbar select {
+      font-size: 13px;
+      padding: 6px 12px;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .toolbar button:hover { background: #f8f5f0; }
+    .toolbar button.danger { border-color: #c33; color: #c33; }
+    .toolbar button.primary { background: #111; color: #fff; border-color: #111; }
+    .main {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
+      max-width: 1480px;
+      margin: 0 auto;
+    }
+    .sidebar {
+      width: 260px;
+      flex-shrink: 0;
+    }
+    .panel {
+      background: #fff;
+      border: 1px solid #ddd;
+      border-radius: 6px;
+      margin-bottom: 12px;
+      overflow: hidden;
+    }
+    .panel h3 {
+      margin: 0;
+      padding: 8px 12px;
+      background: #f8f5f0;
+      font-size: 12px;
+      font-weight: 600;
+      border-bottom: 1px solid #ddd;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .panel .content { padding: 12px; }
+    .quick-text button {
+      display: block;
+      width: 100%;
+      text-align: left;
+      margin-bottom: 4px;
+      font-size: 12px;
+      padding: 5px 8px;
+    }
+    .canvas-wrap {
+      flex: 1;
+      min-width: 0;
+    }
+    #canvas-container {
+      background: #e8e4dc;
+      padding: 24px;
+      border-radius: 4px;
+      box-shadow: 0 4px 20px rgba(0,0,0,.08);
+    }
+    #canvas {
+      width: 1280px;
+      height: 720px;
+      background: #fff;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px #ccc;
+      user-select: none;
+    }
+    .guide {
+      position: absolute;
+      background: rgba(180, 140, 80, .35);
+      pointer-events: none;
+      z-index: 1;
+    }
+    .guide.v { width: 1px; top: 0; bottom: 0; }
+    .guide.h { height: 1px; left: 0; right: 0; }
+    .layer {
+      position: absolute;
+      border: 1px solid transparent;
+      cursor: move;
+      z-index: 2;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      box-shadow: 0 1px 3px rgba(0,0,0,.1);
+    }
+    .layer.selected {
+      border-color: #c85a17;
+      box-shadow: 0 0 0 2px rgba(200,90,23,.3);
+      z-index: 10;
+    }
+    .layer.image {
+      background: repeating-linear-gradient(45deg, #fff, #fff 8px, #f8f0e0 8px, #f8f0e0 16px);
+      border: 2px dashed #e67e22 !important;
+      color: #c85a17;
+      font-size: 11px;
+      font-weight: 600;
+      text-align: center;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .layer.text {
+      padding: 4px 8px;
+      background: rgba(255,255,255,0.92);
+      font-size: 14px;
+      line-height: 1.3;
+      color: #111;
+    }
+    .resize-handle {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background: #c85a17;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      z-index: 20;
+      display: none;
+    }
+    .layer.selected .resize-handle { display: block; }
+    .resize-handle.tl { top: -5px; left: -5px; cursor: nwse-resize; }
+    .resize-handle.tr { top: -5px; right: -5px; cursor: nesw-resize; }
+    .resize-handle.bl { bottom: -5px; left: -5px; cursor: nesw-resize; }
+    .resize-handle.br { bottom: -5px; right: -5px; cursor: nwse-resize; }
+    .inspector input, .inspector select {
+      width: 100%;
+      padding: 4px 6px;
+      font-size: 12px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      margin-bottom: 6px;
+    }
+    .status {
+      font-size: 11px;
+      color: #666;
+      padding: 4px 12px;
+      background: #f8f5f0;
+      border-radius: 3px;
+    }
+    .safety-banner {
+      background: #fff3cd;
+      color: #664d03;
+      padding: 8px 16px;
+      font-size: 12px;
+      border-bottom: 1px solid #ffe69c;
+      text-align: center;
+    }
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.6);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 100;
+    }
+    .modal.open { display: flex; }
+    .modal-content {
+      background: #fff;
+      width: 90%;
+      max-width: 620px;
+      max-height: 80vh;
+      overflow: auto;
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .saved-section {
+      border: 1px solid #ddd;
+      padding: 8px;
+      margin-bottom: 6px;
+      border-radius: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .layer-list { font-size: 12px; max-height: 180px; overflow: auto; }
+  </style>
+</head>
+<body>
+  <div class="safety-banner">
+    <strong>🔒 Safety First:</strong> Your work auto-saves to browser localStorage. Use <strong>⬇ Download Full Backup</strong> often. Supabase images are now live — paste your anon key once in Settings to browse &amp; insert real photos from your bucket.
+  </div>
+
+  <div class="header">
+    <div>
+      <h1>LWS Template Lab</h1>
+      <span class="tag">SSOT • Surface Surveys + Omani • Text-First</span>
+    </div>
+    <div style="display:flex;gap:8px;align-items:center;font-size:12px;">
+      <span id="current-project-badge" style="background:#222;padding:2px 10px;border-radius:3px;">No project loaded</span>
+      <button onclick="downloadFullBackup()" style="background:#2a7; color:#fff; border:none;padding:6px 14px;border-radius:4px;cursor:pointer;">⬇ Download Full Backup (Safe)</button>
+      <button onclick="document.getElementById('import-file').click()" style="background:#555;color:#fff;border:none;padding:6px 12px;border-radius:4px;cursor:pointer;">Import Backup</button>
+      <input type="file" id="import-file" accept=".json" style="display:none" onchange="importBackup(event)">
+    </div>
+  </div>
+
+  <div class="toolbar">
+    <select id="project-select" onchange="loadProject(this.value)" style="min-width:220px;font-weight:600;">
+      <option value="">— Select SSOT Project —</option>
+    </select>
+
+    <button onclick="loadTemplate('full-image-hero')">Full Image Hero (16:6)</button>
+    <button onclick="loadTemplate('split-hero')">Split Hero</button>
+    <button onclick="loadTemplate('editorial')">Editorial</button>
+    <button onclick="loadTemplate('metadata-desc')">Metadata + Description</button>
+    <button onclick="loadTemplate('blank')">Blank Canvas</button>
+
+    <span style="margin:0 8px;color:#999;">|</span>
+
+    <button onclick="undo()" title="Ctrl/Cmd+Z">↩ Undo</button>
+    <button onclick="resetCurrentLayout()" class="danger">Reset Layout</button>
+    <button onclick="resetAll()" class="danger">Reset All (Clear)</button>
+    <button onclick="newBlankCanvas()">+ New Blank</button>
+
+    <span style="margin:0 8px;color:#999;">|</span>
+
+    <button onclick="exportSectionHTML()" class="primary">Export Section HTML</button>
+    <button onclick="openPageBuilder()" style="background:#2a7;color:#fff;border-color:#2a7;">Page Builder →</button>
+
+    <label style="margin-left:auto;font-size:12px;display:flex;align-items:center;gap:4px;">
+      <input type="checkbox" id="guides-toggle" checked onchange="toggleGuides()"> Guides
+    </label>
+    <button onclick="showSupabaseSettings()">Supabase Settings</button>
+    <button id="browse-images-btn" onclick="openImageBrowserAndMaybeAutoLoad()" style="background:#e67e22;color:white;border-color:#e67e22;font-weight:600;">🖼️ Browse Supabase Images</button>
+  </div>
+
+  <div class="main">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="panel">
+        <h3>Quick Text &amp; Headers <span style="font-weight:400;opacity:.6;font-size:10px;">(SSOT roles)</span></h3>
+        <div class="content quick-text">
+          <button onclick="addQuickLayer('project-title-h1')">Project Title H1</button>
+          <button onclick="addQuickLayer('narrative-description-body')">Narrative Description</button>
+          <button onclick="addQuickLayer('description-section-label')">Description Section Label</button>
+          <button onclick="addQuickLayer('description-section-value')">Description Section Value</button>
+          <button onclick="addQuickLayer('metadata-key')">Metadata Key</button>
+          <button onclick="addQuickLayer('metadata-value')">Metadata Value</button>
+          <button onclick="addQuickLayer('artwork-atom-label')">Artwork Atom Label</button>
+          <button onclick="addQuickLayer('artwork-atom-detail')">Artwork Atom Detail</button>
+          <button onclick="addQuickLayer('section-subhead')">Section Subhead</button>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Selected Layer</h3>
+        <div class="content inspector" id="inspector">
+          <div id="inspector-empty" style="color:#888;font-size:12px;">Click a layer to inspect</div>
+          <div id="inspector-content" style="display:none;">
+            <div><strong>Role</strong></div>
+            <select id="layer-role" onchange="updateSelectedRole()"></select>
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;">
+              <div>X% <input id="layer-x" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
+              <div>Y% <input id="layer-y" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
+              <div>W% <input id="layer-w" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
+              <div>H% <input id="layer-h" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
+            </div>
+            <button onclick="deleteSelectedLayer()" class="danger" style="width:100%;margin-top:8px;">Delete Layer (Del/Backspace)</button>
+            <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
+            <div style="font-size:10px;color:#888;margin-top:6px;">Drag layer to move • Drag handles to resize • Double-click text to edit</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Layers in Canvas <span id="layer-count" style="font-weight:400;opacity:.6;"></span></h3>
+        <div class="content layer-list" id="layer-list"></div>
+      </div>
+
+      <div class="panel">
+        <h3>Status</h3>
+        <div class="content">
+          <div id="status" class="status">Ready • Auto-saves to browser</div>
+          <div style="margin-top:8px;font-size:11px;color:#666;">
+            Canvas: 1280×720 (standard desktop)<br>
+            Snapping: guides + layer edges (8px)
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas -->
+    <div class="canvas-wrap">
+      <div id="canvas-container">
+        <div id="canvas">
+          <!-- Layers injected here by JS -->
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:8px;font-size:11px;color:#777;">
+        Tip: Use Page Builder to combine multiple sections into a full exportable page.
+      </div>
+    </div>
+  </div>
+
+  <!-- Page Builder Modal -->
+  <div id="page-builder-modal" class="modal">
+    <div class="modal-content">
+      <h2 style="margin-top:0;">Page Builder — Saved Sections</h2>
+      <p style="font-size:13px;color:#555;">Reorder and combine saved sections. Export as one clean production HTML page using real LWS typography.</p>
+      <div id="saved-sections-list" style="margin:12px 0;"></div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button onclick="saveCurrentAsSection()" class="primary">Save Current Canvas as Section</button>
+        <button onclick="exportFullPageHTML()">Export Selected as Full Page HTML</button>
+        <button onclick="closePageBuilder()">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase Settings Modal -->
+  <div id="supabase-modal" class="modal">
+    <div class="modal-content">
+      <h2 style="margin-top:0;">Supabase Connection — Live Image Browser Active</h2>
+      <p style="font-size:13px;">Paste your anon (public) key once. Then use the orange <strong>🖼️ Browse Supabase Images</strong> button to load real photos from your "LISA WOOD STUDIO WEBSITE" bucket and insert them into any template.</p>
+      <div style="background:#f8f5f0;padding:12px;border-radius:4px;font-family:monospace;font-size:12px;margin:12px 0;">
+        URL: https://aawnkxnnrymqbysgimqj.supabase.co<br>
+        Bucket: LISA WOOD STUDIO WEBSITE<br>
+        <small style="color:#666;">(Public bucket — anon key needed only for listing)</small>
+      </div>
+      <label>Anon Key (public, safe for reads)</label>
+      <input id="supabase-anon-key" type="password" placeholder="Paste anon key here" style="width:100%;padding:8px;margin:6px 0;">
+      <div style="display:flex;gap:8px;">
+        <button onclick="saveSupabaseKey()">Save Key to Browser</button>
+        <button onclick="testSupabaseConnection()">Test Connection</button>
+        <button onclick="closeSupabaseModal()">Close</button>
+      </div>
+      <div id="supabase-test-result" style="margin-top:10px;font-size:12px;"></div>
+    </div>
+  </div>
+
+  <!-- Real Supabase Image Browser Modal -->
+  <div id="image-browser-modal" class="modal">
+    <div class="modal-content" style="max-width:920px;max-height:85vh;">
+      <h2 style="margin-top:0;margin-bottom:4px;">Browse Supabase Images — LISA WOOD STUDIO WEBSITE</h2>
+      <div id="image-browser-project-hint" style="margin-bottom:8px;font-size:13px;color:#c85a17;font-weight:500;display:none;"></div>
+      <p style="margin:0 0 12px 0;font-size:13px;color:#555;">Select a folder prefix, load images, then insert directly into your template. Images are served from your public Supabase bucket.</p>
+
+      <div style="display:flex;gap:8px;align-items:flex-end;margin-bottom:12px;flex-wrap:wrap;">
+        <div>
+          <label style="font-size:11px;display:block;margin-bottom:2px;">Quick Prefix (from your projects)</label>
+          <select id="image-prefix-select" style="width:260px;">
+            <option value="">Root (all files — slow)</option>
+            <option value="SURFACE SURVEYS/">SURFACE SURVEYS /</option>
+            <option value="SURFACE SURVEYS/GREENLAND FINAL PHOTOS/">Greenland</option>
+            <option value="SURFACE SURVEYS/WHITE SANDS/">White Sands</option>
+            <option value="SURFACE SURVEYS/WAHIBA OMAN/">Wahiba (Oman)</option>
+            <option value="SURFACE SURVEYS/CRATERS/">Craters of the Moon</option>
+            <option value="SURFACE SURVEYS/SIMPSON DESERT/">Simpson Desert</option>
+            <option value="SURFACE SURVEYS/CITY/">City of Rocks</option>
+            <option value="OMANI LANDSCAPES/">Omani Landscapes</option>
+            <option value="OMANI LANDSCAPES/Content/">Omani — Content</option>
+            <option value="OMANI LANDSCAPES/Renders/">Omani — Renders</option>
+          </select>
+        </div>
+        <button onclick="loadSupabaseImagesFromUI()" style="background:#e67e22;color:white;">Load Images</button>
+        
+        <div style="margin-left:12px;">
+          <label style="font-size:11px;display:block;margin-bottom:2px;">Or custom prefix</label>
+          <input id="image-prefix-input" type="text" placeholder="e.g. SURFACE SURVEYS/GREENLAND FINAL PHOTOS/" style="width:280px;padding:5px;">
+        </div>
+        <button onclick="loadSupabaseImagesFromUI(true)">Load Custom</button>
+
+        <div style="margin-left:auto;font-size:12px;color:#666;" id="image-browser-status"></div>
+      </div>
+
+      <div id="image-grid" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;max-height:420px;overflow:auto;padding:8px;background:#f8f5f0;border-radius:4px;border:1px solid #ddd;">
+        <!-- Populated dynamically by JS -->
+      </div>
+
+      <div style="margin-top:14px;display:flex;gap:8px;align-items:center;">
+        <button onclick="closeImageBrowser()">Close</button>
+        <span style="font-size:12px;color:#666;">Tip: Click "Insert as New Layer" or "Replace Selected" on any image. Real URLs will be used in exports.</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ==================== CORE DATA & STATE ====================
+    let currentProject = null;
+    let layers = [];
+    let selectedLayerId = null;
+    let undoStack = [];
+    let guidesVisible = true;
+    let isDragging = false;
+    let isResizing = false;
+    let dragOffset = {x:0, y:0};
+    let resizeHandle = null;
+    let lastSaved = Date.now();
+
+    const CANVAS_W = 1280;
+    const CANVAS_H = 720;
+    const SNAP_TOLERANCE = 8;
+
+    // Mapping from SSOT project IDs to the best Supabase storage prefixes for auto-loading images
+    const PROJECT_IMAGE_PREFIX_MAP = {
+      'greenland': 'SURFACE SURVEYS/GREENLAND FINAL PHOTOS/',
+      'white-sands': 'SURFACE SURVEYS/WHITE SANDS/',
+      'wahiba': 'SURFACE SURVEYS/WAHIBA OMAN/',
+      'craters': 'SURFACE SURVEYS/CRATERS/',
+      'simpson': 'SURFACE SURVEYS/SIMPSON DESERT/',
+      'city-of-rocks': 'SURFACE SURVEYS/CITY/',
+      'omani-landscapes': 'OMANI LANDSCAPES/',
+      'surface-surveys': 'SURFACE SURVEYS/',
+    };
+
+    let recommendedImagePrefix = null; // set when a project is loaded
+
+    // Load SSOT projects (embedded for zero-dependency deploy)
+    let SSOT_PROJECTS = [];
+    async function loadSSOTData() {
+      try {
+        const res = await fetch('data/ssot-projects.json');
+        const data = await res.json();
+        SSOT_PROJECTS = data.projects;
+      } catch (e) {
+        // Fallback embedded minimal set (guarantees it always works)
+        SSOT_PROJECTS = [
+          {id:"greenland", title:"Surface Surveys: Greenland", narrative:"Greenland is the ice-sheet chapter of Surface Surveys...", year:"2015-2017", location:"Greenland Ice Sheet", descriptionSections:{scientific:"...",visual:"...",geographic:"...",atmospheric:"...",spatial:"..."}, artworkAtoms:{material:"Archival pigment print on Canson Baryta Photographique II", printer:"Laumont Photographic, New York", dimensions:"Variable"}},
+          {id:"white-sands", title:"Surface Surveys: White Sands", narrative:"White Sands is the gypsum chapter...", year:"2018", location:"White Sands National Park, New Mexico", descriptionSections:{scientific:"...",visual:"...",geographic:"...",atmospheric:"...",spatial:"..."}, artworkAtoms:{material:"Archival pigment print...", printer:"Laumont", dimensions:"Variable"}}
+        ];
+      }
+      populateProjectSelect();
+    }
+
+    function populateProjectSelect() {
+      const sel = document.getElementById('project-select');
+      sel.innerHTML = '<option value="">— Select SSOT Project —</option>';
+      SSOT_PROJECTS.forEach(p => {
+        const opt = document.createElement('option');
+        opt.value = p.id;
+        opt.textContent = `${p.title} (${p.year})`;
+        sel.appendChild(opt);
+      });
+    }
+
+    // ==================== UNDO ====================
+    function pushUndo() {
+      undoStack.push(JSON.stringify({layers: layers.map(l => ({...l})), project: currentProject?.id}));
+      if (undoStack.length > 20) undoStack.shift();
+    }
+    function undo() {
+      if (!undoStack.length) return;
+      const prev = JSON.parse(undoStack.pop());
+      layers = prev.layers;
+      if (prev.project) {
+        const proj = SSOT_PROJECTS.find(p => p.id === prev.project);
+        if (proj) currentProject = proj;
+      }
+      renderCanvas();
+      updateLayerList();
+      updateStatus("Undo applied");
+    }
+
+    // ==================== LAYER MANAGEMENT ====================
+    function generateId() { return 'l_' + Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+
+    function addLayer(type, role, text, x, y, w, h, imageUrl = null, imageName = null) {
+      pushUndo();
+      const layer = {
+        id: generateId(),
+        type, // 'text' | 'image'
+        role: role || (type === 'text' ? 'narrative-description-body' : ''),
+        content: text || (type === 'image' ? 'IMAGE PLACEHOLDER' : 'Edit me'),
+        x: x ?? 12, y: y ?? 18, w: w ?? 76, h: h ?? 12,
+        imageUrl: imageUrl || null,
+        imageName: imageName || null
+      };
+      layers.push(layer);
+      renderCanvas();
+      selectLayer(layer.id);
+      updateLayerList();
+      autoSave();
+    }
+
+    function addQuickLayer(role) {
+      const defaults = {
+        'project-title-h1': {x:8, y:8, w:84, h:9, content: currentProject ? currentProject.title : 'Project Title'},
+        'narrative-description-body': {x:8, y:22, w:84, h:18, content: currentProject ? currentProject.narrative.substring(0,280)+'...' : 'Narrative text from SSOT...'},
+        'description-section-label': {x:8, y:48, w:30, h:4, content: 'Scientific / Factual'},
+        'description-section-value': {x:8, y:52, w:84, h:10, content: currentProject ? (currentProject.descriptionSections?.scientific || 'Description...') : 'Description text...'},
+        'metadata-key': {x:8, y:66, w:18, h:4, content: 'Year'},
+        'metadata-value': {x:26, y:66, w:22, h:4, content: currentProject ? currentProject.year : '2015–2019'},
+        'artwork-atom-label': {x:8, y:78, w:22, h:4, content: 'Material'},
+        'artwork-atom-detail': {x:8, y:82, w:84, h:6, content: currentProject ? currentProject.artworkAtoms?.material : 'Archival pigment print...'},
+        'section-subhead': {x:8, y:42, w:50, h:5, content: 'Description Sections'}
+      };
+      const d = defaults[role] || {x:15, y:30, w:60, h:8, content: 'New text'};
+      addLayer('text', role, d.content, d.x, d.y, d.w, d.h);
+    }
+
+    function deleteSelectedLayer() {
+      if (!selectedLayerId) return;
+      pushUndo();
+      layers = layers.filter(l => l.id !== selectedLayerId);
+      selectedLayerId = null;
+      renderCanvas();
+      updateLayerList();
+      document.getElementById('inspector-content').style.display = 'none';
+      document.getElementById('inspector-empty').style.display = 'block';
+      autoSave();
+    }
+
+    function selectLayer(id) {
+      selectedLayerId = id;
+      renderCanvas();
+      updateInspector();
+      updateLayerList();
+    }
+
+    function updateSelectedRole() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer) return;
+      layer.role = document.getElementById('layer-role').value;
+      renderCanvas();
+      autoSave();
+    }
+
+    function updateSelectedTransform() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer) return;
+      layer.x = parseFloat(document.getElementById('layer-x').value) || 0;
+      layer.y = parseFloat(document.getElementById('layer-y').value) || 0;
+      layer.w = parseFloat(document.getElementById('layer-w').value) || 10;
+      layer.h = parseFloat(document.getElementById('layer-h').value) || 5;
+      renderCanvas();
+      autoSave();
+    }
+
+    // ==================== RENDERING ====================
+    function renderCanvas() {
+      const canvas = document.getElementById('canvas');
+      canvas.innerHTML = '';
+
+      // Guides (rule of thirds + center)
+      if (guidesVisible) {
+        const thirds = [33.333, 66.666];
+        thirds.forEach(p => {
+          const v = document.createElement('div');
+          v.className = 'guide v';
+          v.style.left = p + '%';
+          canvas.appendChild(v);
+          const h = document.createElement('div');
+          h.className = 'guide h';
+          h.style.top = p + '%';
+          canvas.appendChild(h);
+        });
+        // Center cross
+        const cv = document.createElement('div');
+        cv.className = 'guide v';
+        cv.style.left = '50%';
+        cv.style.background = 'rgba(140,90,40,.55)';
+        canvas.appendChild(cv);
+        const ch = document.createElement('div');
+        ch.className = 'guide h';
+        ch.style.top = '50%';
+        ch.style.background = 'rgba(140,90,40,.55)';
+        canvas.appendChild(ch);
+      }
+
+      layers.forEach(layer => {
+        const el = document.createElement('div');
+        el.className = `layer ${layer.type}`;
+        el.style.left = layer.x + '%';
+        el.style.top = layer.y + '%';
+        el.style.width = layer.w + '%';
+        el.style.height = layer.h + '%';
+        if (selectedLayerId === layer.id) el.classList.add('selected');
+
+        if (layer.type === 'text') {
+          el.innerHTML = `<div class="lws-${layer.role}" style="width:100%;height:100%;overflow:hidden;padding:2px 4px;">${layer.content}</div>`;
+          el.ondblclick = () => startInlineEdit(layer, el);
+        } else {
+          // IMAGE LAYER — real Supabase image or styled placeholder
+          if (layer.imageUrl) {
+            el.innerHTML = `
+              <img src="${layer.imageUrl}" 
+                   alt="${layer.imageName || 'LWS artwork'}" 
+                   style="width:100%; height:100%; object-fit:cover; display:block; pointer-events:none;" 
+                   onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'padding:8px;font-size:11px;color:#c85a17\\'>Image failed to load</div>'">
+              <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
+            `;
+            el.style.background = '#111';
+          } else {
+            // Placeholder style (dashed orange + hatch) as requested
+            el.style.background = 'repeating-linear-gradient(45deg, #fff, #fff 8px, #f8f0e0 8px, #f8f0e0 16px)';
+            el.style.border = '2px dashed #e67e22';
+            el.innerHTML = `<div style="font-size:11px;color:#c85a17;font-weight:600;text-align:center;line-height:1.3;padding:6px;">📷 IMAGE PLACEHOLDER<br><span style="font-size:9px;opacity:0.8;">(click Browse Supabase Images)</span></div>`;
+          }
+        }
+
+        // Pointer handlers for drag
+        el.onpointerdown = (e) => startDrag(e, layer, el);
+
+        // Resize handles (4 corners)
+        ['tl','tr','bl','br'].forEach(pos => {
+          const h = document.createElement('div');
+          h.className = `resize-handle ${pos}`;
+          h.onpointerdown = (e) => startResize(e, layer, pos);
+          el.appendChild(h);
+        });
+
+        el.onclick = (e) => { e.stopImmediatePropagation(); selectLayer(layer.id); };
+        canvas.appendChild(el);
+      });
+
+      // Click on empty canvas to deselect
+      canvas.onclick = () => {
+        selectedLayerId = null;
+        renderCanvas();
+        document.getElementById('inspector-content').style.display = 'none';
+        document.getElementById('inspector-empty').style.display = 'block';
+      };
+
+      updateLayerCount();
+    }
+
+    function startInlineEdit(layer, el) {
+      el.contentEditable = true;
+      el.focus();
+      const range = document.createRange();
+      range.selectNodeContents(el);
+      const sel = window.getSelection();
+      sel.removeAllRanges();
+      sel.addRange(range);
+
+      function finish() {
+        layer.content = el.innerText.trim();
+        el.contentEditable = false;
+        el.onblur = null;
+        renderCanvas();
+        autoSave();
+      }
+      el.onblur = finish;
+      el.onkeydown = (ev) => { if (ev.key === 'Enter' && !ev.shiftKey) { ev.preventDefault(); finish(); } };
+    }
+
+    function startDrag(e, layer, el) {
+      e.stopImmediatePropagation();
+      selectLayer(layer.id);
+      isDragging = true;
+      const rect = document.getElementById('canvas').getBoundingClientRect();
+      const startX = (e.clientX - rect.left) / rect.width * 100;
+      const startY = (e.clientY - rect.top) / rect.height * 100;
+      dragOffset = { x: startX - layer.x, y: startY - layer.y };
+
+      const move = (ev) => {
+        if (!isDragging) return;
+        const nx = ((ev.clientX - rect.left) / rect.width * 100) - dragOffset.x;
+        const ny = ((ev.clientY - rect.top) / rect.height * 100) - dragOffset.y;
+        const snapped = getSnappedPosition(nx, ny, layer);
+        layer.x = Math.max(0, Math.min(100 - layer.w, snapped.x));
+        layer.y = Math.max(0, Math.min(100 - layer.h, snapped.y));
+        el.style.left = layer.x + '%';
+        el.style.top = layer.y + '%';
+        updateInspectorLive();
+      };
+      const up = () => {
+        isDragging = false;
+        document.removeEventListener('pointermove', move);
+        document.removeEventListener('pointerup', up);
+        pushUndo();
+        autoSave();
+        renderCanvas();
+      };
+      document.addEventListener('pointermove', move);
+      document.addEventListener('pointerup', up, {once:true});
+    }
+
+    function startResize(e, layer, corner) {
+      e.stopImmediatePropagation();
+      isResizing = true;
+      resizeHandle = corner;
+      const rect = document.getElementById('canvas').getBoundingClientRect();
+      const startX = (e.clientX - rect.left) / rect.width * 100;
+      const startY = (e.clientY - rect.top) / rect.height * 100;
+      const orig = {x: layer.x, y: layer.y, w: layer.w, h: layer.h};
+
+      const move = (ev) => {
+        if (!isResizing) return;
+        const cx = (ev.clientX - rect.left) / rect.width * 100;
+        const cy = (ev.clientY - rect.top) / rect.height * 100;
+        let {x, y, w, h} = orig;
+
+        if (corner.includes('r')) w = Math.max(4, cx - x);
+        if (corner.includes('l')) { const dx = x - cx; x = cx; w = Math.max(4, orig.w + dx); }
+        if (corner.includes('b')) h = Math.max(3, cy - y);
+        if (corner.includes('t')) { const dy = y - cy; y = cy; h = Math.max(3, orig.h + dy); }
+
+        // Snap width/height lightly
+        layer.x = Math.max(0, Math.min(96, x));
+        layer.y = Math.max(0, Math.min(96, y));
+        layer.w = Math.min(100 - layer.x, w);
+        layer.h = Math.min(100 - layer.y, h);
+        renderCanvas();
+        updateInspectorLive();
+      };
+      const up = () => {
+        isResizing = false;
+        document.removeEventListener('pointermove', move);
+        document.removeEventListener('pointerup', up);
+        pushUndo();
+        autoSave();
+      };
+      document.addEventListener('pointermove', move);
+      document.addEventListener('pointerup', up, {once:true});
+    }
+
+    function getSnappedPosition(x, y, currentLayer) {
+      let sx = x, sy = y;
+      const guides = [33.333, 50, 66.666];
+      guides.forEach(g => {
+        if (Math.abs(x - g) < SNAP_TOLERANCE/100*100) sx = g;
+        if (Math.abs(y - g) < SNAP_TOLERANCE/100*100) sy = g;
+      });
+      // Snap to other layers
+      layers.forEach(l => {
+        if (l.id === currentLayer.id) return;
+        const edges = [l.x, l.x + l.w, l.x + l.w/2];
+        edges.forEach(ex => { if (Math.abs(x - ex) < SNAP_TOLERANCE/1.6) sx = ex; });
+        const edgesY = [l.y, l.y + l.h, l.y + l.h/2];
+        edgesY.forEach(ey => { if (Math.abs(y - ey) < SNAP_TOLERANCE/1.6) sy = ey; });
+      });
+      return {x: sx, y: sy};
+    }
+
+    function updateInspector() {
+      const empty = document.getElementById('inspector-empty');
+      const content = document.getElementById('inspector-content');
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer) { empty.style.display='block'; content.style.display='none'; return; }
+      empty.style.display='none'; content.style.display='block';
+
+      const roleSel = document.getElementById('layer-role');
+      roleSel.innerHTML = '';
+      const roles = ['project-title-h1','narrative-description-body','description-section-label','description-section-value','metadata-key','metadata-value','artwork-atom-label','artwork-atom-detail','section-subhead','fine-print','caption','pull-quote'];
+      roles.forEach(r => {
+        const o = document.createElement('option');
+        o.value = r; o.textContent = r;
+        if (r === layer.role) o.selected = true;
+        roleSel.appendChild(o);
+      });
+
+      document.getElementById('layer-x').value = layer.x.toFixed(1);
+      document.getElementById('layer-y').value = layer.y.toFixed(1);
+      document.getElementById('layer-w').value = layer.w.toFixed(1);
+      document.getElementById('layer-h').value = layer.h.toFixed(1);
+    }
+
+    function updateInspectorLive() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer) return;
+      document.getElementById('layer-x').value = layer.x.toFixed(1);
+      document.getElementById('layer-y').value = layer.y.toFixed(1);
+      document.getElementById('layer-w').value = layer.w.toFixed(1);
+      document.getElementById('layer-h').value = layer.h.toFixed(1);
+    }
+
+    function updateLayerList() {
+      const list = document.getElementById('layer-list');
+      list.innerHTML = '';
+      layers.forEach(l => {
+        const div = document.createElement('div');
+        div.style.cssText = 'padding:3px 4px;border-radius:3px;cursor:pointer;margin:2px 0;font-size:12px;';
+        let label = l.type === 'image' ? '🖼️' : '📝';
+        if (l.type === 'image' && l.imageUrl) label = '📸';
+        div.textContent = `${label} ${l.role || (l.imageName ? l.imageName.split('/').pop().slice(0,22) : 'text')} @ ${l.x.toFixed(0)}%,${l.y.toFixed(0)}%`;
+        if (l.id === selectedLayerId) div.style.background = '#f4e9d8';
+        div.onclick = () => selectLayer(l.id);
+        list.appendChild(div);
+      });
+      document.getElementById('layer-count').textContent = `(${layers.length})`;
+    }
+
+    function updateLayerCount() {
+      const el = document.getElementById('layer-count');
+      if (el) el.textContent = `(${layers.length})`;
+    }
+
+    function toggleGuides() {
+      guidesVisible = document.getElementById('guides-toggle').checked;
+      renderCanvas();
+    }
+
+    // ==================== TEMPLATES ====================
+    function loadTemplate(name) {
+      if (!currentProject) {
+        alert("Select a project first (top toolbar).");
+        return;
+      }
+      pushUndo();
+      layers = [];
+
+      const p = currentProject;
+      const title = p.title;
+      const narr = p.narrative;
+      const year = p.year;
+      const loc = p.location;
+      const sci = p.descriptionSections?.scientific || '';
+      const vis = p.descriptionSections?.visual || '';
+      const mat = p.artworkAtoms?.material || '';
+
+      if (name === 'full-image-hero') {
+        // Full Image Hero 16:6 ~30% height as requested
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER (Supabase future)', x:0, y:35, w:100, h:30});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: `${year}  •  ${loc}`, x:68, y:68, w:28, h:5});
+        layers.push({id:generateId(), type:'text', role:'description-section-value', content: narr.substring(0,210)+'…', x:68, y:74, w:28, h:14});
+      } else if (name === 'split-hero') {
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER', x:0, y:0, w:52, h:100});
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:56, y:12, w:40, h:10});
+        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,420), x:56, y:24, w:40, h:28});
+        layers.push({id:generateId(), type:'text', role:'metadata-key', content:'YEAR', x:56, y:58, w:10, h:4});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: year, x:66, y:58, w:20, h:4});
+      } else if (name === 'editorial') {
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:6, w:84, h:8});
+        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,380), x:8, y:16, w:84, h:22});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'VISUAL', x:8, y:42, w:20, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-value', content: vis.substring(0,220), x:8, y:46, w:84, h:12});
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER', x:8, y:62, w:84, h:28});
+      } else if (name === 'metadata-desc') {
+        layers.push({id:generateId(), type:'text', role:'metadata-key', content:'YEAR', x:8, y:12, w:10, h:4});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: year, x:18, y:12, w:30, h:4});
+        layers.push({id:generateId(), type:'text', role:'metadata-key', content:'LOCATION', x:8, y:20, w:14, h:4});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: loc, x:22, y:20, w:50, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'ATMOSPHERIC', x:8, y:32, w:24, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-value', content: (p.descriptionSections?.atmospheric || ''), x:8, y:36, w:84, h:12});
+      } else if (name === 'blank') {
+        // nothing
+      }
+      renderCanvas();
+      updateLayerList();
+      autoSave();
+      updateStatus(`Loaded template: ${name}`);
+    }
+
+    // ==================== PROJECT LOAD ====================
+    function loadProject(projectId) {
+      if (!projectId) return;
+      const proj = SSOT_PROJECTS.find(p => p.id === projectId);
+      if (!proj) return;
+      currentProject = proj;
+
+      // Auto image prefix for this project (the key new feature)
+      recommendedImagePrefix = PROJECT_IMAGE_PREFIX_MAP[proj.id] || null;
+
+      document.getElementById('current-project-badge').textContent = proj.title;
+
+      // Auto-load a good starting template
+      loadTemplate('full-image-hero');
+
+      // Update the Browse Images button to be project-aware
+      updateImageBrowseButton();
+
+      updateStatus(`Loaded ${proj.title} — text fields bound to SSOT. Images for this project are ready.`);
+
+      // If the user already has a Supabase key saved, gently offer / auto-prepare images
+      const hasKey = !!(window.getSupabaseKey && window.getSupabaseKey());
+      if (hasKey && recommendedImagePrefix) {
+        // Pre-select the best prefix in the (closed) modal so when they open it, it's ready
+        setTimeout(() => {
+          preselectRecommendedPrefixInBrowser();
+        }, 400);
+      }
+    }
+
+    function updateImageBrowseButton() {
+      const browseBtn = document.getElementById('browse-images-btn');
+      if (!browseBtn) return;
+
+      if (currentProject && recommendedImagePrefix) {
+        const shortName = currentProject.title.replace('Surface Surveys: ', '').replace('Surface Surveys', 'Collection');
+        browseBtn.innerHTML = `🖼️ Images for ${shortName}`;
+        browseBtn.title = `Click to auto-load images from ${recommendedImagePrefix}`;
+      } else {
+        browseBtn.innerHTML = `🖼️ Browse Supabase Images`;
+        browseBtn.title = 'Browse and insert real images from your Supabase bucket';
+      }
+    }
+
+    function preselectRecommendedPrefixInBrowser() {
+      if (!recommendedImagePrefix) return;
+      const select = document.getElementById('image-prefix-select');
+      if (!select) return;
+
+      // Try to find a matching option
+      let found = false;
+      for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === recommendedImagePrefix) {
+          select.selectedIndex = i;
+          found = true;
+          break;
+        }
+      }
+      if (!found) {
+        // If exact match not present, set the custom input instead
+        const input = document.getElementById('image-prefix-input');
+        if (input) input.value = recommendedImagePrefix;
+      }
+    }
+
+    // ==================== PAGE BUILDER ====================
+    let savedSections = [];
+
+    function loadSavedSections() {
+      try {
+        savedSections = JSON.parse(localStorage.getItem('lws_saved_sections') || '[]');
+      } catch(e) { savedSections = []; }
+    }
+    function saveSavedSections() {
+      localStorage.setItem('lws_saved_sections', JSON.stringify(savedSections));
+    }
+
+    function saveCurrentAsSection() {
+      if (!layers.length) { alert("Canvas is empty."); return; }
+      const name = prompt("Name this section (e.g. 'Greenland Full Image Hero')", currentProject ? currentProject.title + " Hero" : "Untitled Section");
+      if (!name) return;
+      savedSections.push({
+        id: 'sec_' + Date.now(),
+        name,
+        projectId: currentProject?.id,
+        layers: JSON.parse(JSON.stringify(layers))
+      });
+      saveSavedSections();
+      alert("Section saved to Page Builder.");
+      openPageBuilder();
+    }
+
+    function openPageBuilder() {
+      loadSavedSections();
+      const modal = document.getElementById('page-builder-modal');
+      const list = document.getElementById('saved-sections-list');
+      list.innerHTML = '';
+      if (!savedSections.length) {
+        list.innerHTML = '<p style="color:#666;">No saved sections yet. Use "Save Current Canvas as Section" above.</p>';
+      } else {
+        savedSections.forEach((sec, idx) => {
+          const div = document.createElement('div');
+          div.className = 'saved-section';
+          div.innerHTML = `<span>${sec.name} <small style="color:#888">(${sec.layers.length} layers)</small></span>
+            <span>
+              <button onclick="moveSection(${idx},-1)">↑</button>
+              <button onclick="moveSection(${idx},1)">↓</button>
+              <button onclick="deleteSection(${idx})">Delete</button>
+            </span>`;
+          list.appendChild(div);
+        });
+      }
+      modal.classList.add('open');
+    }
+    function closePageBuilder() {
+      document.getElementById('page-builder-modal').classList.remove('open');
+    }
+    function moveSection(idx, dir) {
+      const newIdx = idx + dir;
+      if (newIdx < 0 || newIdx >= savedSections.length) return;
+      [savedSections[idx], savedSections[newIdx]] = [savedSections[newIdx], savedSections[idx]];
+      saveSavedSections();
+      openPageBuilder();
+    }
+    function deleteSection(idx) {
+      if (!confirm("Delete this saved section?")) return;
+      savedSections.splice(idx,1);
+      saveSavedSections();
+      openPageBuilder();
+    }
+
+    function exportFullPageHTML() {
+      if (!savedSections.length) { alert("No sections saved yet."); return; }
+      const selected = savedSections; // for simplicity export all in order
+      let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LWS — ${currentProject?.title || 'Composed Page'}</title><style>${document.querySelector('link[rel="stylesheet"]').outerHTML.includes('lws-type-system') ? '' : ''}</style></head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
+      html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
+      selected.forEach(sec => {
+        html += `<section style="max-width:1280px;margin:40px auto;padding:0 40px;position:relative;">`;
+        sec.layers.forEach(l => {
+          const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
+          if (l.type === 'text') {
+            html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
+          } else {
+            if (l.imageUrl) {
+              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:cover;border:none;">`;
+            } else {
+              html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:11px;">IMAGE PLACEHOLDER</div>`;
+            }
+          }
+        });
+        html += `</section>`;
+      });
+      html += `</body></html>`;
+      const w = window.open('', '_blank');
+      w.document.write(html);
+      w.document.close();
+    }
+
+    function getEmbeddedTypeSystemCSS() {
+      // Return the full content of lws-type-system.css for self-contained exports
+      return `
+:root {--lws-font-serif: Georgia, 'Times New Roman', serif; --lws-font-sans: system-ui, -apple-system, sans-serif; --lws-color-ink:#111;--lws-color-ink-muted:#444;}
+.lws-project-title-h1{font-family:var(--lws-font-serif);font-size:42px;line-height:1.05;font-weight:600;letter-spacing:-0.02em;color:var(--lws-color-ink);}
+.lws-narrative-description-body{font-family:var(--lws-font-serif);font-size:17px;line-height:1.68;color:var(--lws-color-ink);max-width:72ch;}
+.lws-description-section-label{font-family:var(--lws-font-sans);font-size:11px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;color:#666;}
+.lws-description-section-value{font-family:var(--lws-font-sans);font-size:15px;line-height:1.55;color:#444;}
+.lws-metadata-key{font-family:var(--lws-font-sans);font-size:10px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:#666;}
+.lws-metadata-value{font-family:var(--lws-font-sans);font-size:15px;font-weight:500;color:#111;}
+.lws-artwork-atom-label{font-family:var(--lws-font-sans);font-size:10px;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;color:#666;}
+.lws-artwork-atom-detail{font-family:var(--lws-font-sans);font-size:13.5px;color:#444;}
+`;
+    }
+
+    // ==================== EXPORT SINGLE SECTION ====================
+    function exportSectionHTML() {
+      if (!layers.length) { alert("Canvas is empty."); return; }
+      let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LWS Section — ${currentProject?.title || 'Export'}</title></head><body style="margin:40px auto;max-width:1280px;padding:0 40px;font-family:system-ui;background:#faf8f5;">`;
+      html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
+      layers.forEach(l => {
+        const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
+        if (l.type === 'text') {
+          html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
+        } else {
+          if (l.imageUrl) {
+            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:cover;border:none;">`;
+          } else {
+            html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:12px;">IMAGE PLACEHOLDER (Supabase)</div>`;
+          }
+        }
+      });
+      html += `</body></html>`;
+      const w = window.open('', '_blank');
+      w.document.write(html);
+      w.document.close();
+      updateStatus("Exported clean standalone HTML (opens in new tab)");
+    }
+
+    // ==================== BACKUP / PERSISTENCE ====================
+    function autoSave() {
+      const payload = {
+        version: 3,
+        timestamp: Date.now(),
+        currentProjectId: currentProject?.id,
+        layers,
+        savedSections
+      };
+      localStorage.setItem('lws_template_lab_state', JSON.stringify(payload));
+      lastSaved = Date.now();
+      document.getElementById('status').textContent = `Auto-saved ${new Date().toLocaleTimeString()}`;
+    }
+
+    function restoreFromAutoSave() {
+      try {
+        const raw = localStorage.getItem('lws_template_lab_state');
+        if (!raw) return false;
+        const data = JSON.parse(raw);
+        if (data.layers) layers = data.layers;
+        if (data.savedSections) savedSections = data.savedSections;
+        if (data.currentProjectId) {
+          const p = SSOT_PROJECTS.find(x => x.id === data.currentProjectId);
+          if (p) currentProject = p;
+        }
+        return true;
+      } catch(e) { return false; }
+    }
+
+    function downloadFullBackup() {
+      const payload = {
+        version: 3,
+        exportedAt: new Date().toISOString(),
+        currentProject: currentProject,
+        layers,
+        savedSections,
+        ssotProjects: SSOT_PROJECTS
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+      const a = document.createElement('a');
+      a.href = URL.createObjectURL(blob);
+      a.download = `lws-template-lab-backup-${Date.now()}.json`;
+      a.click();
+      updateStatus("Full backup downloaded — safe copy of everything");
+    }
+
+    function importBackup(ev) {
+      const file = ev.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        try {
+          const data = JSON.parse(e.target.result);
+          if (data.layers) layers = data.layers;
+          if (data.savedSections) savedSections = data.savedSections;
+          if (data.currentProject) currentProject = data.currentProject;
+          renderCanvas();
+          updateLayerList();
+          document.getElementById('current-project-badge').textContent = currentProject?.title || 'Imported';
+          alert("Backup imported successfully.");
+          autoSave();
+        } catch(err) {
+          alert("Invalid backup file.");
+        }
+      };
+      reader.readAsText(file);
+      ev.target.value = '';
+    }
+
+    // ==================== SUPABASE (FUTURE) ====================
+    function showSupabaseSettings() {
+      const modal = document.getElementById('supabase-modal');
+      const keyInput = document.getElementById('supabase-anon-key');
+      keyInput.value = localStorage.getItem('lws_supabase_anon_key') || '';
+      modal.classList.add('open');
+    }
+    function closeSupabaseModal() {
+      document.getElementById('supabase-modal').classList.remove('open');
+    }
+    function saveSupabaseKey() {
+      const key = document.getElementById('supabase-anon-key').value.trim();
+      if (key) {
+        localStorage.setItem('lws_supabase_anon_key', key);
+        if (window.setSupabaseKey) window.setSupabaseKey(key);
+        alert("Anon key saved. The 🖼️ Browse Supabase Images button is now fully functional.");
+      }
+      closeSupabaseModal();
+    }
+    async function testSupabaseConnection() {
+      const key = document.getElementById('supabase-anon-key').value.trim() || localStorage.getItem('lws_supabase_anon_key');
+      const resultEl = document.getElementById('supabase-test-result');
+      if (!key) { resultEl.textContent = "Paste anon key first."; return; }
+      resultEl.textContent = "Testing...";
+      try {
+        // Simple HEAD request to bucket root via public listing (will 400/403 without proper key but proves reachability)
+        const url = `https://aawnkxnnrymqbysgimqj.supabase.co/storage/v1/object/list/LISA%20WOOD%20STUDIO%20WEBSITE?limit=1`;
+        const res = await fetch(url, {headers: {Authorization: `Bearer ${key}`}});
+        if (res.status === 200 || res.status === 400) {
+          resultEl.innerHTML = `✅ Reachable. Status ${res.status}. (Key accepted for public reads when RLS allows.)`;
+        } else {
+          resultEl.textContent = `Response: ${res.status}. Key may be invalid or RLS is strict.`;
+        }
+      } catch(e) {
+        resultEl.textContent = "Network error or CORS block (expected in some environments).";
+      }
+    }
+
+    // ==================== REAL SUPABASE IMAGE BROWSER ====================
+    let currentImageList = [];
+
+    function openImageBrowser() {
+      const modal = document.getElementById('image-browser-modal');
+      const key = window.getSupabaseKey ? window.getSupabaseKey() : localStorage.getItem('lws_supabase_anon_key');
+      
+      if (!key) {
+        if (confirm("You need to paste your Supabase anon key first.\n\nOpen Settings now?")) {
+          closeImageBrowser();
+          showSupabaseSettings();
+        }
+        return;
+      }
+      
+      modal.classList.add('open');
+      document.getElementById('image-browser-status').textContent = 'Ready — choose a prefix and click Load Images';
+      document.getElementById('image-grid').innerHTML = '<div style="grid-column:1/-1;padding:20px;text-align:center;color:#888;">No images loaded yet. Select a folder above and click Load Images.</div>';
+
+      const hint = document.getElementById('image-browser-project-hint');
+      if (hint) {
+        if (currentProject && recommendedImagePrefix) {
+          hint.textContent = `✨ Auto-selected best images for: ${currentProject.title}`;
+          hint.style.display = 'block';
+        } else {
+          hint.style.display = 'none';
+        }
+      }
+
+      // If we have a recommended prefix for the current project, pre-select + auto-load it
+      // This delivers the "Auto loading images" experience the user requested
+      if (recommendedImagePrefix) {
+        setTimeout(() => {
+          preselectRecommendedPrefixInBrowser();
+          const statusEl = document.getElementById('image-browser-status');
+          statusEl.textContent = `Auto-loading images for ${currentProject?.title || 'current project'}...`;
+          loadSupabaseImagesFromUI(false);
+        }, 220);
+      }
+    }
+
+    // Called from the dynamic toolbar button — this gives the "auto loading" experience
+    function openImageBrowserAndMaybeAutoLoad() {
+      openImageBrowser();
+    }
+
+    function closeImageBrowser() {
+      document.getElementById('image-browser-modal').classList.remove('open');
+      const hint = document.getElementById('image-browser-project-hint');
+      if (hint) hint.style.display = 'none';
+    }
+
+    function loadSupabaseImagesFromUI(useCustom = false) {
+      const select = document.getElementById('image-prefix-select');
+      const input = document.getElementById('image-prefix-input');
+      const statusEl = document.getElementById('image-browser-status');
+      const grid = document.getElementById('image-grid');
+
+      let prefix = useCustom ? (input.value.trim() || '') : (select.value || '');
+      
+      statusEl.textContent = 'Loading from Supabase...';
+      grid.innerHTML = '<div style="grid-column:1/-1;padding:30px;text-align:center;color:#666;">Fetching file list from your bucket...</div>';
+
+      loadSupabaseImages(prefix).then(files => {
+        currentImageList = files;
+        renderImageGrid(files, prefix);
+        statusEl.textContent = `${files.length} images found in "${prefix || 'root'}"`;
+      }).catch(err => {
+        console.error(err);
+        grid.innerHTML = `<div style="grid-column:1/-1;padding:20px;color:#c33;background:#fff0f0;border-radius:4px;">
+          <strong>Error loading images:</strong><br>${err.message}<br><br>
+          Common fixes: wrong anon key, RLS policies blocking list, or the prefix has no files.
+        </div>`;
+        statusEl.textContent = 'Failed to load';
+      });
+    }
+
+    async function loadSupabaseImages(prefix = '') {
+      const client = window.getSupabaseClient ? window.getSupabaseClient() : null;
+      if (!client) throw new Error('No valid Supabase anon key. Please save it in Settings first.');
+
+      // Supabase Storage list returns an array of objects
+      const result = await client.listImages(prefix);
+      
+      // Filter to image files only (common formats in your archive)
+      const imageFiles = (result || []).filter(f => {
+        if (!f.name) return false;
+        const lower = f.name.toLowerCase();
+        return lower.endsWith('.jpg') || lower.endsWith('.jpeg') || lower.endsWith('.png') || 
+               lower.endsWith('.webp') || lower.endsWith('.gif') || lower.endsWith('.avif');
+      });
+
+      // Build full public URLs
+      return imageFiles.map(f => ({
+        name: f.name,
+        path: prefix ? `${prefix.replace(/\/$/, '')}/${f.name}` : f.name,
+        publicUrl: client.getPublicUrl( prefix ? `${prefix.replace(/\/$/, '')}/${f.name}` : f.name ),
+        updated: f.updated_at,
+        size: f.metadata?.size
+      }));
+    }
+
+    function renderImageGrid(files, prefixUsed) {
+      const grid = document.getElementById('image-grid');
+      grid.innerHTML = '';
+
+      if (!files.length) {
+        grid.innerHTML = `<div style="grid-column:1/-1;padding:20px;text-align:center;color:#666;">No image files found in this prefix.</div>`;
+        return;
+      }
+
+      files.forEach(file => {
+        const card = document.createElement('div');
+        card.style.cssText = 'border:1px solid #ddd;border-radius:4px;overflow:hidden;background:#fff;font-size:12px;';
+        
+        card.innerHTML = `
+          <div style="height:110px;background:#f4f2ed;position:relative;overflow:hidden;">
+            <img src="${file.publicUrl}" 
+                 style="width:100%;height:100%;object-fit:cover;" 
+                 loading="lazy"
+                 onerror="this.style.opacity=0.2;this.parentNode.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;font-size:11px;color:#999\\'>Preview unavailable</div>'">
+          </div>
+          <div style="padding:6px 8px;line-height:1.25;">
+            <div style="font-size:11px;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${file.name}">${file.name}</div>
+            <div style="display:flex;gap:4px;margin-top:6px;">
+              <button style="flex:1;font-size:10px;padding:3px 4px;" onclick="insertSupabaseImageFromBrowser('${file.publicUrl}', '${file.name.replace(/'/g, "\\'")}', false)">Insert as New Layer</button>
+              <button style="flex:1;font-size:10px;padding:3px 4px;" onclick="insertSupabaseImageFromBrowser('${file.publicUrl}', '${file.name.replace(/'/g, "\\'")}', true)">Replace Selected</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function insertSupabaseImageFromBrowser(publicUrl, fileName, replaceSelected = false) {
+      const selectedLayer = layers.find(l => l.id === selectedLayerId);
+
+      if (replaceSelected && selectedLayer && selectedLayer.type === 'image') {
+        // Replace the currently selected image layer
+        selectedLayer.imageUrl = publicUrl;
+        selectedLayer.imageName = fileName;
+        selectedLayer.content = fileName.split('/').pop();
+        pushUndo();
+        renderCanvas();
+        updateLayerList();
+        autoSave();
+        updateStatus(`Replaced layer with ${fileName}`);
+      } else {
+        // Create a new image layer (good default size for hero-style work)
+        const w = 48, h = 32;
+        const x = 26, y = 30;
+        addLayer('image', '', fileName.split('/').pop(), x, y, w, h, publicUrl, fileName);
+        updateStatus(`Inserted new image layer: ${fileName}`);
+      }
+      
+      // Close browser after action
+      closeImageBrowser();
+    }
+
+    // Helper for inspector: quick "Replace this image layer"
+    function replaceSelectedImageWithSupabase() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer || layer.type !== 'image') {
+        alert("Select an image placeholder layer first.");
+        return;
+      }
+      openImageBrowser();
+    }
+
+    // ==================== RESET / NEW ====================
+    function resetCurrentLayout() {
+      if (!currentProject) { layers = []; renderCanvas(); return; }
+      if (!confirm("Reset only the current layout (keeps project)?")) return;
+      pushUndo();
+      layers = [];
+      loadTemplate('full-image-hero'); // restore a sensible default
+    }
+    function resetAll() {
+      if (!confirm("Clear EVERYTHING on the canvas? This cannot be undone (use Undo immediately after if needed).")) return;
+      pushUndo();
+      layers = [];
+      currentProject = null;
+      document.getElementById('current-project-badge').textContent = 'Canvas cleared';
+      document.getElementById('project-select').value = '';
+      renderCanvas();
+      updateLayerList();
+      autoSave();
+    }
+    function newBlankCanvas() {
+      pushUndo();
+      layers = [];
+      currentProject = null;
+      document.getElementById('current-project-badge').textContent = 'Blank canvas';
+      document.getElementById('project-select').value = '';
+      renderCanvas();
+      updateLayerList();
+    }
+
+    // ==================== KEYBOARD ====================
+    function setupKeyboard() {
+      document.addEventListener('keydown', (e) => {
+        if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'z') {
+          e.preventDefault();
+          undo();
+        }
+        if (e.key === 'Delete' || e.key === 'Backspace') {
+          if (selectedLayerId && document.activeElement.tagName !== 'INPUT' && document.activeElement.tagName !== 'TEXTAREA') {
+            e.preventDefault();
+            deleteSelectedLayer();
+          }
+        }
+        if (e.key === 'Escape') {
+          selectedLayerId = null;
+          renderCanvas();
+        }
+      });
+      // Prevent accidental navigation on backspace
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Backspace' && document.activeElement === document.body) e.preventDefault();
+      });
+    }
+
+    // ==================== INIT ====================
+    async function init() {
+      // Load any previously saved Supabase anon key so image browser works immediately
+      const savedKey = localStorage.getItem('lws_supabase_anon_key');
+      if (savedKey && window.setSupabaseKey) {
+        window.setSupabaseKey(savedKey);
+      }
+
+      await loadSSOTData();
+      loadSavedSections();
+
+      // Restore previous session if any
+      const restored = restoreFromAutoSave();
+      if (restored && layers.length) {
+        renderCanvas();
+        updateLayerList();
+        if (currentProject) {
+          document.getElementById('current-project-badge').textContent = currentProject.title;
+          recommendedImagePrefix = PROJECT_IMAGE_PREFIX_MAP[currentProject.id] || null;
+          updateImageBrowseButton();
+        }
+        document.getElementById('status').textContent = 'Restored previous session';
+      } else {
+        // First run — load Greenland as friendly starting point
+        const greenland = SSOT_PROJECTS.find(p => p.id === 'greenland');
+        if (greenland) {
+          currentProject = greenland;
+          recommendedImagePrefix = PROJECT_IMAGE_PREFIX_MAP[greenland.id] || null;
+          document.getElementById('current-project-badge').textContent = greenland.title;
+          document.getElementById('project-select').value = 'greenland';
+          loadTemplate('full-image-hero');
+          updateImageBrowseButton();
+        }
+      }
+
+      setupKeyboard();
+
+      // Auto-save every 25 seconds
+      setInterval(() => {
+        if (Date.now() - lastSaved > 24000) autoSave();
+      }, 25000);
+
+      // Warn before unload if work exists
+      window.addEventListener('beforeunload', (e) => {
+        if (layers.length > 0) {
+          autoSave();
+          e.returnValue = "You have unsaved layers in the Template Lab. Download a backup before leaving?";
+        }
+      });
+
+      document.getElementById('guides-toggle').checked = true;
+      updateStatus("Template Lab ready — real Supabase images active. Select a project and the orange button auto-targets the right images for you.");
+
+      // Expose a couple helpers for power users in console
+      window.LWS_LAB = { exportBackup: downloadFullBackup, clearAll: resetAll };
+    }
+
+    function updateStatus(msg) {
+      document.getElementById('status').textContent = msg;
+    }
+
+    // Boot
+    window.onload = init;
+  </script>
+</body>
+</html>

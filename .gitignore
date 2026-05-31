@@ -1,0 +1,12 @@
+# Template Lab — Git ignore
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+.env
+.env.local
+*.bak
+*.zip
+backup-*.json
+# Never commit real Supabase service keys (anon key is ok to paste in UI only)
+supabase-service-key.txt

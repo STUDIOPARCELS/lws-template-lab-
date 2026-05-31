@@ -1,0 +1,13 @@
+{
+  "name": "lws-template-lab",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Lisa Wood Studio — Visual Section Layout Editor + Page Builder (SSOT-driven). Standalone static site for GitHub + Vercel.",
+  "scripts": {
+    "dev": "npx serve . -p 5173",
+    "deploy:vercel": "vercel --prod"
+  },
+  "keywords": ["lisa-wood-studio", "template-lab", "ssot", "vercel", "static"],
+  "author": "Lisa Wood Studio",
+  "license": "UNLICENSED"
+}
