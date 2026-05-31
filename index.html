@@ -379,24 +379,33 @@
         <div>
           <label style="font-size:11px;display:block;margin-bottom:2px;">Quick Prefix (from your projects)</label>
           <select id="image-prefix-select" style="width:260px;">
-            <option value="">Root (all files — slow)</option>
-            <option value="SURFACE SURVEYS/">SURFACE SURVEYS /</option>
-            <option value="SURFACE SURVEYS/GREENLAND FINAL PHOTOS/">Greenland</option>
-            <option value="SURFACE SURVEYS/WHITE SANDS/">White Sands</option>
-            <option value="SURFACE SURVEYS/WAHIBA OMAN/">Wahiba (Oman)</option>
-            <option value="SURFACE SURVEYS/CRATERS/">Craters of the Moon</option>
-            <option value="SURFACE SURVEYS/SIMPSON DESERT/">Simpson Desert</option>
-            <option value="SURFACE SURVEYS/CITY/">City of Rocks</option>
-            <option value="OMANI LANDSCAPES/">Omani Landscapes</option>
-            <option value="OMANI LANDSCAPES/Content/">Omani — Content</option>
-            <option value="OMANI LANDSCAPES/Renders/">Omani — Renders</option>
+            <option value="">— Choose a folder —</option>
+            <optgroup label="Final Artwork (recommended)">
+              <option value="artwork/greenland/">Greenland</option>
+              <option value="artwork/white-sands/">White Sands</option>
+              <option value="artwork/craters/">Craters of the Moon</option>
+              <option value="artwork/city-of-rocks/">City of Rocks</option>
+              <option value="artwork/simpson-desert/">Simpson Desert</option>
+              <option value="artwork/wahiba/">Wahiba (Oman)</option>
+              <option value="artwork/omani-landscapes/">Omani Landscapes</option>
+            </optgroup>
+            <optgroup label="Surface Surveys (originals)">
+              <option value="SURFACE SURVEYS/GREENLAND/">Greenland — originals</option>
+              <option value="SURFACE SURVEYS/WHITE SANDS/">White Sands — originals</option>
+              <option value="SURFACE SURVEYS/CITY/">City of Rocks — originals</option>
+              <option value="SURFACE SURVEYS/WAHIBA OMAN/">Wahiba — originals</option>
+              <option value="SURFACE SURVEYS/SIMPSON DESERT/">Simpson Desert — originals</option>
+            </optgroup>
+            <optgroup label="Other">
+              <option value="OMANI LANDSCAPES/">Omani Landscapes — originals</option>
+            </optgroup>
           </select>
         </div>
         <button onclick="loadSupabaseImagesFromUI()" style="background:#e67e22;color:white;">Load Images</button>
         
         <div style="margin-left:12px;">
           <label style="font-size:11px;display:block;margin-bottom:2px;">Or custom prefix</label>
-          <input id="image-prefix-input" type="text" placeholder="e.g. SURFACE SURVEYS/GREENLAND FINAL PHOTOS/" style="width:280px;padding:5px;">
+          <input id="image-prefix-input" type="text" placeholder="e.g. artwork/greenland/ or SURFACE SURVEYS/WHITE SANDS/" style="width:280px;padding:5px;">
         </div>
         <button onclick="loadSupabaseImagesFromUI(true)">Load Custom</button>
 
@@ -433,14 +442,14 @@
 
     // Mapping from SSOT project IDs to the best Supabase storage prefixes for auto-loading images
     const PROJECT_IMAGE_PREFIX_MAP = {
-      'greenland': 'SURFACE SURVEYS/GREENLAND FINAL PHOTOS/',
-      'white-sands': 'SURFACE SURVEYS/WHITE SANDS/',
-      'wahiba': 'SURFACE SURVEYS/WAHIBA OMAN/',
-      'craters': 'SURFACE SURVEYS/CRATERS/',
-      'simpson': 'SURFACE SURVEYS/SIMPSON DESERT/',
-      'city-of-rocks': 'SURFACE SURVEYS/CITY/',
-      'omani-landscapes': 'OMANI LANDSCAPES/',
-      'surface-surveys': 'SURFACE SURVEYS/',
+      'greenland': 'artwork/greenland/',
+      'white-sands': 'artwork/white-sands/',
+      'wahiba': 'artwork/wahiba/',
+      'craters': 'artwork/craters/',
+      'simpson': 'artwork/simpson-desert/',
+      'city-of-rocks': 'artwork/city-of-rocks/',
+      'omani-landscapes': 'artwork/omani-landscapes/',
+      'surface-surveys': 'SURFACE SURVEYS/GREENLAND/',
     };
 
     let recommendedImagePrefix = null; // set when a project is loaded
@@ -1158,21 +1167,28 @@
       closeSupabaseModal();
     }
     async function testSupabaseConnection() {
-      const key = document.getElementById('supabase-anon-key').value.trim() || localStorage.getItem('lws_supabase_anon_key');
+      const key = (document.getElementById('supabase-anon-key').value.trim())
+                || (window.getSupabaseKey ? window.getSupabaseKey() : localStorage.getItem('lws_supabase_anon_key'));
       const resultEl = document.getElementById('supabase-test-result');
-      if (!key) { resultEl.textContent = "Paste anon key first."; return; }
+      if (!key) { resultEl.textContent = "No anon key available."; return; }
       resultEl.textContent = "Testing...";
       try {
-        // Simple HEAD request to bucket root via public listing (will 400/403 without proper key but proves reachability)
-        const url = `https://aawnkxnnrymqbysgimqj.supabase.co/storage/v1/object/list/LISA%20WOOD%20STUDIO%20WEBSITE?limit=1`;
-        const res = await fetch(url, {headers: {Authorization: `Bearer ${key}`}});
-        if (res.status === 200 || res.status === 400) {
-          resultEl.innerHTML = `✅ Reachable. Status ${res.status}. (Key accepted for public reads when RLS allows.)`;
+        // Supabase Storage list is a POST with a JSON body.
+        const url = `https://aawnkxnnrymqbysgimqj.supabase.co/storage/v1/object/list/LISA%20WOOD%20STUDIO%20WEBSITE`;
+        const res = await fetch(url, {
+          method: "POST",
+          headers: { "Authorization": `Bearer ${key}`, "apikey": key, "Content-Type": "application/json" },
+          body: JSON.stringify({ prefix: "artwork/greenland/", limit: 1, offset: 0, sortBy: { column: "name", order: "asc" } })
+        });
+        if (res.ok) {
+          const data = await res.json().catch(() => []);
+          resultEl.innerHTML = `✅ Connected — listing works (sample returned ${Array.isArray(data) ? data.length : 0} item).`;
         } else {
-          resultEl.textContent = `Response: ${res.status}. Key may be invalid or RLS is strict.`;
+          const t = await res.text().catch(() => '');
+          resultEl.textContent = `Response ${res.status}: ${t || 'check key / RLS policy'}`;
         }
       } catch(e) {
-        resultEl.textContent = "Network error or CORS block (expected in some environments).";
+        resultEl.textContent = "Network or CORS error: " + e.message;
       }
     }
 
