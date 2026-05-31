@@ -830,22 +830,46 @@
         const cy = (ev.clientY - rect.top) / rect.height * 100;
         let {x, y, w, h} = orig;
 
-        // Handle corners and sides
+        const dx = cx - startX;
+        const dy = cy - startY;
+
+        // Handle corners and sides using deltas for stability
         const isLeft   = corner === 'left'   || corner.includes('l');
         const isRight  = corner === 'right'  || corner.includes('r');
         const isTop    = corner === 'top'    || corner.includes('t');
         const isBottom = corner === 'bottom' || corner.includes('b');
 
-        if (isRight)  w = Math.max(4, cx - x);
-        if (isLeft)   { const dx = x - cx; x = cx; w = Math.max(4, orig.w + dx); }
-        if (isBottom) h = Math.max(3, cy - y);
-        if (isTop)    { const dy = y - cy; y = cy; h = Math.max(3, orig.h + dy); }
+        if (isRight || corner.includes('r')) {
+          w = Math.max(4, orig.w + dx);
+        }
+        if (isLeft || corner.includes('l')) {
+          x = orig.x + dx;
+          w = Math.max(4, orig.w - dx);
+        }
+        if (isBottom || corner.includes('b')) {
+          h = Math.max(3, orig.h + dy);
+        }
+        if (isTop || corner.includes('t')) {
+          y = orig.y + dy;
+          h = Math.max(3, orig.h - dy);
+        }
 
-        // Snap width/height lightly
-        layer.x = Math.max(0, Math.min(96, x));
-        layer.y = Math.max(0, Math.min(96, y));
-        layer.w = Math.min(100 - layer.x, w);
-        layer.h = Math.min(100 - layer.y, h);
+        // Clamp to canvas
+        x = Math.max(0, Math.min(96, x));
+        y = Math.max(0, Math.min(96, y));
+        w = Math.min(100 - x, w);
+        h = Math.min(100 - y, h);
+
+        layer.x = x;
+        layer.y = y;
+        layer.w = w;
+        layer.h = h;
+
+        el.style.left = x + '%';
+        el.style.top = y + '%';
+        el.style.width = w + '%';
+        el.style.height = h + '%';
+
         renderCanvas();
         updateInspectorLive();
       };
