@@ -301,11 +301,17 @@
           <div id="inspector-content" style="display:none;">
             <div><strong>Role</strong></div>
             <select id="layer-role" onchange="updateSelectedRole()"></select>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:8px;">
-              <div>X% <input id="layer-x" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
-              <div>Y% <input id="layer-y" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
-              <div>W% <input id="layer-w" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
-              <div>H% <input id="layer-h" type="number" step="0.5" oninput="updateSelectedTransform()"></div>
+            <!-- Precise X/Y/W/H kept hidden so drag/resize still records position; use the Center button instead -->
+            <div style="display:none;">
+              <input id="layer-x" type="number" oninput="updateSelectedTransform()">
+              <input id="layer-y" type="number" oninput="updateSelectedTransform()">
+              <input id="layer-w" type="number" oninput="updateSelectedTransform()">
+              <input id="layer-h" type="number" oninput="updateSelectedTransform()">
+            </div>
+            <button onclick="centerSelectedLayer('both')" class="primary" style="width:100%;margin-top:8px;">⊕ Center on Page</button>
+            <div style="display:flex;gap:6px;margin-top:6px;">
+              <button onclick="centerSelectedLayer('h')" style="flex:1;">↔ Center across</button>
+              <button onclick="centerSelectedLayer('v')" style="flex:1;">↕ Center down</button>
             </div>
             <button onclick="deleteSelectedLayer()" class="danger" style="width:100%;margin-top:8px;">Delete Layer (Del/Backspace)</button>
             <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
@@ -784,6 +790,18 @@
         edgesY.forEach(ey => { if (Math.abs(y - ey) < SNAP_TOLERANCE/1.6) sy = ey; });
       });
       return {x: sx, y: sy};
+    }
+
+    function centerSelectedLayer(axis) {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer) { alert('Select a layer first (click it on the canvas).'); return; }
+      pushUndo();
+      if (axis === 'h' || axis === 'both') layer.x = (100 - layer.w) / 2;
+      if (axis === 'v' || axis === 'both') layer.y = (100 - layer.h) / 2;
+      renderCanvas();
+      updateInspector();
+      autoSave();
+      updateStatus(axis === 'h' ? 'Centered across (horizontally).' : axis === 'v' ? 'Centered down (vertically).' : 'Centered on the page.');
     }
 
     function updateInspector() {
