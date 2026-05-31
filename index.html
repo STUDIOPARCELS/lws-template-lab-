@@ -1107,10 +1107,18 @@
       openPageBuilder();
     }
 
+    // The current "page" = all saved sections belonging to the selected project.
+    function pageSections() {
+      if (!currentProject) return savedSections.slice();
+      return savedSections.filter(s => (s.projectId || null) === currentProject.id);
+    }
+
     function openPageBuilder() {
       loadSavedSections();
       const modal = document.getElementById('page-builder-modal');
       const list = document.getElementById('saved-sections-list');
+      const heading = modal.querySelector('h2');
+      if (heading) heading.textContent = currentProject ? `Page Builder — ${currentProject.title}` : 'Page Builder — Saved Sections';
 
       // Widen the modal into a scrollable, full-page view.
       const mc = modal.querySelector('.modal-content');
@@ -1123,15 +1131,17 @@
       list.style.borderRadius = '6px';
       list.innerHTML = '';
 
-      if (!savedSections.length) {
-        list.innerHTML = '<p style="color:#666;text-align:center;padding:24px;">No sections yet. Build a layout on the canvas, then click “Save Current Canvas as Section.” Each one becomes a band of your page, shown here stacked top-to-bottom.</p>';
+      const secs = pageSections();
+      if (!secs.length) {
+        const who = currentProject ? currentProject.title : 'this project';
+        list.innerHTML = `<p style="color:#666;text-align:center;padding:24px;">No sections saved for <strong>${who}</strong> yet. Build a layout on the canvas, then click “Save Current Canvas as Section.” Each one becomes a band of this project's page, stacked top-to-bottom.</p>`;
         modal.classList.add('open');
         return;
       }
 
       const PREVIEW_W = 700, scale = PREVIEW_W / 1280, bandH = 720 * scale;
 
-      savedSections.forEach((sec, idx) => {
+      secs.forEach((sec, i) => {
         const inner = sec.layers.map(l => {
           const pos = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
           if (l.type === 'text') {
@@ -1146,15 +1156,15 @@
         wrap.style.cssText = 'margin:0 auto 16px;width:' + PREVIEW_W + 'px;max-width:100%;';
         wrap.innerHTML = `
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;">
-            <span style="font-size:12px;font-weight:600;color:#333;">${idx + 1}. ${sec.name} <small style="color:#999;font-weight:400;">(${sec.layers.length} layer${sec.layers.length === 1 ? '' : 's'})</small></span>
+            <span style="font-size:12px;font-weight:600;color:#333;">${i + 1}. ${sec.name} <small style="color:#999;font-weight:400;">(${sec.layers.length} layer${sec.layers.length === 1 ? '' : 's'})</small></span>
             <span style="display:flex;gap:4px;">
-              <button onclick="editSection(${idx})" style="background:#2a7;color:#fff;border-color:#2a7;font-size:11px;padding:3px 8px;" title="Open on the canvas to edit this section">✏️ Edit</button>
-              <button onclick="moveSection(${idx},-1)" title="Move up" style="font-size:11px;padding:3px 8px;">↑</button>
-              <button onclick="moveSection(${idx},1)" title="Move down" style="font-size:11px;padding:3px 8px;">↓</button>
-              <button onclick="deleteSection(${idx})" style="font-size:11px;padding:3px 8px;">Delete</button>
+              <button onclick="editSection('${sec.id}')" style="background:#2a7;color:#fff;border-color:#2a7;font-size:11px;padding:3px 8px;" title="Open on the canvas to edit this section">✏️ Edit</button>
+              <button onclick="moveSection('${sec.id}',-1)" title="Move up" style="font-size:11px;padding:3px 8px;">↑</button>
+              <button onclick="moveSection('${sec.id}',1)" title="Move down" style="font-size:11px;padding:3px 8px;">↓</button>
+              <button onclick="deleteSection('${sec.id}')" style="font-size:11px;padding:3px 8px;">Delete</button>
             </span>
           </div>
-          <div onclick="editSection(${idx})" title="Click to edit this section on the canvas" style="position:relative;width:${PREVIEW_W}px;max-width:100%;height:${bandH}px;overflow:hidden;background:#faf8f5;border:1px solid #ddd6cc;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;">
+          <div onclick="editSection('${sec.id}')" title="Click to edit this section on the canvas" style="position:relative;width:${PREVIEW_W}px;max-width:100%;height:${bandH}px;overflow:hidden;background:#faf8f5;border:1px solid #ddd6cc;box-shadow:0 1px 3px rgba(0,0,0,.08);cursor:pointer;">
             <div style="position:absolute;top:0;left:0;width:1280px;height:720px;transform:scale(${scale});transform-origin:top left;">${inner}</div>
           </div>`;
         list.appendChild(wrap);
@@ -1165,22 +1175,29 @@
     function closePageBuilder() {
       document.getElementById('page-builder-modal').classList.remove('open');
     }
-    function moveSection(idx, dir) {
-      const newIdx = idx + dir;
-      if (newIdx < 0 || newIdx >= savedSections.length) return;
-      [savedSections[idx], savedSections[newIdx]] = [savedSections[newIdx], savedSections[idx]];
+    function moveSection(id, dir) {
+      const group = pageSections();
+      const gi = group.findIndex(s => s.id === id);
+      const swapWith = group[gi + dir];
+      if (gi < 0 || !swapWith) return;
+      const a = savedSections.findIndex(s => s.id === id);
+      const b = savedSections.findIndex(s => s.id === swapWith.id);
+      if (a < 0 || b < 0) return;
+      [savedSections[a], savedSections[b]] = [savedSections[b], savedSections[a]];
       saveSavedSections();
       openPageBuilder();
     }
-    function deleteSection(idx) {
+    function deleteSection(id) {
       if (!confirm("Delete this saved section?")) return;
-      savedSections.splice(idx,1);
+      const a = savedSections.findIndex(s => s.id === id);
+      if (a < 0) return;
+      savedSections.splice(a, 1);
       saveSavedSections();
       openPageBuilder();
     }
 
-    function editSection(idx) {
-      const sec = savedSections[idx];
+    function editSection(id) {
+      const sec = savedSections.find(s => s.id === id);
       if (!sec) return;
       pushUndo();
       layers = JSON.parse(JSON.stringify(sec.layers));
@@ -1195,7 +1212,7 @@
           updateImageBrowseButton();
         }
       }
-      editingSectionIndex = idx;
+      editingSectionIndex = savedSections.findIndex(s => s.id === id);
       selectedLayerId = null;
       renderCanvas();
       updateLayerList();
@@ -1209,7 +1226,7 @@
       let html = `<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${currentProject?.title || 'LWS Composed Page'}</title>`;
       html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
       html += `</head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
-      savedSections.forEach(sec => {
+      pageSections().forEach(sec => {
         html += `<section style="width:100%;max-width:1280px;aspect-ratio:1280 / 720;margin:0 auto;position:relative;background:#faf8f5;overflow:hidden;">`;
         sec.layers.forEach(l => {
           const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
@@ -1228,7 +1245,7 @@
     }
 
     function exportFullPageHTML() {
-      if (!savedSections.length) { alert("No sections saved yet."); return; }
+      if (!pageSections().length) { alert("No sections saved for this project yet."); return; }
       const w = window.open('', '_blank');
       if (!w) { alert('Your browser blocked the pop-up window. Please allow pop-ups for this site, then click Preview again.'); return; }
       w.document.write(buildComposedPageHTML());
@@ -1236,7 +1253,7 @@
     }
 
     function publishPage() {
-      if (!savedSections.length) { alert("Nothing to publish yet — save at least one section first."); return; }
+      if (!pageSections().length) { alert("Nothing to publish yet — save at least one section for this project first."); return; }
       let slug = prompt("Name this page for its web address (letters, numbers, hyphens only).\nIt will go live at:  templatelab.lisawoodstudio.com/<name>", (currentProject?.id || 'page'));
       if (!slug) return;
       slug = slug.toLowerCase().trim().replace(/[^a-z0-9-]+/g, '-').replace(/^-+|-+$/g, '') || 'page';
