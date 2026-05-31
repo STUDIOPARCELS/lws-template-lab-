@@ -268,6 +268,7 @@
 
     <button onclick="exportSectionHTML()" class="primary">Export Section HTML</button>
     <button onclick="openPageBuilder()" style="background:#2a7;color:#fff;border-color:#2a7;">Page Builder →</button>
+    <button onclick="document.getElementById('help-modal').classList.add('open')" title="How to use the Template Lab" style="background:#444;color:#fff;border-color:#444;">❓ How to Use</button>
 
     <label style="margin-left:auto;font-size:12px;display:flex;align-items:center;gap:4px;">
       <input type="checkbox" id="guides-toggle" checked onchange="toggleGuides()"> Guides
@@ -347,6 +348,28 @@
       </div>
       <div style="text-align:center;margin-top:8px;font-size:11px;color:#777;">
         Tip: Use Page Builder to combine multiple sections into a full exportable page.
+      </div>
+    </div>
+  </div>
+
+  <!-- How to Use Modal -->
+  <div id="help-modal" class="modal">
+    <div class="modal-content" style="max-width:600px;">
+      <h2 style="margin-top:0;">How to Use the Template Lab</h2>
+      <p style="font-size:13px;color:#555;margin-top:-4px;">Build a page from your projects, then publish it — one quick loop:</p>
+      <ol style="font-size:13.5px;line-height:1.65;color:#333;padding-left:20px;margin:10px 0;">
+        <li><strong>Pick a project</strong> (top-left dropdown), then <strong>pick a Template</strong> next to it — it lays out that project's text.</li>
+        <li><strong>Add images:</strong> click <strong style="color:#c25e16;">🖼️ Browse Supabase Images</strong>, then click any image to drop it in. Adjust with <strong>Image Fit (Fill / Fit)</strong> and <strong>⊕ Center on Page</strong>. Drag a layer to move it, drag its corners to resize, <strong>double-click text</strong> to edit.</li>
+        <li>When the band looks good → <strong>Page Builder → Save Current Canvas as Section</strong>.</li>
+        <li><strong>Repeat</strong> for each band (e.g. a hero, a description, a specifications block).</li>
+        <li>In <strong>Page Builder</strong> your sections show <strong>stacked as the real page</strong>. Reorder with <strong>↑ ↓</strong>; click <strong style="color:#1f7a4d;">✏️ Edit</strong> on a section to fix it, then Save.</li>
+        <li>Click <strong style="color:#1f7a4d;">👁 Preview</strong> to see the whole page full-size.</li>
+        <li>Click <strong style="color:#a86b1f;">🚀 Publish</strong>, name it, and it downloads the page — send that file to Claude and it goes live at <code style="font-size:12px;">templatelab.lisawoodstudio.com/&lt;name&gt;</code>.</li>
+      </ol>
+      <p style="font-size:12.5px;color:#666;background:#f6f4ef;border-radius:5px;padding:8px 10px;">💾 Your work auto-saves in this browser. Click <strong>⬇ Download Full Backup</strong> now and then for a safe copy.</p>
+      <p style="font-size:13px;font-weight:600;color:#333;background:#f0ede6;border-radius:5px;padding:8px 10px;">In one line: Pick project → Template → add images/text → Save as Section → (repeat) → Preview → Publish.</p>
+      <div style="text-align:right;margin-top:14px;">
+        <button onclick="document.getElementById('help-modal').classList.remove('open')" class="primary">Got it</button>
       </div>
     </div>
   </div>
