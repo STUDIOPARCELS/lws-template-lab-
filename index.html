@@ -290,6 +290,7 @@
     <span style="margin:0 8px;color:#999;">|</span>
 
     <button onclick="exportSectionHTML()" class="primary">Export Section HTML</button>
+    <button onclick="saveCurrentAsSection()" style="background:#1f7a4d;color:#fff;border-color:#1f7a4d;font-weight:600;" title="Save the current canvas onto this project's page">💾 Save as Page Section</button>
     <button onclick="openPageBuilder()" style="background:#2a7;color:#fff;border-color:#2a7;">Page Builder →</button>
     <button onclick="document.getElementById('help-modal').classList.add('open')" title="How to use the Template Lab" style="background:#444;color:#fff;border-color:#444;">❓ How to Use</button>
     <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark / light mode">☀️ Light Mode</button>
@@ -384,7 +385,7 @@
       <ol style="font-size:13.5px;line-height:1.65;color:#333;padding-left:20px;margin:10px 0;">
         <li><strong>Pick a project</strong> (top-left dropdown), then <strong>pick a Template</strong> next to it — it lays out that project's text.</li>
         <li><strong>Add images:</strong> click <strong style="color:#c25e16;">🖼️ Browse Supabase Images</strong>, then click any image to drop it in. Adjust with <strong>Image Fit (Fill / Fit)</strong> and <strong>⊕ Center on Page</strong>. Drag a layer to move it, drag its corners to resize, <strong>double-click text</strong> to edit.</li>
-        <li>When the band looks good → <strong>Page Builder → Save Current Canvas as Section</strong>.</li>
+        <li>When the band looks good → click <strong>💾 Save as Page Section</strong> (top toolbar, or inside Page Builder).</li>
         <li><strong>Repeat</strong> for each band (e.g. a hero, a description, a specifications block).</li>
         <li>In <strong>Page Builder</strong> your sections show <strong>stacked as the real page</strong>. Reorder with <strong>↑ ↓</strong>; click <strong style="color:#1f7a4d;">✏️ Edit</strong> on a section to fix it, then Save.</li>
         <li>Click <strong style="color:#1f7a4d;">👁 Preview</strong> to see the whole page full-size.</li>
@@ -405,7 +406,7 @@
       <p style="font-size:13px;color:#555;">Reorder and combine saved sections. Export as one clean production HTML page using real LWS typography.</p>
       <div id="saved-sections-list" style="margin:12px 0;"></div>
       <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button onclick="saveCurrentAsSection()" class="primary">Save Current Canvas as Section</button>
+        <button onclick="saveCurrentAsSection()" class="primary">💾 Save Current Template as Page Section</button>
         <button onclick="exportFullPageHTML()" style="background:#2a7;color:#fff;border-color:#2a7;font-weight:600;">👁 Preview / Export Full Page →</button>
         <button onclick="publishPage()" style="background:#a86b1f;color:#fff;border-color:#a86b1f;font-weight:600;">🚀 Publish to Live Site →</button>
         <button onclick="closePageBuilder()">Close</button>
@@ -1134,7 +1135,7 @@
       const secs = pageSections();
       if (!secs.length) {
         const who = currentProject ? currentProject.title : 'this project';
-        list.innerHTML = `<p style="color:#666;text-align:center;padding:24px;">No sections saved for <strong>${who}</strong> yet. Build a layout on the canvas, then click “Save Current Canvas as Section.” Each one becomes a band of this project's page, stacked top-to-bottom.</p>`;
+        list.innerHTML = `<p style="color:#666;text-align:center;padding:24px;">No sections saved for <strong>${who}</strong> yet. Build a layout on the canvas, then click “💾 Save as Page Section.” Each one becomes a band of this project's page, stacked top-to-bottom.</p>`;
         modal.classList.add('open');
         return;
       }
@@ -1219,7 +1220,7 @@
       updateInspector();
       autoSave();
       closePageBuilder();
-      updateStatus(`Editing "${sec.name}" on the canvas. Move/resize/double-click to edit, then click "Save Current Canvas as Section" to update it.`);
+      updateStatus(`Editing "${sec.name}" on the canvas. Move/resize/double-click to edit, then click "💾 Save as Page Section" to update it.`);
     }
 
     function buildComposedPageHTML() {
