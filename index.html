@@ -962,11 +962,11 @@
         layers.push({id:generateId(), type:'text', role:'description-section-value', content: sci, x:8, y:61, w:84, h:18});
       } else if (name === 'triptych') {
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:6, w:84, h:7});
-        const _tw = 20, _ty = 24, _th = 58, _gap = 3, _x0 = 18; // three centred PORTRAIT images
+        const _tw = 22, _ty = 23, _th = 64, _gap = 2, _x0 = 15; // three centred PORTRAIT images — ~10% larger, tighter gap
         const _caps = ['/ ' + (loc || 'Location'), '/ Surface Surveys', '/ ' + (year || '')];
         for (let _i = 0; _i < 3; _i++) {
           const _ix = _x0 + _i * (_tw + _gap);
-          layers.push({id:generateId(), type:'text', role:'artwork-atom-label', content: _caps[_i], x:_ix, y:19, w:_tw, h:3});
+          layers.push({id:generateId(), type:'text', role:'caption', content: _caps[_i], x:_ix, y:18, w:_tw, h:3});
           layers.push({id:generateId(), type:'image', role:'', content:'IMAGE ' + (_i+1), x:_ix, y:_ty, w:_tw, h:_th});
         }
       } else if (name === 'specifications') {
@@ -1263,6 +1263,8 @@
 .lws-artwork-atom-label{font-family:var(--lws-mono);font-weight:700;font-size:10px;letter-spacing:.04em;text-transform:uppercase;color:#444;margin:0 0 .15em;}
 .lws-artwork-atom-detail{font-family:var(--lws-mono);font-weight:400;font-size:10px;line-height:1.45;color:#444;margin:0 0 .5em;}
 .lws-section-subhead{font-family:var(--lws-mono);font-weight:700;font-size:18px;line-height:1.3;color:#2B2B2B;margin:0 0 .4em;}
+.lws-caption{font-family:var(--lws-sans);font-weight:400;font-size:11px;line-height:1.4;color:#8A8F96;}
+.lws-fine-print{font-family:var(--lws-sans);font-weight:400;font-size:11px;line-height:1.4;color:#8A8F96;}
 `;
     }
 
