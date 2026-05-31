@@ -1022,13 +1022,9 @@
 
       document.getElementById('current-project-badge').textContent = proj.title;
 
-      // Only auto-load a starting template if the canvas is empty — never wipe existing work.
-      if (!layers.length) {
-        loadTemplate('full-image-hero');
-      } else {
-        renderCanvas();
-        updateLayerList();
-      }
+      // Switching projects re-applies the current template so the TEXT updates to the new
+      // project (images carry over). On an empty canvas, start with a sensible default.
+      loadTemplate(layers.length ? (currentTemplateName || 'full-image-hero') : 'full-image-hero');
 
       // Update the Browse Images button to be project-aware
       updateImageBrowseButton();
