@@ -909,11 +909,13 @@
     }
 
     // ==================== TEMPLATES ====================
+    let currentTemplateName = 'full-image-hero';
     function loadTemplate(name) {
       if (!currentProject) {
         alert("Select a project first (top toolbar).");
         return;
       }
+      currentTemplateName = name;
       pushUndo();
       layers = [];
       editingSectionIndex = null;
@@ -1614,10 +1616,10 @@
     // ==================== RESET / NEW ====================
     function resetCurrentLayout() {
       if (!currentProject) { layers = []; renderCanvas(); return; }
-      if (!confirm("Reset only the current layout (keeps project)?")) return;
+      if (!confirm("Reset the current layout to the chosen template's defaults?")) return;
       pushUndo();
       layers = [];
-      loadTemplate('full-image-hero'); // restore a sensible default
+      loadTemplate(currentTemplateName || 'full-image-hero'); // restore the CURRENT template, not always Full Image Hero
     }
     function resetAll() {
       if (!confirm("Clear EVERYTHING on the canvas? This cannot be undone (use Undo immediately after if needed).")) return;
