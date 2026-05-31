@@ -967,7 +967,10 @@
       } else if (name === 'triptych') {
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:6, w:84, h:7});
         const _tw = 23.5, _ty = 23, _th = 68, _gap = 1.6, _x0 = 13.2; // bigger boxes (+~7%), gap reduced 20%, kept centred
-        const _caps = ['/ ' + (loc || 'Location'), '/ Surface Surveys', '/ ' + (year || '')];
+        // Caption logic per SSOT: / parent (collection or discipline)  /  project name  /  year
+        const _parent = p.parent || p.medium || 'Photography';
+        const _pname = (title || '').replace(/^Surface Surveys:\s*/i, '');
+        const _caps = ['/ ' + _parent, '/ ' + _pname, '/ ' + (year || '')];
         for (let _i = 0; _i < 3; _i++) {
           const _ix = _x0 + _i * (_tw + _gap);
           layers.push({id:generateId(), type:'text', role:'caption', content: _caps[_i], x:_ix, y:18, w:_tw, h:3});
