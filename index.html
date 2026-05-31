@@ -1645,11 +1645,17 @@
 
     // ==================== RESET / NEW ====================
     function resetCurrentLayout() {
-      if (!currentProject) { layers = []; renderCanvas(); return; }
-      if (!confirm("Reset the current layout to the chosen template's defaults?")) return;
+      if (!layers.length) return;
+      if (!confirm("Clear the canvas to a blank layout?\n\nYour project stays selected so you can keep building.")) return;
       pushUndo();
       layers = [];
-      loadTemplate(currentTemplateName || 'full-image-hero'); // restore the CURRENT template, not always Full Image Hero
+      editingSectionIndex = null;
+      selectedLayerId = null;
+      renderCanvas();
+      updateLayerList();
+      updateInspector();
+      autoSave();
+      updateStatus('Canvas cleared to blank — keep building on ' + (currentProject ? currentProject.title : 'your canvas') + '.');
     }
     function resetAll() {
       if (!confirm("Clear EVERYTHING on the canvas? This cannot be undone (use Undo immediately after if needed).")) return;
