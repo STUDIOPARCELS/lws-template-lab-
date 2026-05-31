@@ -243,11 +243,19 @@
       <option value="">— Select SSOT Project —</option>
     </select>
 
-    <button onclick="loadTemplate('full-image-hero')">Full Image Hero (16:6)</button>
-    <button onclick="loadTemplate('split-hero')">Split Hero</button>
-    <button onclick="loadTemplate('editorial')">Editorial</button>
-    <button onclick="loadTemplate('metadata-desc')">Metadata + Description</button>
-    <button onclick="loadTemplate('blank')">Blank Canvas</button>
+    <select id="template-select" onchange="if(this.value)loadTemplate(this.value)" style="min-width:210px;" title="Apply a layout template — fills in this project's text">
+      <option value="">— Choose a Template —</option>
+      <option value="full-image-hero">Full Image Hero</option>
+      <option value="split-hero">Split Hero</option>
+      <option value="editorial">Editorial</option>
+      <option value="metadata-desc">Metadata + Description</option>
+      <option value="full-bleed">Full-Bleed Image</option>
+      <option value="text-first">Text-First (no image)</option>
+      <option value="triptych">Triptych (3 images)</option>
+      <option value="specifications">Specifications</option>
+      <option value="duo">Duo (2 images + text)</option>
+      <option value="blank">Blank Canvas</option>
+    </select>
 
     <span style="margin:0 8px;color:#999;">|</span>
 
@@ -878,12 +886,43 @@
         layers.push({id:generateId(), type:'text', role:'metadata-value', content: loc, x:22, y:20, w:50, h:4});
         layers.push({id:generateId(), type:'text', role:'description-section-label', content:'ATMOSPHERIC', x:8, y:32, w:24, h:4});
         layers.push({id:generateId(), type:'text', role:'description-section-value', content: (p.descriptionSections?.atmospheric || ''), x:8, y:36, w:84, h:12});
+      } else if (name === 'full-bleed') {
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER', x:0, y:0, w:100, h:72});
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:6, y:76, w:88, h:7});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: `${year}  •  ${loc}`, x:6, y:88, w:88, h:5});
+      } else if (name === 'text-first') {
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:10, w:84, h:7});
+        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr, x:8, y:20, w:74, h:30});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'SCIENTIFIC / FACTUAL', x:8, y:56, w:44, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-value', content: sci, x:8, y:61, w:84, h:18});
+      } else if (name === 'triptych') {
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:6, w:84, h:7});
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 1', x:4, y:20, w:29.5, h:52});
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 2', x:35.25, y:20, w:29.5, h:52});
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 3', x:66.5, y:20, w:29.5, h:52});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content: `${year}  /  ${loc}`, x:4, y:75, w:88, h:4});
+      } else if (name === 'specifications') {
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:8, w:84, h:7});
+        layers.push({id:generateId(), type:'text', role:'metadata-key', content:'YEAR', x:8, y:22, w:14, h:4});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: year, x:24, y:22, w:30, h:4});
+        layers.push({id:generateId(), type:'text', role:'metadata-key', content:'LOCATION', x:8, y:30, w:16, h:4});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: loc, x:24, y:30, w:62, h:4});
+        layers.push({id:generateId(), type:'text', role:'artwork-atom-label', content:'MATERIAL', x:8, y:44, w:24, h:3});
+        layers.push({id:generateId(), type:'text', role:'artwork-atom-detail', content: mat, x:8, y:48, w:84, h:6});
+        layers.push({id:generateId(), type:'text', role:'artwork-atom-label', content:'PRINTER', x:8, y:58, w:24, h:3});
+        layers.push({id:generateId(), type:'text', role:'artwork-atom-detail', content: (p.artworkAtoms?.printer || ''), x:8, y:62, w:84, h:5});
+      } else if (name === 'duo') {
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 1', x:0, y:0, w:50, h:58});
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 2', x:50, y:0, w:50, h:58});
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:63, w:84, h:7});
+        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,300), x:8, y:72, w:84, h:18});
       } else if (name === 'blank') {
         // nothing
       }
       renderCanvas();
       updateLayerList();
       autoSave();
+      const ts = document.getElementById('template-select'); if (ts) ts.value = name;
       updateStatus(`Loaded template: ${name}`);
     }
 
@@ -899,8 +938,13 @@
 
       document.getElementById('current-project-badge').textContent = proj.title;
 
-      // Auto-load a good starting template
-      loadTemplate('full-image-hero');
+      // Only auto-load a starting template if the canvas is empty — never wipe existing work.
+      if (!layers.length) {
+        loadTemplate('full-image-hero');
+      } else {
+        renderCanvas();
+        updateLayerList();
+      }
 
       // Update the Browse Images button to be project-aware
       updateImageBrowseButton();
