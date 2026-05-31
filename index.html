@@ -145,12 +145,14 @@
       gap: 4px;
     }
     .layer.text {
-      padding: 4px 8px;
-      background: rgba(255,255,255,0.92);
+      padding: 2px 4px;
+      background: transparent;
+      box-shadow: none;
       font-size: 14px;
       line-height: 1.3;
       color: #111;
     }
+    .layer.text:hover { outline: 1px dashed rgba(120,120,130,.5); }
     .resize-handle {
       position: absolute;
       width: 10px;
@@ -217,10 +219,31 @@
       justify-content: space-between;
       align-items: center;
     }
+    /* ===== DARK MODE — dark workspace; the page artboard keeps its true paper colour ===== */
+    body.dark { background:#22222a; color:#d7d7dd; }
+    body.dark .header { background:#161619; }
+    body.dark .toolbar { background:#2a2a32; border-bottom-color:#3a3a45; }
+    body.dark .panel { background:#2c2c35; border-color:#3a3a45; }
+    body.dark .panel h3 { background:#34343e; color:#ececf2; border-bottom-color:#3a3a45; }
+    body.dark .status { background:#34343e; color:#b9b9c2; }
+    body.dark .safety-banner { background:#3a3320; color:#e7d8a2; border-bottom-color:#4a4226; }
+    body.dark #canvas-container { background:#17171c; box-shadow:0 6px 28px rgba(0,0,0,.55); }
+    body.dark .modal-content { background:#2b2b34; color:#d7d7dd; }
+    body.dark .modal-content h2, body.dark .modal-content h3 { color:#f1f1f5; }
+    body.dark .modal-content code { background:#1d1d24; color:#d7d7dd; padding:1px 4px; border-radius:3px; }
+    body.dark .saved-section { background:#34343e; border-color:#474754; }
+    body.dark button:not([style*="background"]),
+    body.dark select,
+    body.dark input,
+    body.dark textarea { background:#34343e; color:#e6e6ec; border-color:#4a4a57; }
+    body.dark button:not([style*="background"]):hover { background:#42424f; }
+    body.dark .toolbar button.danger { color:#ff9b9b; border-color:#a84444; }
+    body.dark select option { background:#2a2a32; color:#e6e6ec; }
     .layer-list { font-size: 12px; max-height: 180px; overflow: auto; }
   </style>
 </head>
-<body>
+<body class="dark">
+<script>try{if(localStorage.getItem('lws_theme')==='light')document.body.classList.remove('dark');}catch(e){}</script>
   <div class="safety-banner">
     <strong>🔒 Safety First:</strong> Your work auto-saves to browser localStorage. Use <strong>⬇ Download Full Backup</strong> often. Supabase images are now live — paste your anon key once in Settings to browse &amp; insert real photos from your bucket.
   </div>
@@ -269,6 +292,7 @@
     <button onclick="exportSectionHTML()" class="primary">Export Section HTML</button>
     <button onclick="openPageBuilder()" style="background:#2a7;color:#fff;border-color:#2a7;">Page Builder →</button>
     <button onclick="document.getElementById('help-modal').classList.add('open')" title="How to use the Template Lab" style="background:#444;color:#fff;border-color:#444;">❓ How to Use</button>
+    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle dark / light mode">☀️ Light Mode</button>
 
     <label style="margin-left:auto;font-size:12px;display:flex;align-items:center;gap:4px;">
       <input type="checkbox" id="guides-toggle" checked onchange="toggleGuides()"> Guides
@@ -688,7 +712,7 @@
         ['tl','tr','bl','br'].forEach(pos => {
           const h = document.createElement('div');
           h.className = `resize-handle ${pos}`;
-          h.onpointerdown = (e) => startResize(e, layer, pos);
+          h.onpointerdown = (e) => startResize(e, layer, pos, el);
           el.appendChild(h);
         });
 
@@ -759,13 +783,12 @@
       document.addEventListener('pointerup', up, {once:true});
     }
 
-    function startResize(e, layer, corner) {
+    function startResize(e, layer, corner, el) {
       e.stopImmediatePropagation();
+      selectLayer(layer.id);
       isResizing = true;
       resizeHandle = corner;
       const rect = document.getElementById('canvas').getBoundingClientRect();
-      const startX = (e.clientX - rect.left) / rect.width * 100;
-      const startY = (e.clientY - rect.top) / rect.height * 100;
       const orig = {x: layer.x, y: layer.y, w: layer.w, h: layer.h};
 
       const move = (ev) => {
@@ -775,16 +798,16 @@
         let {x, y, w, h} = orig;
 
         if (corner.includes('r')) w = Math.max(4, cx - x);
-        if (corner.includes('l')) { const dx = x - cx; x = cx; w = Math.max(4, orig.w + dx); }
+        if (corner.includes('l')) { x = Math.min(cx, orig.x + orig.w - 4); w = orig.x + orig.w - x; }
         if (corner.includes('b')) h = Math.max(3, cy - y);
-        if (corner.includes('t')) { const dy = y - cy; y = cy; h = Math.max(3, orig.h + dy); }
+        if (corner.includes('t')) { y = Math.min(cy, orig.y + orig.h - 3); h = orig.y + orig.h - y; }
 
-        // Snap width/height lightly
-        layer.x = Math.max(0, Math.min(96, x));
-        layer.y = Math.max(0, Math.min(96, y));
+        layer.x = Math.max(0, x);
+        layer.y = Math.max(0, y);
         layer.w = Math.min(100 - layer.x, w);
         layer.h = Math.min(100 - layer.y, h);
-        renderCanvas();
+        // Update only THIS box while dragging — no full re-render (smooth, not janky).
+        if (el) { el.style.left = layer.x + '%'; el.style.top = layer.y + '%'; el.style.width = layer.w + '%'; el.style.height = layer.h + '%'; }
         updateInspectorLive();
       };
       const up = () => {
@@ -793,6 +816,7 @@
         document.removeEventListener('pointerup', up);
         pushUndo();
         autoSave();
+        renderCanvas();
       };
       document.addEventListener('pointermove', move);
       document.addEventListener('pointerup', up, {once:true});
@@ -800,18 +824,16 @@
 
     function getSnappedPosition(x, y, currentLayer) {
       let sx = x, sy = y;
+      const TOL = 0.7; // ~9px on a 1280 canvas — gentle, not sticky
       const guides = [33.333, 50, 66.666];
       guides.forEach(g => {
-        if (Math.abs(x - g) < SNAP_TOLERANCE/100*100) sx = g;
-        if (Math.abs(y - g) < SNAP_TOLERANCE/100*100) sy = g;
+        if (Math.abs(x - g) < TOL) sx = g;
+        if (Math.abs(y - g) < TOL) sy = g;
       });
-      // Snap to other layers
       layers.forEach(l => {
         if (l.id === currentLayer.id) return;
-        const edges = [l.x, l.x + l.w, l.x + l.w/2];
-        edges.forEach(ex => { if (Math.abs(x - ex) < SNAP_TOLERANCE/1.6) sx = ex; });
-        const edgesY = [l.y, l.y + l.h, l.y + l.h/2];
-        edgesY.forEach(ey => { if (Math.abs(y - ey) < SNAP_TOLERANCE/1.6) sy = ey; });
+        [l.x, l.x + l.w, l.x + l.w/2].forEach(ex => { if (Math.abs(x - ex) < TOL) sx = ex; });
+        [l.y, l.y + l.h, l.y + l.h/2].forEach(ey => { if (Math.abs(y - ey) < TOL) sy = ey; });
       });
       return {x: sx, y: sy};
     }
@@ -940,10 +962,13 @@
         layers.push({id:generateId(), type:'text', role:'description-section-value', content: sci, x:8, y:61, w:84, h:18});
       } else if (name === 'triptych') {
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:6, w:84, h:7});
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 1', x:4, y:20, w:29.5, h:52});
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 2', x:35.25, y:20, w:29.5, h:52});
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 3', x:66.5, y:20, w:29.5, h:52});
-        layers.push({id:generateId(), type:'text', role:'description-section-label', content: `${year}  /  ${loc}`, x:4, y:75, w:88, h:4});
+        const _tw = 20, _ty = 24, _th = 58, _gap = 3, _x0 = 18; // three centred PORTRAIT images
+        const _caps = ['/ ' + (loc || 'Location'), '/ Surface Surveys', '/ ' + (year || '')];
+        for (let _i = 0; _i < 3; _i++) {
+          const _ix = _x0 + _i * (_tw + _gap);
+          layers.push({id:generateId(), type:'text', role:'artwork-atom-label', content: _caps[_i], x:_ix, y:19, w:_tw, h:3});
+          layers.push({id:generateId(), type:'image', role:'', content:'IMAGE ' + (_i+1), x:_ix, y:_ty, w:_tw, h:_th});
+        }
       } else if (name === 'specifications') {
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:8, w:84, h:7});
         layers.push({id:generateId(), type:'text', role:'metadata-key', content:'YEAR', x:8, y:22, w:14, h:4});
@@ -1639,6 +1664,13 @@
     }
 
     // ==================== INIT ====================
+    function toggleTheme() {
+      const dark = document.body.classList.toggle('dark');
+      try { localStorage.setItem('lws_theme', dark ? 'dark' : 'light'); } catch(e) {}
+      const b = document.getElementById('theme-toggle');
+      if (b) b.textContent = dark ? '☀️ Light Mode' : '🌙 Dark Mode';
+    }
+
     async function init() {
       // Load any previously saved Supabase anon key so image browser works immediately
       const savedKey = localStorage.getItem('lws_supabase_anon_key');
@@ -1689,6 +1721,7 @@
       });
 
       document.getElementById('guides-toggle').checked = true;
+      { const tb = document.getElementById('theme-toggle'); if (tb) tb.textContent = document.body.classList.contains('dark') ? '☀️ Light Mode' : '🌙 Dark Mode'; }
       updateStatus("Template Lab ready — real Supabase images active. Select a project and the orange button auto-targets the right images for you.");
 
       // Expose a couple helpers for power users in console
