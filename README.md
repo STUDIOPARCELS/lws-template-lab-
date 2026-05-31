@@ -35,9 +35,12 @@ You edit locally → `git add` + `git commit` + `git push` → Vercel automatica
 ### Current Recommended Setup
 
 1. Your code lives in this folder.
-2. It is connected to GitHub repo: `https://github.com/STUDIOPARCELS/lws-template-lab-`
-3. Vercel is connected to that same GitHub repo (Production Branch = `main`).
-4. Every push to `main` on GitHub triggers a new production deployment on Vercel.
+2. It is connected to this GitHub repo (the single source of truth):  
+   `https://github.com/STUDIOPARCELS/lws-template-lab-`
+3. Vercel should be connected to the same repo with **Production Branch = `main`**.
+4. Every `git push origin main` will trigger a new production deployment on Vercel.
+
+**Latest commit on GitHub right now:** `b59a844` (Docs update for Git-first workflow) — this is confirmed as the top commit.
 
 ### How to Make Changes Going Forward (Git Flow)
 
