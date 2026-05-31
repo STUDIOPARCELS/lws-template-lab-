@@ -1193,18 +1193,23 @@
         if (confirm(`Update the section "${sec.name}" with your changes?\n\nOK = update it   •   Cancel = save as a NEW section`)) {
           sec.layers = JSON.parse(JSON.stringify(layers));
           sec.projectId = currentProject?.id;
+          sec.templateId = currentTemplateName;
           saveSavedSections();
           openPageBuilder();
           return;
         }
       }
 
-      const name = prompt("Name this section (e.g. 'Greenland Full Image Hero')", currentProject ? currentProject.title + " Hero" : "Untitled Section");
+      const _labels = {'full-image-hero':'Full Image Hero','split-hero':'Split Hero','editorial':'Editorial','metadata-desc':'Metadata + Description','full-bleed':'Full-Bleed Image','text-first':'Text-First','triptych':'Triptych','specifications':'Specifications','duo':'Duo','blank':'Blank'};
+      const _tlabel = _labels[currentTemplateName] || currentTemplateName || '';
+      const _defaultName = currentProject ? (currentProject.title + (_tlabel ? ' — ' + _tlabel : '')) : (_tlabel || 'Untitled Section');
+      const name = prompt("Name this section (it's saved to this project's page in the Page Builder)", _defaultName);
       if (!name) return;
       savedSections.push({
         id: 'sec_' + Date.now(),
         name,
         projectId: currentProject?.id,
+        templateId: currentTemplateName,
         layers: JSON.parse(JSON.stringify(layers))
       });
       saveSavedSections();
@@ -1317,6 +1322,7 @@
           updateImageBrowseButton();
         }
       }
+      if (sec.templateId) currentTemplateName = sec.templateId;
       editingSectionIndex = savedSections.findIndex(s => s.id === id);
       selectedLayerId = null;
       renderCanvas();
