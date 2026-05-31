@@ -1,159 +1,53 @@
-/* LWS Type System v1.0 — Canonical typography roles for Lisa Wood Studio website
-   Source: LWS-design-system_FINAL + SSOT FOR PROJECT PAGES
-   Use these exact class names on all text layers for correct mapping.
-   This file is embedded in all "Export Clean HTML" outputs.
+/* LWS Type System v2.0 — Canonical typography for Lisa Wood Studio
+   Source of truth: "LWS Type & Content Design System" (FINAL).
+   TWO fonts only — Inter (sans) + Space Mono (mono). No serif.
+   Use these exact class names on every text layer.
+   Mirrored in the app's HTML exports (getEmbeddedTypeSystemCSS).
 */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  --lws-font-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-  --lws-font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
-  --lws-font-mono: 'SF Mono', 'Menlo', 'Consolas', monospace;
-
-  --lws-color-ink: #111111;
-  --lws-color-ink-muted: #444444;
-  --lws-color-ink-light: #666666;
-  --lws-color-paper: #FAF8F5;
-  --lws-color-accent: #8B5E3C; /* warm bronze for subtle emphasis */
+  --lws-sans: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --lws-mono: 'Space Mono', 'SF Mono', Menlo, Consolas, monospace;
+  /* legacy aliases so any older reference stays on-system (never a stray serif) */
+  --lws-font-sans: var(--lws-sans);
+  --lws-font-serif: var(--lws-sans);
+  --lws-font-mono: var(--lws-mono);
 }
 
-/* 01. Project Title — Hero / Major Section Title */
-.lws-project-title-h1 {
-  font-family: var(--lws-font-serif);
-  font-size: 42px;
-  line-height: 1.05;
-  font-weight: 600;
-  letter-spacing: -0.02em;
-  color: var(--lws-color-ink);
-  margin: 0 0 0.6em 0;
-}
+/* 01 · Project Title H1 — Inter 500 · 20px · #2B2B2B */
+.lws-project-title-h1{font-family:var(--lws-sans);font-weight:500;font-size:20px;line-height:1.25;letter-spacing:0;color:#2B2B2B;margin:0 0 .45em;}
 
-/* 02. Narrative Description — Primary long-form body under hero */
-.lws-narrative-description-body {
-  font-family: var(--lws-font-serif);
-  font-size: 17px;
-  line-height: 1.68;
-  font-weight: 400;
-  color: var(--lws-color-ink);
-  max-width: 72ch;
-  margin: 0 0 1.8em 0;
-}
+/* 02 · Narrative Description Body — Inter 400 · 14px · #5A6068 */
+.lws-narrative-description-body{font-family:var(--lws-sans);font-weight:400;font-size:14px;line-height:1.6;color:#5A6068;max-width:72ch;margin:0 0 1.2em;}
 
-/* 03. Description Section Label — e.g. "Scientific / Factual" */
-.lws-description-section-label {
-  font-family: var(--lws-font-sans);
-  font-size: 11px;
-  line-height: 1.4;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--lws-color-ink-light);
-  margin: 0 0 0.25em 0;
-}
+/* 03 · Description Section Label — Space Mono 700 · 12px · #9A9AA0 */
+.lws-description-section-label{font-family:var(--lws-mono);font-weight:700;font-size:12px;line-height:1.4;letter-spacing:.04em;text-transform:uppercase;color:#9A9AA0;margin:0 0 .3em;}
 
-/* 04. Description Section Value — The actual paragraph content */
-.lws-description-section-value {
-  font-family: var(--lws-font-sans);
-  font-size: 15px;
-  line-height: 1.55;
-  font-weight: 400;
-  color: var(--lws-color-ink-muted);
-  margin: 0 0 1.1em 0;
-}
+/* 04 · Description Section Value — Inter 400 · 14px · #424A52 */
+.lws-description-section-value{font-family:var(--lws-sans);font-weight:400;font-size:14px;line-height:1.55;color:#424A52;margin:0 0 1em;}
 
-/* 05. Metadata Key — Small label like "Year", "Location" */
-.lws-metadata-key {
-  font-family: var(--lws-font-sans);
-  font-size: 10px;
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--lws-color-ink-light);
-  margin: 0 0 0.1em 0;
-}
+/* 05 · Metadata Label — Space Mono 700 · 14px · #9A9AA0 */
+.lws-metadata-key{font-family:var(--lws-mono);font-weight:700;font-size:14px;line-height:1.3;letter-spacing:.02em;text-transform:uppercase;color:#9A9AA0;margin:0 0 .15em;}
 
-/* 06. Metadata Value — The data itself */
-.lws-metadata-value {
-  font-family: var(--lws-font-sans);
-  font-size: 15px;
-  line-height: 1.35;
-  font-weight: 500;
-  color: var(--lws-color-ink);
-  margin: 0 0 0.65em 0;
-}
+/* 06 · Metadata Value — Inter 400 · 14px · #4A5158 */
+.lws-metadata-value{font-family:var(--lws-sans);font-weight:400;font-size:14px;line-height:1.4;color:#4A5158;margin:0 0 .7em;}
 
-/* 07. Artwork Atom Label — "Material", "Printer", etc. */
-.lws-artwork-atom-label {
-  font-family: var(--lws-font-sans);
-  font-size: 10px;
-  line-height: 1.3;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: var(--lws-color-ink-light);
-  margin: 0 0 0.15em 0;
-}
+/* 07 · Artwork Atom Label — Space Mono 700 · 10px · #444 */
+.lws-artwork-atom-label{font-family:var(--lws-mono);font-weight:700;font-size:10px;line-height:1.3;letter-spacing:.04em;text-transform:uppercase;color:#444444;margin:0 0 .15em;}
 
-/* 08. Artwork Atom Detail — The actual spec value */
-.lws-artwork-atom-detail {
-  font-family: var(--lws-font-sans);
-  font-size: 13.5px;
-  line-height: 1.4;
-  font-weight: 400;
-  color: var(--lws-color-ink-muted);
-  margin: 0 0 0.55em 0;
-}
+/* 08 · Artwork Atom / Material Detail — Space Mono 400 · 10px · #444 */
+.lws-artwork-atom-detail{font-family:var(--lws-mono);font-weight:400;font-size:10px;line-height:1.45;color:#444444;margin:0 0 .5em;}
 
-/* 09. Section Subhead — Used inside page builder sections */
-.lws-section-subhead {
-  font-family: var(--lws-font-serif);
-  font-size: 21px;
-  line-height: 1.2;
-  font-weight: 600;
-  letter-spacing: -0.01em;
-  color: var(--lws-color-ink);
-  margin: 0 0 0.4em 0;
-}
+/* 09 · Section Subhead / Brand Splash — Space Mono 700 · 18px · #2B2B2B */
+.lws-section-subhead{font-family:var(--lws-mono);font-weight:700;font-size:18px;line-height:1.3;letter-spacing:.01em;color:#2B2B2B;margin:0 0 .4em;}
 
-/* 10. Fine Print / Legal / Edition line */
-.lws-fine-print {
-  font-family: var(--lws-font-sans);
-  font-size: 11px;
-  line-height: 1.35;
-  font-weight: 400;
-  color: var(--lws-color-ink-light);
-  letter-spacing: 0.01em;
-}
+/* Supporting roles (kept on-system) */
+.lws-caption{font-family:var(--lws-sans);font-weight:400;font-size:11px;line-height:1.4;color:#8A8F96;}
+.lws-fine-print{font-family:var(--lws-sans);font-weight:400;font-size:11px;line-height:1.4;color:#8A8F96;}
+.lws-pull-quote{font-family:var(--lws-sans);font-weight:400;font-size:16px;line-height:1.5;color:#424A52;}
 
-/* 11. Caption / Image credit style */
-.lws-caption {
-  font-family: var(--lws-font-sans);
-  font-size: 12px;
-  line-height: 1.4;
-  font-weight: 400;
-  color: var(--lws-color-ink-light);
-  font-style: italic;
-}
-
-/* 12. Pull Quote / Atmospheric highlight */
-.lws-pull-quote {
-  font-family: var(--lws-font-serif);
-  font-size: 19px;
-  line-height: 1.45;
-  font-weight: 500;
-  color: var(--lws-color-ink);
-  border-left: 2px solid var(--lws-color-accent);
-  padding-left: 1em;
-  margin: 1.2em 0;
-}
-
-/* Utility: tight tracking for titles */
-.lws-tracking-tight {
-  letter-spacing: -0.025em;
-}
-
-/* Print / export friendly overrides */
 @media print {
-  .lws-project-title-h1 { font-size: 36pt; }
-  .lws-narrative-description-body { font-size: 12pt; }
+  .lws-project-title-h1{font-size:18pt;}
+  .lws-narrative-description-body{font-size:11pt;}
 }
