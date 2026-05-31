@@ -1160,7 +1160,7 @@
       let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LWS — ${currentProject?.title || 'Composed Page'}</title><style>${document.querySelector('link[rel="stylesheet"]').outerHTML.includes('lws-type-system') ? '' : ''}</style></head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
       html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
       selected.forEach(sec => {
-        html += `<section style="max-width:1280px;margin:40px auto;padding:0 40px;position:relative;">`;
+        html += `<section style="width:100%;max-width:1280px;aspect-ratio:1280 / 720;margin:0 auto;position:relative;background:#faf8f5;overflow:hidden;">`;
         sec.layers.forEach(l => {
           const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
           if (l.type === 'text') {
@@ -1202,8 +1202,9 @@
     // ==================== EXPORT SINGLE SECTION ====================
     function exportSectionHTML() {
       if (!layers.length) { alert("Canvas is empty."); return; }
-      let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LWS Section — ${currentProject?.title || 'Export'}</title></head><body style="margin:40px auto;max-width:1280px;padding:0 40px;font-family:system-ui;background:#faf8f5;">`;
+      let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LWS Section — ${currentProject?.title || 'Export'}</title></head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
       html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
+      html += `<div style="width:100%;max-width:1280px;aspect-ratio:1280 / 720;margin:40px auto;position:relative;background:#faf8f5;overflow:hidden;">`;
       layers.forEach(l => {
         const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
         if (l.type === 'text') {
@@ -1216,7 +1217,7 @@
           }
         }
       });
-      html += `</body></html>`;
+      html += `</div></body></html>`;
       const w = window.open('', '_blank');
       if (!w) { alert('Your browser blocked the pop-up window. Please allow pop-ups for this site, then click Preview again.'); return; }
       w.document.write(html);
