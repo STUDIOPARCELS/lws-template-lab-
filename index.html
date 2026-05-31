@@ -301,6 +301,7 @@
             </div>
             <button onclick="deleteSelectedLayer()" class="danger" style="width:100%;margin-top:8px;">Delete Layer (Del/Backspace)</button>
             <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
+            <button onclick="toggleImageFit()" style="width:100%;margin-top:6px;">🔳 Image Fit: Fill ⇄ Fit (whole image)</button>
             <div style="font-size:10px;color:#888;margin-top:6px;">Drag layer to move • Drag handles to resize • Double-click text to edit</div>
           </div>
         </div>
@@ -421,7 +422,7 @@
 
       <div style="margin-top:14px;display:flex;gap:8px;align-items:center;">
         <button onclick="closeImageBrowser()">Close</button>
-        <span style="font-size:12px;color:#666;">Tip: Click "Insert as New Layer" or "Replace Selected" on any image. Real URLs will be used in exports.</span>
+        <span style="font-size:12px;color:#666;">Tip: Just click any image to add it to your canvas (real URLs are used in exports). New images fill the box — use the inspector's “Image Fit” button to switch to whole-image view.</span>
       </div>
     </div>
   </div>
@@ -629,7 +630,7 @@
             el.innerHTML = `
               <img src="${layer.imageUrl}" 
                    alt="${layer.imageName || 'LWS artwork'}" 
-                   style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;" 
+                   style="width:100%; height:100%; object-fit:${layer.objectFit || 'cover'}; display:block; pointer-events:none;"
                    onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'padding:8px;font-size:11px;color:#c85a17\\'>Image failed to load</div>'">
               <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
             `;
@@ -1030,7 +1031,7 @@
             html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
           } else {
             if (l.imageUrl) {
-              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:contain;border:none;">`;
+              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
             } else {
               html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:11px;">IMAGE PLACEHOLDER</div>`;
             }
@@ -1073,7 +1074,7 @@
           html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
         } else {
           if (l.imageUrl) {
-            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:contain;border:none;">`;
+            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
           } else {
             html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:12px;">IMAGE PLACEHOLDER (Supabase)</div>`;
           }
@@ -1243,7 +1244,10 @@
     }
 
     // Called from the dynamic toolbar button — this gives the "auto loading" experience
+    let imageBrowserMode = 'insert'; // 'insert' = add new layer, 'replace' = swap the selected image
+
     function openImageBrowserAndMaybeAutoLoad() {
+      imageBrowserMode = 'insert';
       openImageBrowser();
     }
 
@@ -1331,23 +1335,23 @@
 
       files.forEach(file => {
         const card = document.createElement('div');
-        card.style.cssText = 'border:1px solid #ddd;border-radius:4px;overflow:hidden;background:#fff;font-size:12px;';
-        
+        card.style.cssText = 'border:1px solid #ddd;border-radius:4px;overflow:hidden;background:#fff;font-size:12px;cursor:pointer;transition:box-shadow .12s,border-color .12s;';
+        card.title = 'Click to add this image to the canvas';
+        card.onmouseenter = () => { card.style.boxShadow = '0 0 0 2px #e67e22'; card.style.borderColor = '#e67e22'; };
+        card.onmouseleave = () => { card.style.boxShadow = 'none'; card.style.borderColor = '#ddd'; };
+        card.onclick = () => insertSupabaseImageFromBrowser(file.publicUrl, file.name, imageBrowserMode === 'replace');
         card.innerHTML = `
           <div style="height:160px;background:#f4f2ed;position:relative;overflow:hidden;">
             <img src="${file.thumbUrl || file.publicUrl}"
-                 style="width:100%;height:100%;object-fit:contain;display:block;"
+                 style="width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;"
                  loading="lazy"
                  onload="var r=this.naturalWidth/this.naturalHeight,b=this.parentNode.querySelector('.ar-badge');if(b)b.textContent=(r>=1.9?'PANO':r>=1.15?'Landscape':r<=0.85?'Portrait':'Square')+' · '+(r>=1?r.toFixed(1)+':1':'1:'+(1/r).toFixed(1));"
                  onerror="this.style.opacity=0.2;this.parentNode.innerHTML='<div style=\\'display:flex;align-items:center;justify-content:center;height:100%;font-size:11px;color:#999\\'>Preview unavailable</div>'">
-            <div class="ar-badge" style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);color:#fff;font-size:9px;padding:2px 4px;text-align:center;"></div>
+            <div class="ar-badge" style="position:absolute;bottom:0;left:0;right:0;background:rgba(0,0,0,0.55);color:#fff;font-size:9px;padding:2px 4px;text-align:center;pointer-events:none;"></div>
           </div>
           <div style="padding:6px 8px;line-height:1.25;">
             <div style="font-size:11px;font-family:monospace;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;" title="${file.name}">${file.name}</div>
-            <div style="display:flex;gap:4px;margin-top:6px;">
-              <button style="flex:1;font-size:10px;padding:3px 4px;" onclick="insertSupabaseImageFromBrowser('${file.publicUrl}', '${file.name.replace(/'/g, "\\'")}', false)">Insert as New Layer</button>
-              <button style="flex:1;font-size:10px;padding:3px 4px;" onclick="insertSupabaseImageFromBrowser('${file.publicUrl}', '${file.name.replace(/'/g, "\\'")}', true)">Replace Selected</button>
-            </div>
+            <div style="font-size:10px;color:#e67e22;font-weight:700;margin-top:3px;">${imageBrowserMode === 'replace' ? '↺ Click to replace selected' : '＋ Click to add'}</div>
           </div>
         `;
         grid.appendChild(card);
@@ -1386,7 +1390,19 @@
         alert("Select an image placeholder layer first.");
         return;
       }
+      imageBrowserMode = 'replace';
       openImageBrowser();
+    }
+
+    function toggleImageFit() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer || layer.type !== 'image') { alert('Select an image layer first (click it on the canvas).'); return; }
+      pushUndo();
+      layer.objectFit = (layer.objectFit === 'contain') ? 'cover' : 'contain';
+      renderCanvas();
+      updateLayerList();
+      autoSave();
+      updateStatus(layer.objectFit === 'cover' ? 'Image set to FILL the box (fills the edges; may crop).' : 'Image set to FIT (entire image shown inside the box).');
     }
 
     // ==================== RESET / NEW ====================
