@@ -307,7 +307,8 @@
             <button onclick="deleteSelectedLayer()" class="danger" style="width:100%;margin-top:8px;">Delete Layer (Del/Backspace)</button>
             <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
             <button onclick="toggleImageFit()" style="width:100%;margin-top:6px;">🔳 Image Fit: Fill ⇄ Fit (whole image)</button>
-            <div style="font-size:10px;color:#888;margin-top:6px;">Drag layer to move • Drag handles to resize • Double-click text to edit</div>
+            <button onclick="resetImagePosition()" style="width:100%;margin-top:4px;font-size:12px;">Reset Image Position (pan)</button>
+            <div style="font-size:10px;color:#888;margin-top:6px;">Drag = move layer • <strong>Alt/Shift + Drag</strong> = pan image inside (Fill mode) • Double-click text to edit</div>
           </div>
         </div>
       </div>
@@ -447,6 +448,11 @@
     let resizeHandle = null;
     let lastSaved = Date.now();
 
+    // Image panning inside the box (when in Fill mode + modifier key)
+    let isPanningImage = false;
+    let panStart = {x:0, y:0};
+    let panStartOffset = {x:0, y:0};
+
     const CANVAS_W = 1280;
     const CANVAS_H = 720;
     const SNAP_TOLERANCE = 8;
@@ -523,7 +529,9 @@
         content: text || (type === 'image' ? 'IMAGE PLACEHOLDER' : 'Edit me'),
         x: x ?? 12, y: y ?? 18, w: w ?? 76, h: h ?? 12,
         imageUrl: imageUrl || null,
-        imageName: imageName || null
+        imageName: imageName || null,
+        imageOffsetX: 0,
+        imageOffsetY: 0
       };
       layers.push(layer);
       renderCanvas();
@@ -588,6 +596,16 @@
       autoSave();
     }
 
+    function resetImagePosition() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer || layer.type !== 'image') return;
+      layer.imageOffsetX = 0;
+      layer.imageOffsetY = 0;
+      renderCanvas();
+      updateInspector();
+      autoSave();
+    }
+
     // Removed X/Y/W/H inputs — replaced by "Center in Page" button.
     // function updateSelectedTransform() { ... }  (no longer needed)
 
@@ -637,10 +655,12 @@
         } else {
           // IMAGE LAYER — real Supabase image or styled placeholder
           if (layer.imageUrl) {
+            const imgOffsetX = layer.imageOffsetX || 0;
+            const imgOffsetY = layer.imageOffsetY || 0;
             el.innerHTML = `
               <img src="${layer.imageUrl}" 
                    alt="${layer.imageName || 'LWS artwork'}" 
-                   style="width:100%; height:100%; object-fit:${layer.objectFit || 'cover'}; display:block; pointer-events:none;"
+                   style="width:100%; height:100%; object-fit:${layer.objectFit || 'cover'}; display:block; pointer-events:none; transform: translate(${imgOffsetX}%, ${imgOffsetY}%);"
                    onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'padding:8px;font-size:11px;color:#c85a17\\'>Image failed to load</div>'">
               <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
             `;
@@ -702,10 +722,52 @@
     function startDrag(e, layer, el) {
       e.stopImmediatePropagation();
       selectLayer(layer.id);
-      isDragging = true;
+
       const rect = document.getElementById('canvas').getBoundingClientRect();
       const startX = (e.clientX - rect.left) / rect.width * 100;
       const startY = (e.clientY - rect.top) / rect.height * 100;
+
+      const isImageFill = layer.type === 'image' && (layer.objectFit || 'cover') === 'cover';
+
+      // Image panning mode: Alt or Shift + drag on a filled image layer
+      if (isImageFill && (e.altKey || e.shiftKey)) {
+        isPanningImage = true;
+        isDragging = false;
+        panStart = { x: startX, y: startY };
+        panStartOffset = { x: layer.imageOffsetX || 0, y: layer.imageOffsetY || 0 };
+
+        const move = (ev) => {
+          if (!isPanningImage) return;
+          const dx = ((ev.clientX - rect.left) / rect.width * 100) - panStart.x;
+          const dy = ((ev.clientY - rect.top) / rect.height * 100) - panStart.y;
+
+          layer.imageOffsetX = panStartOffset.x + dx * 1.8; // sensitivity
+          layer.imageOffsetY = panStartOffset.y + dy * 1.8;
+
+          // Reasonable constraint so image doesn't fly away
+          layer.imageOffsetX = Math.max(-120, Math.min(120, layer.imageOffsetX));
+          layer.imageOffsetY = Math.max(-120, Math.min(120, layer.imageOffsetY));
+
+          renderCanvas();
+          updateInspectorLive();
+        };
+
+        const up = () => {
+          isPanningImage = false;
+          document.removeEventListener('pointermove', move);
+          document.removeEventListener('pointerup', up);
+          pushUndo();
+          autoSave();
+          renderCanvas();
+        };
+
+        document.addEventListener('pointermove', move);
+        document.addEventListener('pointerup', up, {once:true});
+        return;
+      }
+
+      // Normal layer dragging
+      isDragging = true;
       dragOffset = { x: startX - layer.x, y: startY - layer.y };
 
       const move = (ev) => {
@@ -1071,7 +1133,9 @@
             html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
           } else {
             if (l.imageUrl) {
-              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
+              const imgOffsetX = l.imageOffsetX || 0;
+              const imgOffsetY = l.imageOffsetY || 0;
+              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none; transform: translate(${imgOffsetX}%, ${imgOffsetY}%);">`;
             } else {
               html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:11px;">IMAGE PLACEHOLDER</div>`;
             }
@@ -1114,7 +1178,9 @@
           html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
         } else {
           if (l.imageUrl) {
-            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
+            const imgOffsetX = l.imageOffsetX || 0;
+            const imgOffsetY = l.imageOffsetY || 0;
+            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none; transform: translate(${imgOffsetX}%, ${imgOffsetY}%);">`;
           } else {
             html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:12px;">IMAGE PLACEHOLDER (Supabase)</div>`;
           }
@@ -1406,6 +1472,8 @@
         selectedLayer.imageUrl = publicUrl;
         selectedLayer.imageName = fileName;
         selectedLayer.content = fileName.split('/').pop();
+        selectedLayer.imageOffsetX = 0;
+        selectedLayer.imageOffsetY = 0;
         pushUndo();
         renderCanvas();
         updateLayerList();
