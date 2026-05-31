@@ -153,8 +153,8 @@
     }
     .resize-handle {
       position: absolute;
-      width: 10px;
-      height: 10px;
+      width: 14px;
+      height: 14px;
       background: #c85a17;
       border: 2px solid #fff;
       border-radius: 50%;
@@ -162,10 +162,16 @@
       display: none;
     }
     .layer.selected .resize-handle { display: block; }
-    .resize-handle.tl { top: -5px; left: -5px; cursor: nwse-resize; }
-    .resize-handle.tr { top: -5px; right: -5px; cursor: nesw-resize; }
-    .resize-handle.bl { bottom: -5px; left: -5px; cursor: nesw-resize; }
-    .resize-handle.br { bottom: -5px; right: -5px; cursor: nwse-resize; }
+    .resize-handle.tl { top: -7px; left: -7px; cursor: nwse-resize; }
+    .resize-handle.tr { top: -7px; right: -7px; cursor: nesw-resize; }
+    .resize-handle.bl { bottom: -7px; left: -7px; cursor: nesw-resize; }
+    .resize-handle.br { bottom: -7px; right: -7px; cursor: nwse-resize; }
+
+    /* Mid-side resize handles */
+    .resize-handle.left  { left: -7px; top: 50%; transform: translateY(-50%); width: 14px; height: 28px; border-radius: 4px; cursor: ew-resize; }
+    .resize-handle.right { right: -7px; top: 50%; transform: translateY(-50%); width: 14px; height: 28px; border-radius: 4px; cursor: ew-resize; }
+    .resize-handle.top   { top: -7px; left: 50%; transform: translateX(-50%); width: 28px; height: 14px; border-radius: 4px; cursor: ns-resize; }
+    .resize-handle.bottom{ bottom: -7px; left: 50%; transform: translateX(-50%); width: 28px; height: 14px; border-radius: 4px; cursor: ns-resize; }
     .inspector input, .inspector select {
       width: 100%;
       padding: 4px 6px;
@@ -676,8 +682,8 @@
         // Pointer handlers for drag
         el.onpointerdown = (e) => startDrag(e, layer, el);
 
-        // Resize handles (4 corners)
-        ['tl','tr','bl','br'].forEach(pos => {
+        // Resize handles (4 corners + 4 sides)
+        ['tl','tr','bl','br', 'left','right','top','bottom'].forEach(pos => {
           const h = document.createElement('div');
           h.className = `resize-handle ${pos}`;
           h.onpointerdown = (e) => startResize(e, layer, pos);
@@ -741,8 +747,8 @@
           const dx = ((ev.clientX - rect.left) / rect.width * 100) - panStart.x;
           const dy = ((ev.clientY - rect.top) / rect.height * 100) - panStart.y;
 
-          layer.imageOffsetX = panStartOffset.x + dx * 1.8; // sensitivity
-          layer.imageOffsetY = panStartOffset.y + dy * 1.8;
+          layer.imageOffsetX = panStartOffset.x + dx * 0.95; // reduced sensitivity
+          layer.imageOffsetY = panStartOffset.y + dy * 0.95;
 
           // Reasonable constraint so image doesn't fly away
           layer.imageOffsetX = Math.max(-120, Math.min(120, layer.imageOffsetX));
@@ -808,10 +814,16 @@
         const cy = (ev.clientY - rect.top) / rect.height * 100;
         let {x, y, w, h} = orig;
 
-        if (corner.includes('r')) w = Math.max(4, cx - x);
-        if (corner.includes('l')) { const dx = x - cx; x = cx; w = Math.max(4, orig.w + dx); }
-        if (corner.includes('b')) h = Math.max(3, cy - y);
-        if (corner.includes('t')) { const dy = y - cy; y = cy; h = Math.max(3, orig.h + dy); }
+        // Handle corners and sides
+        const isLeft   = corner === 'left'   || corner.includes('l');
+        const isRight  = corner === 'right'  || corner.includes('r');
+        const isTop    = corner === 'top'    || corner.includes('t');
+        const isBottom = corner === 'bottom' || corner.includes('b');
+
+        if (isRight)  w = Math.max(4, cx - x);
+        if (isLeft)   { const dx = x - cx; x = cx; w = Math.max(4, orig.w + dx); }
+        if (isBottom) h = Math.max(3, cy - y);
+        if (isTop)    { const dy = y - cy; y = cy; h = Math.max(3, orig.h + dy); }
 
         // Snap width/height lightly
         layer.x = Math.max(0, Math.min(96, x));
