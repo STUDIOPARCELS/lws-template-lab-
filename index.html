@@ -918,6 +918,7 @@
       }
       currentTemplateName = name;
       pushUndo();
+      const prevImages = layers.filter(l => l.type === 'image' && l.imageUrl).map(l => ({imageUrl: l.imageUrl, imageName: l.imageName, objectFit: l.objectFit}));
       layers = [];
       editingSectionIndex = null;
 
@@ -989,6 +990,18 @@
         layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,300), x:8, y:72, w:84, h:18});
       } else if (name === 'blank') {
         // nothing
+      }
+      // Carry previously-placed images into the new template's image slots,
+      // so switching/reloading a template keeps your photos (e.g. re-tightening the triptych).
+      if (prevImages.length) {
+        layers.filter(l => l.type === 'image').forEach((l, i) => {
+          if (prevImages[i]) {
+            l.imageUrl = prevImages[i].imageUrl;
+            l.imageName = prevImages[i].imageName;
+            l.content = (prevImages[i].imageName || '').split('/').pop();
+            if (prevImages[i].objectFit) l.objectFit = prevImages[i].objectFit;
+          }
+        });
       }
       renderCanvas();
       updateLayerList();
