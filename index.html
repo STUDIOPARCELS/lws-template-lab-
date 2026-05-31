@@ -344,6 +344,16 @@
             <button onclick="deleteSelectedLayer()" class="danger" style="width:100%;margin-top:8px;">Delete Layer (Del/Backspace)</button>
             <button onclick="replaceSelectedImageWithSupabase()" style="width:100%;margin-top:6px;background:#e67e22;color:white;border-color:#e67e22;">🖼️ Replace This Image from Supabase</button>
             <button onclick="toggleImageFit()" style="width:100%;margin-top:6px;">🔳 Image Fit: Fill ⇄ Fit (whole image)</button>
+            <div id="image-pan-controls" style="display:none;margin-top:8px;padding:8px;border:1px solid rgba(128,128,140,.35);border-radius:5px;">
+              <div style="font-size:11px;font-weight:600;margin-bottom:4px;">↔↕ Slide image inside box</div>
+              <label style="font-size:10px;display:block;">Left / Right
+                <input id="pan-x" type="range" min="0" max="100" value="50" step="1" oninput="panSelectedImage('x', this.value)" style="width:100%;">
+              </label>
+              <label style="font-size:10px;display:block;margin-top:2px;">Up / Down
+                <input id="pan-y" type="range" min="0" max="100" value="50" step="1" oninput="panSelectedImage('y', this.value)" style="width:100%;">
+              </label>
+              <button onclick="recenterImagePan()" style="width:100%;margin-top:6px;font-size:11px;">Recenter image</button>
+            </div>
             <div style="font-size:10px;color:#888;margin-top:6px;">Drag layer to move • Drag handles to resize • Double-click text to edit</div>
           </div>
         </div>
@@ -695,7 +705,7 @@
             el.innerHTML = `
               <img src="${layer.imageUrl}" 
                    alt="${layer.imageName || 'LWS artwork'}" 
-                   style="width:100%; height:100%; object-fit:${layer.objectFit || 'cover'}; display:block; pointer-events:none;"
+                   style="width:100%; height:100%; object-fit:${layer.objectFit || 'cover'}; object-position:${layer.panX ?? 50}% ${layer.panY ?? 50}%; display:block; pointer-events:none;"
                    onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'padding:8px;font-size:11px;color:#c85a17\\'>Image failed to load</div>'">
               <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
             `;
@@ -869,6 +879,15 @@
         if (r === layer.role) o.selected = true;
         roleSel.appendChild(o);
       });
+
+      const panCtrls = document.getElementById('image-pan-controls');
+      if (panCtrls) {
+        if (layer.type === 'image') {
+          panCtrls.style.display = 'block';
+          const _px = document.getElementById('pan-x'); if (_px) _px.value = layer.panX ?? 50;
+          const _py = document.getElementById('pan-y'); if (_py) _py.value = layer.panY ?? 50;
+        } else { panCtrls.style.display = 'none'; }
+      }
 
       document.getElementById('layer-x').value = layer.x.toFixed(1);
       document.getElementById('layer-y').value = layer.y.toFixed(1);
@@ -1233,7 +1252,7 @@
           if (l.type === 'text') {
             return `<div class="lws-${l.role}" style="${pos}overflow:hidden;">${l.content || ''}</div>`;
           } else if (l.imageUrl) {
-            return `<img src="${l.imageUrl}" style="${pos}object-fit:${l.objectFit || 'cover'};">`;
+            return `<img src="${l.imageUrl}" style="${pos}object-fit:${l.objectFit || 'cover'};object-position:${l.panX ?? 50}% ${l.panY ?? 50}%;">`;
           }
           return `<div style="${pos}background:repeating-linear-gradient(45deg,#fff,#fff 10px,#f5ecd9 10px,#f5ecd9 20px);border:1px dashed #e67e22;"></div>`;
         }).join('');
@@ -1319,7 +1338,7 @@
           if (l.type === 'text') {
             html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
           } else if (l.imageUrl) {
-            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
+            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};object-position:${l.panX ?? 50}% ${l.panY ?? 50}%;border:none;">`;
           } else {
             html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:11px;">IMAGE PLACEHOLDER</div>`;
           }
@@ -1385,7 +1404,7 @@
           html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
         } else {
           if (l.imageUrl) {
-            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none;">`;
+            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};object-position:${l.panX ?? 50}% ${l.panY ?? 50}%;border:none;">`;
           } else {
             html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:12px;">IMAGE PLACEHOLDER (Supabase)</div>`;
           }
@@ -1705,6 +1724,26 @@
       }
       imageBrowserMode = 'replace';
       openImageBrowser();
+    }
+
+    function panSelectedImage(axis, val) {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer || layer.type !== 'image') return;
+      if (layer.objectFit === 'contain') layer.objectFit = 'cover'; // panning needs Fill mode
+      if (axis === 'x') layer.panX = +val; else layer.panY = +val;
+      const img = document.querySelector('#canvas .layer.selected img');
+      if (img) { img.style.objectFit = 'cover'; img.style.objectPosition = (layer.panX ?? 50) + '% ' + (layer.panY ?? 50) + '%'; }
+      else renderCanvas();
+      autoSave();
+    }
+
+    function recenterImagePan() {
+      const layer = layers.find(l => l.id === selectedLayerId);
+      if (!layer || layer.type !== 'image') return;
+      layer.panX = 50; layer.panY = 50;
+      const px = document.getElementById('pan-x'); if (px) px.value = 50;
+      const py = document.getElementById('pan-y'); if (py) py.value = 50;
+      renderCanvas(); autoSave();
     }
 
     function toggleImageFit() {
