@@ -23,35 +23,41 @@ This folder (`template-lab/`) is a **completely self-contained**, zero-dependenc
 
 ---
 
-## 2. Recommended: GitHub + Vercel (Your Usual Stack)
+## 2. Recommended Long-Term Workflow: GitHub as Source of Truth + Vercel Auto-Deploy
 
-### Step-by-step (PowerShell / Terminal)
+You want all changes to go through Git. This is the correct setup:
+
+- Edit files locally in this folder.
+- `git add .`, `git commit`, `git push origin main`
+- Vercel automatically deploys the new version to production.
+
+### Initial One-Time Setup (Already Partially Done)
+
+Your GitHub repo is: https://github.com/STUDIOPARCELS/lws-template-lab-
+
+### If the Live Site Stops Updating or Domains Are Stuck (Common)
+
+Vercel projects can get into a bad state with domain provisioning during initial setup.
+
+**Clean reset (takes 2 minutes):**
+
+1. In Vercel, delete the current `lws-template-lab` project (safe — does not delete your GitHub repo or code).
+2. Go to https://vercel.com → **Add New Project** → **Import Git Repository**.
+3. Select your repo `STUDIOPARCELS/lws-template-lab-`.
+4. Deploy.
+
+After this, the connection is clean. From now on:
 
 ```powershell
-# 1. Go into the folder
-cd "D:\LWS\OBSERVATORY FINAL\WEBSITE\WEBSITE FOLDERS\template-lab"
-
-# 2. Initialize git (only needed once)
-git init
+# Make changes, then:
 git add .
-git commit -m "Initial LWS Template Lab — SSOT visual composer with full-image-hero 16:6, undo, Page Builder, Supabase bridge"
-
-# 3. Create a new repo on GitHub.com first (https://github.com/new)
-#    Name it something like: lws-template-lab
-
-# 4. Connect and push (replace YOUR_GITHUB_USERNAME)
-git remote add origin https://github.com/YOUR_GITHUB_USERNAME/lws-template-lab.git
-git branch -M main
-git push -u origin main
+git commit -m "Describe your change"
+git push origin main
 ```
 
-### Connect to Vercel (one time)
+Vercel will automatically build and update the live site within ~30-60 seconds.
 
-1. Go to Vercel dashboard → **Add New Project**
-2. Import the GitHub repo you just created (`lws-template-lab`)
-3. Vercel auto-detects the static site (thanks to `vercel.json`)
-4. Click Deploy
-5. Future pushes to `main` will auto-deploy.
+This is the reliable "everything through Git" workflow you asked for.
 
 ---
 

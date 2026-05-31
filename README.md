@@ -27,22 +27,44 @@ Single source of truth (SSOT) driven. Text-first. Built exactly to your design s
 
 No build step. No server. Works offline.
 
-## Deploy (GitHub + Vercel — Your Stack)
+## Deploy & Develop (GitHub + Vercel — Recommended Workflow)
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for the exact commands.
+The goal is that **your GitHub repo is the single source of truth**.  
+You edit locally → `git add` + `git commit` + `git push` → Vercel automatically updates the live site.
 
-**Fastest path**: Zip this folder → drag to Vercel → instant live URL.
+### Current Recommended Setup
 
-**Proper path** (recommended):
+1. Your code lives in this folder.
+2. It is connected to GitHub repo: `https://github.com/STUDIOPARCELS/lws-template-lab-`
+3. Vercel is connected to that same GitHub repo (Production Branch = `main`).
+4. Every push to `main` on GitHub triggers a new production deployment on Vercel.
+
+### How to Make Changes Going Forward (Git Flow)
+
 ```powershell
-cd template-lab
-git init
+# 1. Make your edits to the files (index.html, CSS, JS, data, etc.)
+
+# 2. Commit and push
 git add .
-git commit -m "LWS Template Lab v1"
-git remote add origin https://github.com/YOUR_USERNAME/lws-template-lab.git
-git push -u origin main
+git commit -m "Your description of the change"
+git push origin main
 ```
-Then import the repo in Vercel.
+
+A few seconds later, Vercel will automatically build and deploy the new version.
+
+### If the Live Site is Not Updating
+
+Sometimes Vercel projects get into a stuck state with domain provisioning (this happened during initial setup).
+
+**Clean reset (recommended when stuck):**
+1. In Vercel, delete the current `lws-template-lab` project (this does **not** delete your GitHub repo or code).
+2. Go to Vercel → Add New Project → Import Git Repository.
+3. Select your repo `STUDIOPARCELS/lws-template-lab-`.
+4. Deploy.
+
+After this, the GitHub → Vercel connection will be clean, and future `git push` commands will reliably update the live site.
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for more details.
 
 ## Supabase (Already Connected)
 
