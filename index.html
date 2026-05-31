@@ -168,10 +168,10 @@
     .resize-handle.br { bottom: -7px; right: -7px; cursor: nwse-resize; }
 
     /* Mid-side resize handles */
-    .resize-handle.left  { left: -7px; top: 50%; transform: translateY(-50%); width: 14px; height: 28px; border-radius: 4px; cursor: ew-resize; }
-    .resize-handle.right { right: -7px; top: 50%; transform: translateY(-50%); width: 14px; height: 28px; border-radius: 4px; cursor: ew-resize; }
-    .resize-handle.top   { top: -7px; left: 50%; transform: translateX(-50%); width: 28px; height: 14px; border-radius: 4px; cursor: ns-resize; }
-    .resize-handle.bottom{ bottom: -7px; left: 50%; transform: translateX(-50%); width: 28px; height: 14px; border-radius: 4px; cursor: ns-resize; }
+    .resize-handle.left  { left: -9px; top: 50%; transform: translateY(-50%); width: 18px; height: 36px; border-radius: 4px; cursor: ew-resize; background: rgba(200,90,23,0.3); }
+    .resize-handle.right { right: -9px; top: 50%; transform: translateY(-50%); width: 18px; height: 36px; border-radius: 4px; cursor: ew-resize; background: rgba(200,90,23,0.3); }
+    .resize-handle.top   { top: -9px; left: 50%; transform: translateX(-50%); width: 36px; height: 18px; border-radius: 4px; cursor: ns-resize; background: rgba(200,90,23,0.3); }
+    .resize-handle.bottom{ bottom: -9px; left: 50%; transform: translateX(-50%); width: 36px; height: 18px; border-radius: 4px; cursor: ns-resize; background: rgba(200,90,23,0.3); }
     .inspector input, .inspector select {
       width: 100%;
       padding: 4px 6px;
@@ -665,14 +665,28 @@
           if (layer.imageUrl) {
             const imgOffsetX = layer.imageOffsetX || 0;
             const imgOffsetY = layer.imageOffsetY || 0;
-            el.innerHTML = `
-              <img src="${layer.imageUrl}" 
-                   alt="${layer.imageName || 'LWS artwork'}" 
-                   style="width:100%; height:100%; object-fit:${layer.objectFit || 'cover'}; display:block; pointer-events:none; transform: translate(${imgOffsetX}%, ${imgOffsetY}%);"
-                   onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'padding:8px;font-size:11px;color:#c85a17\\'>Image failed to load</div>'">
-              <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
-            `;
-            el.style.background = '#f4f2ed';
+            const fit = layer.objectFit || 'cover';
+
+            if (fit === 'cover') {
+              // Use background for reliable panning without ever showing the layer background
+              el.style.backgroundImage = `url('${layer.imageUrl}')`;
+              el.style.backgroundSize = 'cover';
+              el.style.backgroundPosition = `${imgOffsetX}% ${imgOffsetY}%`;
+              el.style.backgroundRepeat = 'no-repeat';
+              el.innerHTML = `
+                <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
+              `;
+            } else {
+              // Contain mode - use img so the whole photo can be seen
+              el.innerHTML = `
+                <img src="${layer.imageUrl}" 
+                     alt="${layer.imageName || 'LWS artwork'}" 
+                     style="width:100%; height:100%; object-fit:contain; display:block; pointer-events:none;"
+                     onerror="this.style.display='none'; this.parentNode.innerHTML='<div style=\\'padding:8px;font-size:11px;color:#c85a17\\'>Image failed to load</div>'">
+                <div style="position:absolute;bottom:2px;right:4px;font-size:9px;background:rgba(0,0,0,0.55);color:#fff;padding:1px 5px;border-radius:2px;pointer-events:none;">${layer.imageName ? layer.imageName.split('/').pop().slice(0,18) : ''}</div>
+              `;
+              el.style.background = 'transparent';
+            }
           } else {
             // Placeholder style (dashed orange + hatch) as requested
             el.style.background = 'repeating-linear-gradient(45deg, #fff, #fff 8px, #f8f0e0 8px, #f8f0e0 16px)';
@@ -1164,7 +1178,12 @@
             if (l.imageUrl) {
               const imgOffsetX = l.imageOffsetX || 0;
               const imgOffsetY = l.imageOffsetY || 0;
-              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none; transform: translate(${imgOffsetX}%, ${imgOffsetY}%);">`;
+              const fit = l.objectFit || 'cover';
+              if (fit === 'cover') {
+                html += `<div style="${style}background-image:url('${l.imageUrl}');background-size:cover;background-position:${imgOffsetX}% ${imgOffsetY}%;border:none;"></div>`;
+              } else {
+                html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:contain;border:none;">`;
+              }
             } else {
               html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:11px;">IMAGE PLACEHOLDER</div>`;
             }
@@ -1209,7 +1228,12 @@
           if (l.imageUrl) {
             const imgOffsetX = l.imageOffsetX || 0;
             const imgOffsetY = l.imageOffsetY || 0;
-            html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:${l.objectFit||'cover'};border:none; transform: translate(${imgOffsetX}%, ${imgOffsetY}%);">`;
+            const fit = l.objectFit || 'cover';
+            if (fit === 'cover') {
+              html += `<div style="${style}background-image:url('${l.imageUrl}');background-size:cover;background-position:${imgOffsetX}% ${imgOffsetY}%;border:none;"></div>`;
+            } else {
+              html += `<img src="${l.imageUrl}" alt="${l.imageName || ''}" style="${style}object-fit:contain;border:none;">`;
+            }
           } else {
             html += `<div style="${style}border:2px dashed #e67e22;background:#fffbeb;display:flex;align-items:center;justify-content:center;color:#c85a17;font-size:12px;">IMAGE PLACEHOLDER (Supabase)</div>`;
           }
