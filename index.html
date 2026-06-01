@@ -1017,7 +1017,7 @@
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:63, w:84, h:7});
         layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,300), x:8, y:72, w:84, h:18});
       } else if (name === 'grid-8') {
-        const _gw = 19, _gh = 40, _gx = 8.5, _gy = 8, _ggx = 2.5, _ggy = 4;
+        const _gw = 12, _gh = 32.4, _gx = 23, _gy = 16, _ggx = 2, _ggy = 3.2; // portrait 0.66 cells · doubled outer padding · gaps -20%
         for (let _r = 0; _r < 2; _r++) for (let _c = 0; _c < 4; _c++)
           layers.push({id:generateId(), type:'image', role:'', content:'IMAGE ' + (_r*4+_c+1), x:_gx + _c*(_gw+_ggx), y:_gy + _r*(_gh+_ggy), w:_gw, h:_gh});
       } else if (name === 'grid-4') {
