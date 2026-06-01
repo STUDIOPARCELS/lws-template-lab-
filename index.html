@@ -876,10 +876,23 @@
 
       const roleSel = document.getElementById('layer-role');
       roleSel.innerHTML = '';
-      const roles = ['project-title-h1','narrative-description-body','description-section-label','description-section-value','metadata-key','metadata-value','artwork-atom-label','artwork-atom-detail','section-subhead','fine-print','caption','pull-quote'];
-      roles.forEach(r => {
+      const roles = [
+        ['project-title-h1','Project Title (H1) — Inter 20'],
+        ['narrative-description-body','Body / Narrative — Inter 14'],
+        ['description-section-value','Section Value — Inter 14'],
+        ['metadata-value','Metadata Value — Inter 14'],
+        ['caption','Caption / Triptych Label — Inter 11'],
+        ['pull-quote','Quote — Inter 14'],
+        ['section-subhead','Subhead / Splash — Space Mono 18'],
+        ['description-section-label','Section Label — Space Mono 12'],
+        ['metadata-key','Metadata Label — Space Mono 14'],
+        ['artwork-atom-label','Atom Label — Space Mono 10'],
+        ['artwork-atom-detail','Atom Detail — Space Mono 10'],
+        ['fine-print','Fine Print — Inter 11']
+      ];
+      roles.forEach(([r, label]) => {
         const o = document.createElement('option');
-        o.value = r; o.textContent = r;
+        o.value = r; o.textContent = label;
         if (r === layer.role) o.selected = true;
         roleSel.appendChild(o);
       });
@@ -1360,9 +1373,19 @@
       html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
       html += `</head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
       pageSections().forEach(sec => {
-        html += `<section style="width:100%;max-width:1280px;aspect-ratio:1280 / 720;margin:0 auto;position:relative;background:#faf8f5;overflow:hidden;">`;
-        sec.layers.forEach(l => {
-          const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
+        const ls = sec.layers || [];
+        if (!ls.length) return;
+        // Fit the section to its content with EQUAL top & bottom padding.
+        let minTop = Math.min(...ls.map(l => l.y));
+        let maxBot = Math.max(...ls.map(l => l.y + l.h));
+        if (!isFinite(minTop)) minTop = 6;
+        if (!isFinite(maxBot)) maxBot = 94;
+        const pad = Math.max(minTop, 3);
+        const Hpx = ((maxBot - minTop) + 2 * pad) / 100 * 720;
+        html += `<section style="width:100%;max-width:1280px;aspect-ratio:1280 / ${Hpx.toFixed(1)};margin:0 auto;position:relative;background:#faf8f5;overflow:hidden;">`;
+        ls.forEach(l => {
+          const topPx = (l.y - minTop + pad) / 100 * 720;
+          const style = `position:absolute;left:${l.x}%;top:${(topPx/Hpx*100).toFixed(2)}%;width:${l.w}%;height:${((l.h/100*720)/Hpx*100).toFixed(2)}%;`;
           if (l.type === 'text') {
             html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
           } else if (l.imageUrl) {
@@ -1426,9 +1449,14 @@
       if (!layers.length) { alert("Canvas is empty."); return; }
       let html = `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>LWS Section — ${currentProject?.title || 'Export'}</title></head><body style="margin:0;font-family:system-ui;background:#faf8f5;">`;
       html += `<style>${getEmbeddedTypeSystemCSS()}</style>`;
-      html += `<div style="width:100%;max-width:1280px;aspect-ratio:1280 / 720;margin:40px auto;position:relative;background:#faf8f5;overflow:hidden;">`;
+      let _minTop = Math.min(...layers.map(l => l.y)), _maxBot = Math.max(...layers.map(l => l.y + l.h));
+      if (!isFinite(_minTop)) _minTop = 6;
+      if (!isFinite(_maxBot)) _maxBot = 94;
+      const _pad = Math.max(_minTop, 3), _Hpx = ((_maxBot - _minTop) + 2 * _pad) / 100 * 720;
+      html += `<div style="width:100%;max-width:1280px;aspect-ratio:1280 / ${_Hpx.toFixed(1)};margin:40px auto;position:relative;background:#faf8f5;overflow:hidden;">`;
       layers.forEach(l => {
-        const style = `position:absolute;left:${l.x}%;top:${l.y}%;width:${l.w}%;height:${l.h}%;`;
+        const _topPx = (l.y - _minTop + _pad) / 100 * 720;
+        const style = `position:absolute;left:${l.x}%;top:${(_topPx/_Hpx*100).toFixed(2)}%;width:${l.w}%;height:${((l.h/100*720)/_Hpx*100).toFixed(2)}%;`;
         if (l.type === 'text') {
           html += `<div style="${style}" class="lws-${l.role}">${l.content}</div>`;
         } else {
