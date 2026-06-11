@@ -154,26 +154,28 @@ photographs.
 Lisa asked that every **photography** project carry an ethereal prose description of the terrain / subject,
 so a blind visitor can picture the image (distinct from the keyword `descriptionSections.visual`). A new
 top-level field **`visualDescription`** was added to **winterblue, flipped, palouse**, written after
-viewing representative imagery from each project's folder. Per Lisa, the format is short evocative
-words / two-word phrases separated by commas (6–8 max) — not sentences — meant to conjure the image:
-- **winterblue** — `nocturnal blue, snowbound prairie, wind-carved drifts, haloed moon, frozen minimalism, cold light, distant ranges`
-- **flipped** — `luminous icebergs, blue-white ice, near-black water, ethereal glow, stark minimalism, inverted planes`
-- **palouse** — `minimalist, monochromatic, Becher-esque typology, patterned fields, grain striations, rolling contours, spare horizon` (Bernd & Hilla Becher reference per Lisa)
+viewing representative imagery from each project's folder. Per Lisa, the format is **concrete, sensory, blind-accessible** comma-separated descriptors — materials,
+colors, and what each surface physically resembles — NOT abstract art-jargon ("warm minimalism" was
+rejected). Current text lives in each entry's `visualDescription` and in `visual-descriptions.json`. Example:
+- **winterblue** — `snow-covered prairie at night in deep midnight-blue and indigo, wind-carved ridges and crusty drifts catching faint silver light, a pale haloed moon…`
+- **palouse** — `smooth rolling farmland hills in soft waves of green and brown, fine parallel plow lines following the curves like combed corduroy…`
+
+**Excluded:** field / documentary / scouting images (people, vehicles, camps, establishing shots) are NOT
+artworks and are not described — only the abstract surface/landscape artworks.
+**Aerial vs. ground (per Lisa):** Greenland & Simpson = aerial; Wahiba & City of Rocks = ground-level;
+White Sands & Craters = both; the scale ambiguity (rock-in-hand vs. continent-from-orbit) is intentional.
 
 Installations were **not** given `visualDescription` (Lisa scoped this to photography).
 
-**Now drafted for ALL photography** (after viewing imagery from each chapter folder). The
-Surface Surveys collection, its six chapters, and Omani Landscapes were measured from their local images
-and given comma-phrase descriptions — collected in **`content-intake/visual-descriptions.json`** (a
-propagation map) for merging into `data/ssot-projects.json`:
-- **surface-surveys** — `aerial abstraction, elemental surface, mineral pattern, glacial-to-volcanic range, wind-shaped texture, serial chapters, Becher-like typology`
-- **greenland** — `aerial ice, cobalt meltwater, turquoise pools, white snowfield, crevasse veining, crystalline fracture`
-- **white-sands** — `powdery gypsum, near-white, mineral mottling, soft glare, bone-pale, rippled crust`
-- **wahiba** — `golden sand, fine grain, wind-combed lines, soft ridges, warm minimalism, desert hush`
-- **craters** — `black basalt, gold lichen, rust flecks, encrusted texture, volcanic crust, mineral density`
-- **simpson** — `rust-red expanse, parallel dunes, dendritic channels, aerial rhythm, speckled grain, immense scale`
-- **city-of-rocks** — `weathered granite, chartreuse lichen, fissured stone, speckled grey, sculptural surface, sagebrush-pale`
-- **omani-landscapes** — `saturated pattern, pointillist grain, dissolved landform, pink-green-violet, graphic abstraction, form-versus-function`
+**Drafted for ALL photography** after studying multi-image contact sheets of each chapter (not a single
+frame). The Surface Surveys collection, its six chapters, and Omani Landscapes are in
+**`content-intake/visual-descriptions.json`** (propagation map) for merging into `data/ssot-projects.json`.
+All written as concrete blind-accessible descriptors, e.g.:
+- **white-sands** — `brilliant chalk-white, like troweled and dripping wet plaster, whipped meringue and cake-frosting peaks, soft folds of melting wax and fresh snow…`
+- **simpson** — `deep brick-red and oxblood ground seen straight down from above, threaded with thin wandering vine lines…, like cracked red leather drawn on with fine roots`
+- **craters** — `rough volcanic rock in black and charcoal… rusty red crust blotched with mustard-yellow and lime-green lichen… both a boulder up close and scorched ground seen from above`
+
+(Full text for all eight is in `visual-descriptions.json`.)
 
 ### Omani Landscapes — enriched entry (NEW, `content-intake/omani-landscapes.json`)
 Lisa supplied the concept and a new source folder (`D:\LWS\ALL ARTWORKS\Omani Landscapes`, circa **2024**).
