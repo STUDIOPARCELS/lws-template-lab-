@@ -606,10 +606,22 @@
       autoSave();
     }
 
+    // Truncate to a whole-word boundary (never cut mid-word); add an ellipsis only
+    // when text was actually shortened. Shared by every template + Quick Text so copy
+    // always reads cleanly — and so future auto-composed pages inherit the same rule.
+    function clip(s, n) {
+      s = (s || '').trim();
+      if (s.length <= n) return s;
+      let cut = s.slice(0, n);
+      const sp = cut.lastIndexOf(' ');
+      if (sp > n * 0.5) cut = cut.slice(0, sp);
+      return cut.replace(/[\s,;:.—–-]+$/, '') + '…';
+    }
+
     function addQuickLayer(role) {
       const defaults = {
         'project-title-h1': {x:8, y:8, w:84, h:9, content: currentProject ? currentProject.title : 'Project Title'},
-        'narrative-description-body': {x:8, y:22, w:84, h:18, content: currentProject ? currentProject.narrative.substring(0,280)+'...' : 'Narrative text from SSOT...'},
+        'narrative-description-body': {x:8, y:22, w:84, h:18, content: currentProject ? clip(currentProject.narrative, 280) : 'Narrative text from SSOT...'},
         'description-section-label': {x:8, y:48, w:30, h:4, content: 'Scientific / Factual'},
         'description-section-value': {x:8, y:52, w:84, h:10, content: currentProject ? (currentProject.descriptionSections?.scientific || 'Description...') : 'Description text...'},
         'metadata-key': {x:8, y:66, w:18, h:4, content: 'Year'},
@@ -973,18 +985,18 @@
         // Full Image Hero 16:6 ~30% height as requested
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER (Supabase future)', x:0, y:35, w:100, h:30});
         layers.push({id:generateId(), type:'text', role:'metadata-value', content: `${year}  •  ${loc}`, x:68, y:68, w:28, h:5});
-        layers.push({id:generateId(), type:'text', role:'description-section-value', content: narr.substring(0,210)+'…', x:68, y:74, w:28, h:14});
+        layers.push({id:generateId(), type:'text', role:'description-section-value', content: clip(narr, 210), x:68, y:74, w:28, h:14});
       } else if (name === 'split-hero') {
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER', x:0, y:0, w:52, h:100});
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:56, y:12, w:40, h:10});
-        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,420), x:56, y:24, w:40, h:28});
+        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: clip(narr, 420), x:56, y:24, w:40, h:28});
         layers.push({id:generateId(), type:'text', role:'metadata-key', content:'YEAR', x:56, y:58, w:10, h:4});
         layers.push({id:generateId(), type:'text', role:'metadata-value', content: year, x:66, y:58, w:20, h:4});
       } else if (name === 'editorial') {
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:6, w:84, h:8});
-        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,380), x:8, y:16, w:84, h:22});
+        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: clip(narr, 380), x:8, y:16, w:84, h:22});
         layers.push({id:generateId(), type:'text', role:'description-section-label', content:'VISUAL', x:8, y:42, w:20, h:4});
-        layers.push({id:generateId(), type:'text', role:'description-section-value', content: vis.substring(0,220), x:8, y:46, w:84, h:12});
+        layers.push({id:generateId(), type:'text', role:'description-section-value', content: clip(vis, 220), x:8, y:46, w:84, h:12});
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER', x:8, y:62, w:84, h:28});
       } else if (name === 'metadata-desc') {
         layers.push({id:generateId(), type:'text', role:'metadata-key', content:'YEAR', x:8, y:12, w:10, h:4});
@@ -1028,7 +1040,7 @@
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 1', x:0, y:0, w:50, h:58});
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE 2', x:50, y:0, w:50, h:58});
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:63, w:84, h:7});
-        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr.substring(0,300), x:8, y:72, w:84, h:18});
+        layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: clip(narr, 300), x:8, y:72, w:84, h:18});
       } else if (name === 'grid-8') {
         const _gw = 12, _gh = 32.4, _gx = 23, _gy = 16, _ggx = 2, _ggy = 3.2; // portrait 0.66 cells · doubled outer padding · gaps -20%
         for (let _r = 0; _r < 2; _r++) for (let _c = 0; _c < 4; _c++)
