@@ -1,58 +1,54 @@
-# Build Plan — the repeatable, self-improving loop to auto-composed pages
+# Build Plan — Templates → Confirmed Sections → AI-Assembled Pages
 
-**Goal:** Add a project to the SSOT → the engine composes a publish-ready page
-(sections chosen + **ordered by design logic**, content bound, images pulled from
-Supabase) → draft on the sandbox preview → Lisa approves → production.
-
----
-
-## The loop (run for every project — it gets smarter each pass)
+**The contract (Lisa, 2026-06-11):** The 13 template-lab sections are THE building
+blocks — already designed, already tuned. The pipeline is:
 
 ```
-SELECT project ─▶ RESOLVE images (manifest) ─▶ COMPOSE (sections + order + bind)
-      ▲                                                      │
-      │                                                      ▼
-   LEARN  ◀──────  REVIEW (Lisa, on sandbox)  ◀──────  RENDER (preview)
+1. FILL      every template section with each project's real SSOT text
+2. CONFIRM   Lisa reviews the filled sections (review sheets on sandbox) ✓/edit
+3. ASSEMBLE  the AI organizes ONLY confirmed sections into pages (order varies per project)
+4. SEE       Lisa reviews pages → feedback → learn → regenerate → approve → production
 ```
 
-**Why it's recursive:** every REVIEW appends a rule to the **Learnings Log** below.
-The composer reads those rules, so **project N+1 starts better than project N**.
-Hand-built reference pages teach the rules; once the rules are good, the engine
-produces them automatically. That is the engine.
+**Rule #1 (Learnings Log, from Lisa):** Pages are composed FROM the template-lab
+sections — exact geometry, exact `.lws-*` type roles, the lab's own export pipeline
+(`buildComposedPageHTML`: equal-padding fit, 1280×720 canvas math). **Never freestyle
+HTML/CSS.** (`demo-flipped.html` violated this — kept only as the lesson.)
 
 ---
 
-## To-do (we tick + refine as we go)
+## To-do
 
-### Stage 0 — Reference: establish the look by hand
-- [x] **R1** Photography reference page — **Flipped** (hero → narrative → image study → specs → plate). Live Supabase images. → `demo-flipped.html`
-- [ ] **R2** Lock the **Photography page pattern** from Lisa's R1 feedback
-- [ ] **R3** Installation reference page (ECS or Mind the Gap) — adds the **Media / video** section
-- [ ] **R4** Lock the **Installation page pattern**
+### Stage A — FILL: the writing goes INTO the templates
+- [x] **A1** `scripts/fill_sections.py` — transcribes the 13 template definitions
+      exactly from `index.html` (`loadTemplate`), binds every project's SSOT content,
+      extracts the `.lws-*` CSS verbatim from the lab → `data/filled-sections.json`
+- [x] **A2** **Section Review Sheets** — `review/<project>.html`: every template
+      section filled with that project's real text, rendered with the lab's own
+      export math. Real images wired where unambiguous (flipped, side-effects);
+      lab-style placeholders elsewhere. + `review/index.html` directory.
+- [ ] **A3** Lisa reviews on sandbox → per section: ✓ confirm / comment / kill.
+      Edits applied → regenerate → repeat until confirmed per project.
 
-### Stage 1 — Codify: turn the look into data
-- [ ] **C1** `recipe.json` — per discipline: section set, default order, variation rules
-- [ ] **C2** Finalize `image-manifest.json` with real **nested** paths (`web-2000px`), hero + order per project
+### Stage B — ASSEMBLE: AI organizes confirmed sections into pages
+- [ ] **B1** `confirmed-sections.json` = the contract (only ✓ sections enter pages)
+- [ ] **B2** Composer stacks confirmed sections per project — **section order chosen
+      per project** (the agent's design judgment; varies, never one fixed recipe),
+      via the lab's `buildComposedPageHTML` logic → `pages/<project>.html`
+- [ ] **B3** Image slots auto-filled from `data/image-manifest.json` folders
 
-### Stage 2 — Engine: generate the look automatically
-- [ ] **E1** Composer reads SSOT + manifest + recipe → renders a page (no hand-HTML)
-- [ ] **E2** Proof: engine-generated Flipped matches hand-built R1
-- [ ] **E3** Order logic varies section order per project (the differentiator)
+### Stage C — SEE: pages on the preview → recursive improvement
+- [ ] **C1** All pages on sandbox preview + index
+- [ ] **C2** Lisa's page feedback → Learnings Log rules → regenerate (each pass better)
+- [ ] **C3** Approved → promote `sandbox/claude` → `main` (production)
 
-### Stage 3 — Run + recurse: the payoff
-- [ ] **G1** Generate all Photography pages → review → log learnings → regenerate
-- [ ] **G2** Generate all Installation pages → review → log learnings → regenerate
-- [ ] **G3** Bespoke collections: Surface Surveys, Luxuriate in Discomfort
-
-### Stage 4 — Lock + hand off
-- [ ] **L1** Package as the "add a project → page appears" agent skill
-- [ ] **L2** Promote approved pages sandbox → production
+### Stage D — LOCK: repeatability
+- [ ] **D1** "Add a project → filled sections → confirm → page" packaged as the
+      one-command skill, documented in this repo
 
 ---
 
-## Learnings Log (the memory that makes it recursive)
-Every review appends rules here; the composer obeys them.
-
-| # | From | Rule the engine must follow |
-|---|------|-----------------------------|
-| _(awaiting Lisa's R1 feedback on demo-flipped.html)_ | | |
+## Learnings Log
+| # | From | Rule |
+|---|------|------|
+| 1 | Lisa, on demo-flipped | Compose ONLY from template-lab sections (geometry + `.lws-*` + lab export math). Never freestyle. |
