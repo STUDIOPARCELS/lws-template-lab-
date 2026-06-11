@@ -1,90 +1,53 @@
 {
-  "_status": "DRAFT — recommended canonical folders pending Lisa's confirmation. See docs/IMAGE-INVENTORY.md.",
-  "_audited": "2026-06-11",
+  "_status": "LOCKED architecture (2026-06-11). Per-project image ORDER + HERO are proposed by the agent at generation time and confirmed by Lisa on the sandbox preview.",
+  "_mandate": "Simple, architecturally sound, future-proof — any later agent resolves images the same way with zero ambiguity.",
+  "architecture": {
+    "sourceOfTruth": "THIS FILE. Apps and agents resolve a project's images by reading its entry here — never by crawling the storage bucket.",
+    "rules": [
+      "1. Each SSOT project id maps to exactly ONE canonical folder (relative to publicBase).",
+      "2. Collections (surface-surveys, luxuriate-in-discomfort) map each CHILD id to its own folder.",
+      "3. Image ORDER is explicit + curated (agent proposes -> Lisa confirms). Never derived from filename sort.",
+      "4. hero = the lead image for the project.",
+      "5. video[] / audio[] hold installation multimedia (real .mp4/.mp3 exist).",
+      "6. URL = publicBase + each path segment URL-encoded (spaces -> %20), joined by '/'.",
+      "7. Adding a project = add ONE entry here (id, folder). No code change anywhere else.",
+      "8. NON-DESTRUCTIVE: existing bucket files are never renamed or moved (the live website depends on them). This manifest absorbs all naming inconsistency."
+    ]
+  },
   "bucket": "LISA WOOD STUDIO WEBSITE",
   "publicBase": "https://aawnkxnnrymqbysgimqj.supabase.co/storage/v1/object/public/LISA%20WOOD%20STUDIO%20WEBSITE/",
   "projects": {
     "surface-surveys": {
-      "discipline": "photography",
-      "page": "bespoke",
-      "folder": "surface-surveys",
-      "chapters": ["greenland", "white-sands", "wahiba-oman", "craters", "simpson-desert", "city"],
-      "fileCount": 168,
-      "media": ["image"],
-      "order": "curate",
-      "_decision": "confirm kebab-case 'surface-surveys' over uppercase 'SURFACE SURVEYS' (kebab has all 6 chapters incl. Craters)"
+      "discipline": "Photography",
+      "page": "collection",
+      "children": {
+        "greenland":     { "folder": "surface-surveys/greenland" },
+        "white-sands":   { "folder": "surface-surveys/white-sands" },
+        "wahiba":        { "folder": "surface-surveys/wahiba-oman" },
+        "craters":       { "folder": "surface-surveys/craters" },
+        "simpson":       { "folder": "surface-surveys/simpson-desert" },
+        "city-of-rocks": { "folder": "surface-surveys/city" }
+      },
+      "_decision": "Use kebab 'surface-surveys/' (all 6 chapters incl. Craters). Title DISPLAYS all-caps via CSS."
     },
-    "omani-landscapes": {
-      "discipline": "photography",
-      "folder": "OMANI LANDSCAPES",
-      "fileCount": 32,
-      "media": ["image"],
-      "order": "curate",
-      "_note": "many color variants of the same shots — needs hero pick + de-dup"
-    },
-    "winterblue": {
-      "discipline": "photography",
-      "folder": "WINTERBLUE/web-2000px",
-      "fileCount": 14,
-      "media": ["image", "video"],
-      "video": "WINTERBLUE/WINTERBLUE VIDEO",
-      "order": "curate",
-      "_decision": "web-2000px (14, web-ready) vs photos (51, full set)?"
-    },
-    "flipped": {
-      "discipline": "photography",
-      "folder": "flipped/final-photos",
-      "fileCount": 57,
-      "media": ["image"],
-      "order": "curate",
-      "_note": "uppercase FLIPPED/ (BLUE, Media) is working files — ignored"
-    },
-    "palouse": {
-      "discipline": "photography",
-      "folder": null,
-      "fileCount": 0,
-      "media": [],
-      "_note": "NO media in Supabase yet — Lisa to add"
-    },
-    "side-effects": {
-      "discipline": "installation",
-      "folder": "SIDE EFFECTS",
-      "fileCount": 6,
-      "media": ["image"],
-      "order": "filename",
-      "_note": "cleanly numbered 1-4.jpg + 2 final-artwork PNGs — best-ordered project"
-    },
-    "attention": {
-      "discipline": "installation",
-      "folder": "ATTENTION",
-      "fileCount": 5,
-      "media": ["image", "audio"],
-      "audio": "ATTENTION/ATTENTION by LISA WOOD STUDIO_Proxy.mp3",
-      "order": "curate"
-    },
-    "ecs": {
-      "discipline": "installation",
-      "folder": "ECS",
-      "fileCount": 2,
-      "media": ["image", "video"],
-      "order": "curate",
-      "_note": "only 2 files (1 image + 1 mp4) — sparse, may need more"
-    },
-    "mind-the-gap": {
-      "discipline": "installation",
-      "folder": "MIND THE GAP",
-      "fileCount": 6,
-      "media": ["image", "video"],
-      "order": "curate"
-    },
+    "omani-landscapes": { "discipline": "Photography", "folder": "OMANI LANDSCAPES", "media": ["image"], "_note": "many color variants of same shots — curate at generation" },
+    "winterblue":  { "discipline": "Photography", "folder": "WINTERBLUE/web-2000px", "media": ["image","video","audio"], "video": ["WINTERBLUE/WINTERBLUE VIDEO"], "_decision": "web-ready set (14). Full set in WINTERBLUE/photos (51) if more needed." },
+    "flipped":     { "discipline": "Photography", "folder": "flipped/final-photos", "media": ["image"], "_note": "uppercase FLIPPED/ is working files — ignored" },
+    "palouse":     { "discipline": "Photography", "folder": "palouse", "media": ["image"], "_status": "FOLDER PENDING — media not yet uploaded to Supabase (Nikon D800 prints)" },
+    "21st-century-bw": { "discipline": "Photography", "folder": "21st Century", "media": ["image"], "_status": "newly added per Lisa; verify folder contents at generation" },
+    "side-effects": { "discipline": "Installation", "folder": "SIDE EFFECTS", "media": ["image"], "_note": "cleanly numbered 1-4.jpg + 2 artwork PNGs" },
+    "attention":    { "discipline": "Installation", "folder": "ATTENTION", "media": ["image","audio"], "audio": ["ATTENTION/ATTENTION by LISA WOOD STUDIO_Proxy.mp3"] },
+    "ecs":          { "discipline": "Installation", "folder": "ECS", "media": ["image","video"], "_note": "sparse (2 files)" },
+    "mind-the-gap": { "discipline": "Installation", "folder": "MIND THE GAP", "media": ["image","video"] },
     "luxuriate-in-discomfort": {
-      "discipline": "installation",
-      "page": "bespoke",
-      "folder": "LUXURIATE IN DISCOMFORT/photos",
-      "fileCount": 6,
-      "media": ["image"],
-      "subfolders": ["Luxuriating in Discomfort Show", "LUXURIATE IN DISCOMFORT  Book"],
-      "order": "curate"
+      "discipline": "Installation",
+      "page": "collection",
+      "_note": "3 sub-projects per Lisa; finalizing from the in-progress intake pass. LUX Public Art lives UNDER Luxuriate (not separate).",
+      "children": {
+        "luxuriate-installation": { "folder": "LUXURIATE IN DISCOMFORT/photos" },
+        "luxuriate-book":         { "folder": "LUXURIATE IN DISCOMFORT/LUXURIATE IN DISCOMFORT  Book" },
+        "lux-public-art":         { "folder": "LUXURIATE IN DISCOMFORT/LUX Public Art", "_status": "being re-captured by intake" }
+      }
     }
   }
 }

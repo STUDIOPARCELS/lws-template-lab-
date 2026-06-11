@@ -44,8 +44,23 @@ and sequences sections for editorial impact. This is the core differentiator.
 
 | Discipline | Projects | Supabase folder status |
 |---|---|---|
-| **Photographs** | Surface Surveys (bespoke, 6 chapters) · Omani Landscapes · Winterblue · Flipped · Palouse | All have media except **Palouse** (folder TBD). Case-dupes to consolidate: `FLIPPED`/`flipped`, `SURFACE SURVEYS`/`surface-surveys`. |
-| **Installation** | Side Effects · Attention · ECS · Mind the Gap · Luxuriate in Discomfort (bespoke) | All have media; **ECS sparse (2 files)**. |
+| **Photographs** | Surface Surveys (collection, 6 chapters) · Omani Landscapes · Winterblue · Flipped · Palouse · **21st Century in Black & White** *(added 06-11)* | Image folders locked in `data/image-manifest.json`. Palouse media not yet uploaded. |
+| **Installation** | Side Effects · Attention · ECS · Mind the Gap · Luxuriate in Discomfort (**collection**, 3 sub-projects incl. LUX Public Art) | All have media; ECS sparse (2 files). |
+
+**Out (Writing discipline, not now):** Lost Vibrations, Time of Becoming. **LUX Public Art** is a child of Luxuriate, not separate.
+
+## Content decisions & data (2026-06-11, per Lisa — apply at merge)
+| Project | Year | Medium / equipment | Location |
+|---|---|---|---|
+| Flipped | 2023–2026 | Generative AI + Leica medium-format | **Ilulissat Icefjord, Greenland** (UNESCO World Heritage Site) — two expeditions |
+| Winterblue | 2023–2025 | Leica S (Typ 007) + iPhone Pro Max | — |
+| Palouse | 2013 | Nikon D800 | — |
+
+- **Description sections:** DEFERRED — decide only after *all* narrative content is in and confirmed.
+- **CTA:** button label = "Inquire" (all). But the **post-click action differs by discipline** (Installation vs Photographs vs Conceptual) — wire per-discipline later.
+- **Title display:** store clean title case in SSOT; render ALL-CAPS via one CSS rule (matches the live site, e.g. "SURFACE SURVEYS").
+- **Image/folder architecture:** delegated to Claude → locked in `data/image-manifest.json` (manifest is the single source of truth; non-destructive; one folder per project/child).
+- **Still open (non-blocking, proceeding on these defaults unless corrected):** Attention "from 200" → "2001"; Mind the Gap display title ("Mind the Gap" vs source "MIND | FIND THE GAP") + dimension typo (`26ft W`); Palouse 60×40&quot; print dims.
 
 - **Viceroy: removed — not part of this site.**
 - **Writing / Conceptual / Apps:** nav links exist but disciplines are untouched for now.
