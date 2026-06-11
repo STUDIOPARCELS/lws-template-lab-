@@ -144,13 +144,31 @@ Stripe/Xero/WLT automation), `You are correct.docx` (AI chat transcript), `FLIPP
 - **All photography editions are identical: `of 3, 2 APs`** — applied to winterblue, flipped, palouse. (Installations carry no edition.)
 
 ## Paper / fabrication (confirmed by Lisa)
-All photography now prints on **archival pigment, Hahnemühle bright white baryta** — applied to winterblue,
-flipped, and palouse. Lisa confirmed they switched all papers to this, so the earlier website-stated
-"Kodak Glossy" for Winterblue was superseded and replaced (Winterblue's "mounted on painted maple wood"
-mounting note retained). Printer not restated this round; Winterblue keeps "Laumont Photographic, New York"
-(from the site); flipped/palouse `printer` left empty pending confirmation (house printer is likely Laumont).
+All photography prints on **archival pigment, Hahnemühle bright white baryta**, fabricated by **Laumont
+Photographic, New York** — both fields now set on winterblue, flipped, and palouse. Lisa confirmed they
+switched all papers to the Hahnemühle baryta, so the earlier website-stated "Kodak Glossy" for Winterblue
+was superseded (its "mounted on painted maple wood" mounting note retained). Printer is the same for all
+photographs.
+
+## Visual descriptions (accessibility) — NEW field `visualDescription`
+Lisa asked that every **photography** project carry an ethereal prose description of the terrain / subject,
+so a blind visitor can picture the image (distinct from the keyword `descriptionSections.visual`). A new
+top-level field **`visualDescription`** was added to **winterblue, flipped, palouse**, written after
+viewing representative imagery from each project's folder:
+- **winterblue** — deep indigo/cobalt nocturnal snow prairie, wind-sculpted drifts, haloed moon, gold horizon seam, distant ranges.
+- **flipped** — luminous blue-white icebergs rising from near-black still water, glowing against a dark gradient sky.
+- **palouse** — rolling farmland hills in soft waves, green crop and tilled-earth bands in fine contour rows under a pale open sky.
+
+Installations were **not** given `visualDescription` (Lisa scoped this to photography). The existing SSOT
+photography in `data/ssot-projects.json` (Surface Surveys collection + 6 chapters, Omani Landscapes) does
+**not** yet have `visualDescription` — see cloud-update instructions below.
+
+### Cloud-session instructions to propagate into `data/ssot-projects.json`
+1. Add a `visualDescription` (string) field to each **photography** project object. Copy the three from `content-intake/{winterblue,flipped,palouse}.json`.
+2. For the existing photography entries (`surface-surveys`, `greenland`, `white-sands`, `wahiba`, `craters`, `simpson`, `city-of-rocks`, `omani-landscapes`) add a `visualDescription` too — these currently only have the keyword `descriptionSections.visual`. Draft from each chapter's imagery (folders exist locally under `SURFACE SURVEYS/` and `OMANI LANDSCAPES/`); this Claude Code instance can generate them on request.
+3. Decide placement/rendering: render `visualDescription` as the image `alt`/longdesc for accessibility, and/or as a short on-page caption.
 
 ## Remaining open items
 1. Minor verbatim typos left as-is: Attention "from 200" (likely 2001); Mind the Gap "26ft W".
-2. **Printer** for flipped/palouse unconfirmed (Laumont assumed elsewhere but not stated for these).
+2. `visualDescription` not yet added to the existing SSOT photography entries (instructions above) — can be drafted on request.
 3. Want a standalone **practice** entry from `/#practice`? Not created yet.
