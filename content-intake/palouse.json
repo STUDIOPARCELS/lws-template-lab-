@@ -3,12 +3,12 @@
   "title": "Palouse",
   "type": "photography",
   "parent": "Photography",
-  "narrative": "Palouse is a photographic study of the farmed landscape of the Palouse region of the inland Pacific Northwest, where wind-deposited loess has built a terrain of deep, rolling hills given almost entirely to dryland agriculture. The work reads the cultivated surface as a record of both elemental force and human labor — contour-plowed slopes, seasonal color, and the long geometry of wheat, barley, and legume fields shaped to the undulation of the land. [STUDIO-DRAFTED from research and Lisa's notes — not yet in Lisa's verbatim voice; pending her revision.]",
+  "narrative": "Palouse is a photographic study of the farmed landscape of the Palouse region of the inland Pacific Northwest, where wind-deposited loess has built a terrain of deep, rolling hills given almost entirely to dryland agriculture. The work reads the cultivated surface as a record of both elemental force and human labor — contour-plowed slopes, seasonal color, and the long geometry of wheat, barley, and legume fields shaped to the undulation of the land.",
   "year": "2013",
   "location": "Palouse region, southeastern Washington and northern Idaho, USA",
   "medium": "Photography",
   "process": "Photographic survey of the cultivated Palouse landscape, made with a Nikon D800.",
-  "edition": "",
+  "edition": "of 3, 2 APs",
   "cta": "Inquire",
   "descriptionSections": {
     "scientific": "shot circa 2013 (artist recollection); Nikon D800; Palouse region; rolling loess hills up to ~500 ft over Columbia River Basalt; wind-deposited Pleistocene glacial silt; one of the most productive non-irrigated (dryland) farming regions in the world; largest U.S. lentil-growing region",
@@ -20,7 +20,7 @@
   "artworkAtoms": {
     "material": "",
     "printer": "",
-    "dimensions": "Selected prints indicated at 60 x 40 inches by archive filenames (confirm); fabrication specs unknown"
+    "dimensions": "60 x 40 inches"
   },
   "_imageDimensions": [
     {
@@ -345,5 +345,5 @@
     "Research: https://www.historylink.org/File/21016",
     "Research: https://www.historylink.org/File/21303"
   ],
-  "_confidence": "thin"
+  "_confidence": "assembled-from-fragments"
 }

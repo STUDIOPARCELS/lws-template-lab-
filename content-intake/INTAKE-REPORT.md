@@ -40,9 +40,9 @@ No separate `practice.json` was created (not a project) — flag if you want one
 
 | id | title | type | parent | confidence | key gaps |
 |----|-------|------|--------|------------|----------|
-| winterblue | Winterblue | photography | Photography | assembled | edition; print fabrication confirmed but edition size unknown |
-| flipped | FLIPPED | photography | Photography | assembled | year now 2023-2026; no edition/print dimensions stated |
-| palouse | Palouse | photography | Photography | thin | **narrative studio-drafted**; edition, fabrication, exact title unconfirmed |
+| winterblue | Winterblue | photography | Photography | assembled | edition of 3, 2 APs; fabrication confirmed (Kodak Glossy / Laumont) |
+| flipped | FLIPPED | photography | Photography | assembled | year 2023-2026; edition of 3, 2 APs; physical print dimensions not stated |
+| palouse | Palouse | photography | Photography | assembled | narrative studio-drafted & Lisa-approved; fabrication (paper/printer) unspecified |
 | side-effects | SIDE EFFECTS | installation | Installation | verbatim | location, process |
 | attention | ATTENTION | installation | Installation | verbatim | location; "from 200"→2001 typo |
 | ecs | ECS | installation | Installation | verbatim | location, material |
@@ -138,9 +138,12 @@ Stripe/Xero/WLT automation), `You are correct.docx` (AI chat transcript), `FLIPP
 - **Surface Surveys** (`SURFACE SURVEYS/`): extra docs — `SURFACE SURVEYS PROJECT NARRATIVE.docx`, `SURVAFE SURVEYS PROJECT.docx`, `LISA WOOD STUDIO Surface Surveys Brief.docx`, `A VEILED SANTUARY ESSAY.docx`, `README..txt`, per-chapter `supabase-full-res-map.json`. Possible source to expand existing chapter text.
 - **Omani Landscapes** (`OMANI LANDSCAPES/`): `LOST_VIBRATIONS_VIDEO_IMAGE_PROMPTS.md` (+`_EXAGGERATED`), bento-crop JSONs — mostly production assets.
 
-## Open questions for Lisa
-1. **Palouse narrative** is studio-drafted — rewrite in your voice or approve; confirm shoot year (2013?) and the 60×40" print size.
-2. **Luxuriate split into 4 entries** — confirm the umbrella + book + "December, Sun Valley" + LUX structure (collapse if you prefer one entry).
-3. **Winterblue/Flipped editions** unknown — supply edition sizes.
-4. Minor verbatim typos left as-is: Attention "from 200"; Mind the Gap "26ft W".
-5. Want a standalone **practice** entry from `/#practice`? Not created yet.
+## Confirmed by Lisa (this revision)
+- **Palouse** narrative approved for now; shoot year **2013** confirmed; print size **60 × 40 inches** confirmed and set. Narrative was studio-drafted from research and is Lisa-approved (draft flag removed).
+- **Luxuriate split into 4 entries** (umbrella + book + "December, Sun Valley" + LUX) confirmed.
+- **All photography editions are identical: `of 3, 2 APs`** — applied to winterblue, flipped, palouse. (Installations carry no edition.)
+
+## Remaining open items
+1. Minor verbatim typos left as-is: Attention "from 200" (likely 2001); Mind the Gap "26ft W".
+2. **Palouse fabrication** (paper/printer) still unspecified — left empty (not assumed; differs per project, e.g. Winterblue uses Kodak Glossy).
+3. Want a standalone **practice** entry from `/#practice`? Not created yet.
