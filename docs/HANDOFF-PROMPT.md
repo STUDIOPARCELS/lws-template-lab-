@@ -77,9 +77,16 @@ flagged-for-review only.
 5. Don't touch unrelated repos (kohler/solokit/micron/budget/mission-control).
 
 ═══ FIRST MOVES ═══
-1. Map this repo: the template components (the 10 kinds), /api/template-pages, the
-   section organizer, how /projects/[slug] assembles rows.
-2. Show Lisa /templates and /projects/white-sands on the current preview — confirm this IS
-   the system she remembers building (May 23–30).
+0. CONFIRMED WORKING 2026-06-11: the slot renderer is live on branch rescue/unify-20260609.
+   Lisa's White Sands brand-splash renders correctly (title WHITE SANDS / New Mexico / 2018 +
+   both photos) at:
+   https://lisa-wood-studio-p2oxolgbs-lisa-woods-projects-87a1cfaa.vercel.app/templates
+   and /template-preview/white-sands-brand-splash . Component: BrandSplashSection (React).
+   Production domain (main) lacks /templates — merge rescue/unify or keep building on it.
+1. Map this repo: the template components (the 10 kinds, e.g. BrandSplashSection,
+   ProjectHeroSection...), /api/template-pages, the section organizer, how /projects/[slug]
+   and /work/[slug] assemble rows.
+2. Show Lisa /templates and a couple of /projects/[slug] pages on the rescue/unify preview —
+   confirm this IS the system she built (May 23–30).
 3. Then execute the gap list above with her, one approved slice at a time.
 ```
