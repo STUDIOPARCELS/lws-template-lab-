@@ -155,27 +155,30 @@ Lisa asked that every **photography** project carry an ethereal prose descriptio
 so a blind visitor can picture the image (distinct from the keyword `descriptionSections.visual`). A new
 top-level field **`visualDescription`** was added to **winterblue, flipped, palouse**, written after
 viewing representative imagery from each project's folder. Per Lisa, the format is **short comma-separated fragments of one, two, or three words** — no uniform
-pattern, NOT sentences, NOT abstract art-jargon ("warm minimalism" rejected), no redundant words ("wet"
-is implied by pools/meltwater/dripping; "crusty"/"haloed moon"/"gold horizon" removed). **The count varies
-by project** (5–10 fragments — some spare, some richer). Each blends material/color/what-it-resembles with
-the **scientific fact that grounds it** for a non-seeing reader. All eleven were reviewed against these
-rules in this pass (tracked as a 12-item to-do list). Current set:
-- **surface-surveys** (8) — `ice, sand, lava, gypsum, granite, red dune, elemental, ambiguous scale`
-- **greenland** (6) — `glacial ice, meltwater, turquoise, cobalt, crevasses, aerial`
-- **white-sands** (6) — `gypsum, plaster, blinding white, dripping plaster, meringue peaks, close or aerial`
-- **wahiba** (5) — `Wahiba Sands, honey-gold, quartz grains, wind ripples, scribed circles`
-- **craters** (8) — `basalt, cooled lava, black, rust-red, gold lichen, lime lichen, iron stain, aerial or close`
-- **simpson** (6) — `red centre, Australia, iron-red, oxblood, trailing vines, aerial`
-- **city-of-rocks** (5) — `granite, salt-and-pepper grey, rust-orange, acid-yellow lichen, pockmarked`
-- **omani-landscapes** (7) — `pink, green, feminine, bread browns, earth tones, dissolved landform, form versus function`
-- **winterblue** (8) — `midnight blue, indigo, ice blue, monochromatic, snow, wind-carved drifts, moonlight, sub-zero`
-- **flipped** (10) — `cinematic, monumental, icebergs, luminous blue-white, looming peaks, black mirror water, backlit, moody, otherworldly, inverted`
-- **palouse** (5) — `loess hills, wind-blown silt, rolling, plow-line corduroy, spare`
+pattern, NOT sentences, NOT abstract art-jargon ("warm minimalism" rejected), no redundant/obvious words
+("wet" implied by pools/meltwater/dripping; "cooled lava" obvious; "crusty"/"haloed moon"/"gold horizon"
+removed). **Each line must ebb and flow between one-, two-, and three-word fragments — never uniformly
+two-word.** The fragment **count varies by project** (6–10). The words **"aerial" and "close" are not used
+in any description** (per Lisa); the scale idea is carried by `ambiguous scale` on the collection instead.
+Each blends material/color/what-it-resembles with the **scientific fact that grounds it** for a non-seeing
+reader. Current set (with per-fragment word-count pattern):
+- **surface-surveys** — `ice, sand, lava, gypsum, granite, elemental, ambiguous scale`
+- **greenland** — `glacial, ice, meltwater pools, turquoise, cobalt, fine dark lines` (glacial & ice separated; "crevasses"→"fine dark lines")
+- **white-sands** — `gypsum, plaster, blinding white, dripping plaster, meringue, soft folds`
+- **wahiba** — `Wahiba Sands, golden, quartz, wind ripples, scribed circles, dry`
+- **craters** — `basalt, black, rust-red, gold lichen, lime, iron stain, pitted, cracked`
+- **simpson** — `red centre, Australia, iron-red, oxblood, trailing vines, vast`
+- **city-of-rocks** — `granite, speckled grey, rust-orange, acid-yellow lichen, lime, pockmarked, cracked`
+- **omani-landscapes** — `pink, green, feminine, bread browns, earth tones, dissolved landform, form versus function`
+- **winterblue** — `midnight blue, indigo, ice blue, monochromatic, snow, wind-carved drifts, moonlight, sub-zero`
+- **flipped** — `cinematic, monumental, icebergs, luminous blue-white, looming peaks, black mirror water, backlit, moody, otherworldly, inverted`
+- **palouse** — `loess hills, wind-blown silt, rolling, corduroy furrows, green, brown, spare`
 
 **Excluded:** field / documentary / scouting images (people, vehicles, camps, establishing shots) are NOT
 artworks and are not described — only the abstract surface/landscape artworks.
-**Aerial vs. ground (per Lisa):** Greenland & Simpson = aerial; Wahiba & City of Rocks = ground-level;
-White Sands & Craters = both; the scale ambiguity (rock-in-hand vs. continent-from-orbit) is intentional.
+**Aerial vs. ground (kept as metadata only, NOT in the descriptions):** Greenland & Simpson = aerial;
+Wahiba & City of Rocks = ground-level; White Sands & Craters = both. The scale ambiguity is intentional
+but is conveyed without the words "aerial"/"close".
 
 Installations were **not** given `visualDescription` (Lisa scoped this to photography).
 
