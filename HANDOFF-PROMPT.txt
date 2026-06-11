@@ -1,0 +1,98 @@
+HANDOFF PROMPT — Lisa Wood Studio website engine
+==================================================
+
+WHERE TO OPEN: new Claude Code session, model Fable 5, repo STUDIOPARCELS/lisa-wood-studio
+(branch rescue/unify-20260609 is the latest known-good). Paste everything below the line.
+
+------------------------------------------------------------------------------------------
+
+You are picking up Lisa Wood Studio's website engine. Read fully before acting.
+These findings are VERIFIED (2026-06-11) — trust them, don't re-derive.
+
+=== MISSION ===
+THIS repo (lisa-wood-studio) is the engine: it renders Lisa's slot-based templates from
+Supabase into project pages. Goal: get every project's page composed from her saved
+templates, reviewable on a sandbox preview, promoted to production on her approval —
+and make "add a project -> page appears for approval" a repeatable loop.
+
+=== VERIFIED SYSTEM MAP ===
+- ENGINE (this repo): Next.js 16. Routes incl. /templates, /template-preview/[...],
+  /projects/[slug], /disciplines/[slug], /work/[slug] (~75 pages),
+  /project-section-organizer, APIs /api/template-pages, /api/template-pages/project-heroes,
+  /api/template-images, /api/template-user-images/[...path].
+  Vercel projects: lisa-wood-studio (+ lisa-wood-studio-sandbox for previews). Deployment
+  protection (Vercel Auth) is ON — Lisa can view previews in her browser.
+- DATA (Supabase "SURFACE SURVEYS", ref aawnkxnnrymqbysgimqj, org STUDIO PARCELS):
+  * lws_template_pages (78 rows, saved 2026-05-23 to 30; drafts: draft-1=53, hero=25) =
+    Lisa's filled slot templates. 10 kinds: project-hero, project-desktop, brand-splash,
+    blackout-desktop, landscape-hero, split-hero, triptych, detail-grid,
+    detail-grid-single-row, analysis-poster-pair. Rows: template_id, project_slug,
+    sort_order, placement(hero|body), reveal, text_slots[]{slotId,label,value,style,visible},
+    image_slots[]{slotId,fullSrc,assetSrc,storagePath,crop,transform,visible}.
+  * lws_project_content (18 rows) = canonical SSOT (narrative_description, years, location,
+    medium, process, dimensions, edition, cta, 5 *_description fields, poetic_words,
+    ethereal_description, artwork_atoms, field_images_path).
+  * Storage bucket "LISA WOOD STUDIO WEBSITE" (public) = all media; slot uploads under
+    template-lab/<project>/<template>/<slot>/; project folders incl.
+    surface-surveys/<chapter>/photos/full-res, flipped/final-photos/web-2000px,
+    WINTERBLUE/, OMANI LANDSCAPES/, SIDE EFFECTS/, ATTENTION/, ECS/, MIND THE GAP/,
+    LUXURIATE IN DISCOMFORT/, 21st Century/. PALOUSE has no folder yet.
+- RELATED REPOS (context, mostly hands-off):
+  * LWS_WEBSITE-sandbox -> observatory.lisawoodstudio.com = current LIVE site (older gen).
+  * lws-template-lab- = canvas sketch tool @ templatelab.lisawoodstudio.com (RETIRED — was
+    clunky/hard to use; this engine replaced it). BUT holds valuable docs/data on branch
+    sandbox/claude: ROADMAP.md, BUILD-PLAN.md, docs/IMAGE-INVENTORY.md,
+    data/ssot-projects.json (19 entries incl. new projects), content-intake/ (verbatim
+    local-archive extractions + INTAKE-REPORT.md). Keep the data; do NOT revive the old UI.
+  * LWS_WEBSITE, STUDIO-WEBSITE, observatory-presentation = older generations (confirm, then archive).
+  * kohler-*, solokit-*, micron-*, budget-*, mission-control = unrelated ventures. IGNORE.
+
+=== CONFIRMED CONTENT FACTS (from Lisa, 2026-06-11) ===
+Disciplines in scope: Photographs + Installation ONLY (Writing/Conceptual/Apps later).
+Photographs: Surface Surveys (6 chapters; bespoke collection) · Omani Landscapes ·
+Winterblue (2023, Camas Prairie, 125-photo contact sheet, Leica S007 + iPhone) ·
+Flipped (2023-2026, Ilulissat Icefjord, generative AI + Leica) · Palouse (2013, Nikon D800).
+Installation: Side Effects · Attention · ECS · Mind the Gap · 21st Century in Black & White
+(ALL 2022) · Luxuriate in Discomfort (2018-2020 umbrella; children: book 2020, one-night
+installation "December, Sun Valley" 2020, LUX public art 2024; bespoke collection).
+Homepage features Surface Surveys + Luxuriate in Discomfort. About on homepage, not nav.
+"SUN VALLEY, IDAHO" corner tag. Titles display ALL-CAPS. CTA label "Inquire" everywhere
+(post-click differs per discipline, later). Lisa's narrative voice is sacred: verbatim or
+flagged-for-review only.
+
+=== GAPS TO CLOSE (the actual work) ===
+1. lws_project_content has 18 rows but template coverage is uneven: rich for Surface Surveys
+   chapters + Flipped (7-8 templates each); thin (1 row, project-hero only) for winterblue,
+   mind-the-gap, luxuriate children, 21st-century. New projects may lack content rows —
+   reconcile with lws-template-lab-'s data/ssot-projects.json + content-intake/ (Lisa-approved).
+2. Render/QA every project page from existing rows; list which projects need more saved
+   templates; let Lisa fill those in her existing tools (or via the organizer).
+3. The "agent chooses section order per project" goal: /project-section-organizer exists —
+   evaluate it before building anything new.
+4. Sandbox -> approve -> production loop on lisa-wood-studio(-sandbox).
+5. KNOWN RENDER BUG (Lisa's screenshots, 06-11): the survey/project-hero composition can lose
+   padding so long body text OVERLAPS the metadata rows (DATE/LOCATION/EQUIPMENT/MEDIA) and the
+   subtitle — text collides. Correct target = generous left/right padding, metadata block flows
+   cleanly BELOW the body (never overlapping). Audit the project-hero/survey-hero section CSS for
+   absolute-positioning/overflow that breaks when copy is long; make it flow. Verify on every project.
+
+=== RULES (hard-won) ===
+1. Lisa's saved work (lws_template_pages) is the source of truth — query, never assume.
+2. Render templates EXACTLY via this repo's real renderer. NEVER freestyle HTML/CSS.
+3. Never deploy to production without Lisa's explicit approval; preview first, always.
+4. Show Lisa RENDERED PAGES (URLs/files) — she judges visually, not from tables.
+5. Don't touch unrelated repos (kohler/solokit/micron/budget/mission-control).
+
+=== FIRST MOVES ===
+0. CONFIRMED WORKING 2026-06-11: the slot renderer is live on branch rescue/unify-20260609.
+   Lisa's White Sands brand-splash renders correctly (title WHITE SANDS / New Mexico / 2018 +
+   both photos) at:
+   https://lisa-wood-studio-p2oxolgbs-lisa-woods-projects-87a1cfaa.vercel.app/templates
+   and /template-preview/white-sands-brand-splash . Component: BrandSplashSection (React).
+   Production domain (main) lacks /templates — merge rescue/unify or keep building on it.
+1. Map this repo: the template components (the 10 kinds, e.g. BrandSplashSection,
+   ProjectHeroSection...), /api/template-pages, the section organizer, how /projects/[slug]
+   and /work/[slug] assemble rows.
+2. Show Lisa /templates and a couple of /projects/[slug] pages on the rescue/unify preview —
+   confirm this IS the system she built (May 23-30).
+3. Then execute the gap list above with her, one approved slice at a time.
