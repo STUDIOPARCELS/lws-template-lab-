@@ -16,8 +16,8 @@ below are **locked** unless we deliberately revisit them.
 | # | Decision | Choice |
 |---|----------|--------|
 | 1 | **Page model** | **Discipline-based shared structure.** A discipline (e.g. Photography, Installation) shares the *same vocabulary of section types* — but the **agent chooses the section ORDER per project** using design expertise, so each project opens differently. |
-| 2 | **Scope now** | **Photography + Installation only.** Conceptual / Apps / Writing get their own unique page languages later. |
-| 3 | **Bespoke pages** | **Surface Surveys** and **Luxuriate in Discomfort** are multi-year, multi-dimensional bodies of work with sub-projects → **unique hand-crafted pages**, not the disciplinary generator. |
+| 2 | **Scope now** | **Photographs + Installation only.** The other 3 nav disciplines — Writing, Conceptual, Apps — are explicitly OUT for now. |
+| 3 | **Bespoke pages** | **Surface Surveys** (Photographs; 6 chapters) + **Luxuriate in Discomfort** (Installation) are the homepage-featured bodies → **unique hand-crafted pages**, not the generator. |
 | 4 | **Section selection** | Canonical *set* of sections per discipline; **skip-if-empty**; **order is design-driven, not fixed.** |
 | 5 | **Images** | **One Supabase folder per project**; pages auto-pull that folder's images in order (browser-side). |
 | 6 | **Deploy / approval** | **sandbox branch → Vercel preview → Lisa approves → promote to `main` (production).** No more direct-to-production. |
@@ -32,15 +32,35 @@ and sequences sections for editorial impact. This is the core differentiator.
 - **SSOT is complete** for all 8 current projects (narrative, year, location, all 5
   description sections, all 3 artwork atoms). Generated pages will be rich; skip-if-empty
   is a safety net, not a common case.
-- **Build sandbox can't reach Supabase** (network policy); the **browser can**. So image
-  auto-pull and any live-image verification happen in-browser, confirmed visually with Lisa.
+- **Claude now has direct Supabase access** (MCP) — bucket/folder structure is verified
+  ground truth, not assumption. Pages still fetch images **in-browser** at runtime from
+  the public bucket; visual confirmation stays with Lisa on the sandbox preview.
 - **Templates already bind SSOT data** — the generator extends existing work, not a rewrite.
 
 ---
 
+## Project roster (locked 2026-06-11, per Lisa)
+
+| Discipline | Projects | Supabase folder status |
+|---|---|---|
+| **Photographs** | Surface Surveys (bespoke, 6 chapters) · Omani Landscapes · Winterblue · Flipped · Palouse | All have media except **Palouse** (folder TBD). Case-dupes to consolidate: `FLIPPED`/`flipped`, `SURFACE SURVEYS`/`surface-surveys`. |
+| **Installation** | Side Effects · Attention · ECS · Mind the Gap · Luxuriate in Discomfort (bespoke) | All have media; **ECS sparse (2 files)**. |
+
+- **Viceroy: removed — not part of this site.**
+- **Writing / Conceptual / Apps:** nav links exist but disciplines are untouched for now.
+- Media source of truth: bucket **`LISA WOOD STUDIO WEBSITE`** (public) in Supabase
+  project `SURFACE SURVEYS` (`aawnkxnnrymqbysgimqj`), one folder per project.
+  Ignore the flat `make-e667ad39-images` bucket (legacy automation dump).
+
+### Navigation concept (directional, not final design)
+- Header: `LISA WOOD STUDIO` left · `PHOTOGRAPHS  WRITING  INSTALLATION  CONCEPTUAL  APPS` right
+- **About** lives on the homepage (not in the main nav)
+- **`SUN VALLEY, IDAHO`** corner tag (placement to be refined)
+- Homepage features **Surface Surveys + Luxuriate in Discomfort** only (no Winterblue there)
+
 ## Disciplines & the section vocabulary (scope now)
 
-**Photography** and **Installation** share this section vocabulary (the agent picks
+**Photographs** and **Installation** share this section vocabulary (the agent picks
 which to use and in what order, per project):
 
 - Hero (full-image / full-bleed / split) — *the opening; varies per project*
