@@ -68,6 +68,13 @@ flagged-for-review only.
 3. The "agent chooses section order per project" goal: /project-section-organizer exists —
    evaluate it before building anything new.
 4. Sandbox→approve→production loop on lisa-wood-studio(-sandbox).
+5. KNOWN RENDER BUG (Lisa's screenshots, 06-11): the survey/project-hero composition can lose
+   padding so long body text OVERLAPS the metadata rows (DATE/LOCATION/EQUIPMENT/MEDIA) and the
+   subtitle — text collides. Correct target = generous left/right padding, metadata block flows
+   cleanly BELOW the body (never overlapping). Audit the project-hero/survey-hero section CSS for
+   absolute-positioning/overflow that breaks when copy is long; make it flow. Verify on every project.
+   (NOTE: the old templatelab composer was retired for being clunky — this engine supersedes it;
+   do NOT revive the old interface, just keep the saved data it stored.)
 
 ═══ RULES (hard-won) ═══
 1. Lisa's saved work (lws_template_pages) is the source of truth — query, never assume.
