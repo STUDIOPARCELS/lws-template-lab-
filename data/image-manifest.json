@@ -1,0 +1,90 @@
+{
+  "_status": "DRAFT — recommended canonical folders pending Lisa's confirmation. See docs/IMAGE-INVENTORY.md.",
+  "_audited": "2026-06-11",
+  "bucket": "LISA WOOD STUDIO WEBSITE",
+  "publicBase": "https://aawnkxnnrymqbysgimqj.supabase.co/storage/v1/object/public/LISA%20WOOD%20STUDIO%20WEBSITE/",
+  "projects": {
+    "surface-surveys": {
+      "discipline": "photography",
+      "page": "bespoke",
+      "folder": "surface-surveys",
+      "chapters": ["greenland", "white-sands", "wahiba-oman", "craters", "simpson-desert", "city"],
+      "fileCount": 168,
+      "media": ["image"],
+      "order": "curate",
+      "_decision": "confirm kebab-case 'surface-surveys' over uppercase 'SURFACE SURVEYS' (kebab has all 6 chapters incl. Craters)"
+    },
+    "omani-landscapes": {
+      "discipline": "photography",
+      "folder": "OMANI LANDSCAPES",
+      "fileCount": 32,
+      "media": ["image"],
+      "order": "curate",
+      "_note": "many color variants of the same shots — needs hero pick + de-dup"
+    },
+    "winterblue": {
+      "discipline": "photography",
+      "folder": "WINTERBLUE/web-2000px",
+      "fileCount": 14,
+      "media": ["image", "video"],
+      "video": "WINTERBLUE/WINTERBLUE VIDEO",
+      "order": "curate",
+      "_decision": "web-2000px (14, web-ready) vs photos (51, full set)?"
+    },
+    "flipped": {
+      "discipline": "photography",
+      "folder": "flipped/final-photos",
+      "fileCount": 57,
+      "media": ["image"],
+      "order": "curate",
+      "_note": "uppercase FLIPPED/ (BLUE, Media) is working files — ignored"
+    },
+    "palouse": {
+      "discipline": "photography",
+      "folder": null,
+      "fileCount": 0,
+      "media": [],
+      "_note": "NO media in Supabase yet — Lisa to add"
+    },
+    "side-effects": {
+      "discipline": "installation",
+      "folder": "SIDE EFFECTS",
+      "fileCount": 6,
+      "media": ["image"],
+      "order": "filename",
+      "_note": "cleanly numbered 1-4.jpg + 2 final-artwork PNGs — best-ordered project"
+    },
+    "attention": {
+      "discipline": "installation",
+      "folder": "ATTENTION",
+      "fileCount": 5,
+      "media": ["image", "audio"],
+      "audio": "ATTENTION/ATTENTION by LISA WOOD STUDIO_Proxy.mp3",
+      "order": "curate"
+    },
+    "ecs": {
+      "discipline": "installation",
+      "folder": "ECS",
+      "fileCount": 2,
+      "media": ["image", "video"],
+      "order": "curate",
+      "_note": "only 2 files (1 image + 1 mp4) — sparse, may need more"
+    },
+    "mind-the-gap": {
+      "discipline": "installation",
+      "folder": "MIND THE GAP",
+      "fileCount": 6,
+      "media": ["image", "video"],
+      "order": "curate"
+    },
+    "luxuriate-in-discomfort": {
+      "discipline": "installation",
+      "page": "bespoke",
+      "folder": "LUXURIATE IN DISCOMFORT/photos",
+      "fileCount": 6,
+      "media": ["image"],
+      "subfolders": ["Luxuriating in Discomfort Show", "LUXURIATE IN DISCOMFORT  Book"],
+      "order": "curate"
+    }
+  }
+}
