@@ -34,7 +34,7 @@
     "winterblue":  { "discipline": "Photography", "folder": "WINTERBLUE/web-2000px", "media": ["image","video","audio"], "video": ["WINTERBLUE/WINTERBLUE VIDEO"], "_decision": "web-ready set (14). Full set in WINTERBLUE/photos (51) if more needed." },
     "flipped":     { "discipline": "Photography", "folder": "flipped/final-photos", "media": ["image"], "_note": "uppercase FLIPPED/ is working files — ignored" },
     "palouse":     { "discipline": "Photography", "folder": "palouse", "media": ["image"], "_status": "FOLDER PENDING — media not yet uploaded to Supabase (Nikon D800 prints)" },
-    "21st-century-bw": { "discipline": "Photography", "folder": "21st Century", "media": ["image"], "_status": "newly added per Lisa; verify folder contents at generation" },
+    "21st-century-bw": { "discipline": "Installation", "folder": "21st Century", "media": ["image"], "_status": "Installation per Lisa (corrected from Photography 06-11); verify folder contents + any video/audio at generation" },
     "side-effects": { "discipline": "Installation", "folder": "SIDE EFFECTS", "media": ["image"], "_note": "cleanly numbered 1-4.jpg + 2 artwork PNGs" },
     "attention":    { "discipline": "Installation", "folder": "ATTENTION", "media": ["image","audio"], "audio": ["ATTENTION/ATTENTION by LISA WOOD STUDIO_Proxy.mp3"] },
     "ecs":          { "discipline": "Installation", "folder": "ECS", "media": ["image","video"], "_note": "sparse (2 files)" },
