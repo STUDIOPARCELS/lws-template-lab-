@@ -1,0 +1,33 @@
+{
+  "id": "omani-landscapes",
+  "title": "Omani Landscapes",
+  "type": "photography",
+  "parent": "Photography",
+  "narrative": "Omani Landscapes began at the dawn of generative AI, asking a single question: what is a photograph when an image can be spun up from a prompt? Each work starts as a photograph Lisa made in Oman with a Leica, then strips that image down through software until only its underlying patterns remain — and rebuilds those patterns into something new that no longer looks anything like a photograph. The result is a body of work that is genuinely photographic in origin yet reads as pure abstraction. Where generative AI can now produce images that look like photographs but are not, these are photographs that do not look like photographs — posing the question at the center of the project: is a photograph defined by form (what it looks like) or by function (how it was made)? [STUDIO-DRAFTED from Lisa's spoken explanation and the imagery — confirm voice.]",
+  "year": "2024",
+  "location": "Oman; Jebel Akhdar and desert landscapes",
+  "medium": "Photography (Leica capture, software pattern-extraction and reconstruction)",
+  "process": "Photographs made in Oman with a Leica are reduced in software to their underlying patterns, then rebuilt into new, non-photographic abstractions.",
+  "edition": "of 3, 2 APs",
+  "cta": "Inquire",
+  "visualDescription": "pink, green, feminine, bread browns, earth tones, dissolved landform, form versus function",
+  "descriptionSections": {
+    "scientific": "2024; Oman (Leica source photographs); software pattern-extraction then reconstruction; made at the dawn of generative AI; interrogates form vs function in photography",
+    "visual": "saturated, pointillist, granular, graphic, abstract, pink, green, violet, dissolved",
+    "geographic": "Oman; Jebel Akhdar; desert and mountain terrain",
+    "atmospheric": "vivid, synthetic, dreamlike, heightened, uncanny",
+    "spatial": "dissolved landforms, dune and mountain silhouettes, panoramic abstraction, color-field pattern"
+  },
+  "artworkAtoms": {
+    "material": "Archival pigment print on Hahnemühle bright white baryta",
+    "printer": "Laumont Photographic, New York",
+    "dimensions": "Variable / large-format by selected Omani Landscapes artwork (working files at 200 ppi)"
+  },
+  "_imageDimensions": [],
+  "_sources": [
+    "Lisa Wood (artist explanation: form vs function; Leica capture reduced to pattern then rebuilt; circa 2024; generative-AI question)",
+    "D:/LWS/ALL ARTWORKS/Omani Landscapes (working files, PNGs, INSTA set incl. 'FORM OR FUNCTION' titles)",
+    "https://observatory.lisawoodstudio.com (Omani Landscapes)"
+  ],
+  "_confidence": "assembled-from-fragments"
+}

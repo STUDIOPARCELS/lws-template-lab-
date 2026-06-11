@@ -1,0 +1,78 @@
+{
+  "id": "luxuriate-installation",
+  "title": "December, Sun Valley",
+  "type": "installation",
+  "parent": "Luxuriate in Discomfort",
+  "narrative": "Luxuriating In Discomfort is a group of works born out of a 2.5 year inquiry into the nature of sadness and pain. Comprised of poetry, a book, a large painting, and a video clip, the work is autobiographical in nature, and serves as the culmination of a period of grief and transformation that began on July 1, 2018, the day I resolved to approach my own self-care with sincerity.\n\nFrom use of the bedroom as installation space to employing a lullaby palette, Luxuriating In Discomfort dwells in double entendres, touching on both the multi-dimensionality and the potentiality of our experience. Water emerges as a primary theme, as both subject matter in the poems and as visual metaphor in the painting, memorializing the elemental medium that opened the pathway towards transformation.\n\nA one-night-only exhibition staged inside the artist's bedroom in Sun Valley, Idaho in December 2020 at the height of the pandemic, opened to a small masked, distanced audience. Works on view: a mixed media painting, poetry (HEAT and COLD), the book Luxuriate in Discomfort, and a video clip (Hedge Crawl, from Andy Goldsworthy's Leaning into the Wind).",
+  "year": "2020",
+  "location": "Artist's bedroom, Sun Valley, Idaho",
+  "medium": "One-night multimedia installation (mixed media painting, poetry, book, video)",
+  "process": "",
+  "edition": "",
+  "cta": "Inquire",
+  "descriptionSections": {
+    "scientific": "December 2020; Sun Valley, Idaho; one-night-only bedroom installation; works: mixed media painting (begun as a year painting January 1, 2019), HEAT & COLD poems, book, video",
+    "visual": "blue, lullaby-palette, watery, layered, textured, intimate",
+    "geographic": "Sun Valley, Idaho; Wood River Valley",
+    "atmospheric": "intimate, grief-touched, tender, pandemic-distanced",
+    "spatial": "bedroom as gallery, painting above the bed, poems, book, projected video"
+  },
+  "artworkAtoms": {
+    "material": "Mixed media painting; poetry; artist book; video",
+    "printer": "",
+    "dimensions": "HEAT poem: 101in W X 131in H; COLD poem: 91.5in W X 87.5in H"
+  },
+  "_imageDimensions": [
+    {
+      "file": "COLD POEM.jpg",
+      "px": "3529x4153",
+      "aspect": "0.85:1"
+    },
+    {
+      "file": "HEAT POEM copy 2.jpg",
+      "px": "6208x5686",
+      "aspect": "1.09:1"
+    },
+    {
+      "file": "BOOKS AND MIRROR.jpg",
+      "px": "1295x1920",
+      "aspect": "0.67:1"
+    },
+    {
+      "file": "L1009804.jpg",
+      "px": "1274x1920",
+      "aspect": "0.66:1"
+    },
+    {
+      "file": "L1009809.jpg",
+      "px": "1920x1274",
+      "aspect": "1.51:1"
+    },
+    {
+      "file": "L1009902 copy.webp",
+      "px": "4984x7511",
+      "aspect": "0.66:1"
+    },
+    {
+      "file": "L1009908.jpg",
+      "px": "1920x1274",
+      "aspect": "1.51:1"
+    },
+    {
+      "file": "L1009938 book in mirrorRE copy.jpg",
+      "px": "3000x2360",
+      "aspect": "1.27:1"
+    },
+    {
+      "file": "L1009942 LID blur mirror.jpg",
+      "px": "4884x7414",
+      "aspect": "0.66:1"
+    }
+  ],
+  "_sources": [
+    "https://observatory.lisawoodstudio.com/#luxuriate-in-discomfort",
+    "LUXURIATE IN DISCOMFORT/Luxuriating in Discomfort One Night Installation/Installation Statement - Luxuriating In Discomfort (2).pdf",
+    "LUXURIATE IN DISCOMFORT/Luxuriating in Discomfort One Night Installation/Luxuriate in Discomfort.docx"
+  ],
+  "_confidence": "assembled-from-fragments"
+}

@@ -1,0 +1,51 @@
+{
+  "id": "side-effects",
+  "title": "SIDE EFFECTS",
+  "type": "installation",
+  "parent": "Installation",
+  "narrative": "SIDE EFFECTS introduces a prescribing cascade in which one drug is introduced to treat the side effect of another drug, connecting 4 prescription drugs.\nThe drugs profiled within the cascade are imaginary; their listed side effects are not. Each side effect is approved for one or more prescription drugs in the US by the United States Food and Drug Administration.\nSIDE EFFECTS looks at the FDA and Big Pharma’s role in perpetuating prescribing cascades in a society molded by increased expectations and diminished timelines.\nRather than invest in making current drugs safer let us regard side effects as symptoms and sell and consume new drugs to treat them.\nSIDE EFFECTS is not a negation of the pharmaceutical industry; it's a push for increased responsibility.",
+  "year": "2022",
+  "location": "",
+  "medium": "Two Text Murals",
+  "process": "",
+  "edition": "",
+  "cta": "Inquire",
+  "descriptionSections": {
+    "scientific": "",
+    "visual": "",
+    "geographic": "",
+    "atmospheric": "",
+    "spatial": ""
+  },
+  "artworkAtoms": {
+    "material": "",
+    "printer": "",
+    "dimensions": "Two Wall Murals - 49ft W X 15ft H"
+  },
+  "_imageDimensions": [
+    {
+      "file": "1.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "2.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "3.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "4.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    }
+  ],
+  "_sources": [
+    "SIDE EFFECTS/Content/SIDE EFFECTS.docx"
+  ],
+  "_confidence": "verbatim"
+}

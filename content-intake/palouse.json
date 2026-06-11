@@ -1,0 +1,350 @@
+{
+  "id": "palouse",
+  "title": "Palouse",
+  "type": "photography",
+  "parent": "Photography",
+  "narrative": "Palouse is a photographic study of the farmed landscape of the Palouse region of the inland Pacific Northwest, where wind-deposited loess has built a terrain of deep, rolling hills given almost entirely to dryland agriculture. The work reads the cultivated surface as a record of both elemental force and human labor — contour-plowed slopes, seasonal color, and the long geometry of wheat, barley, and legume fields shaped to the undulation of the land.",
+  "year": "2013",
+  "location": "Palouse region, southeastern Washington and northern Idaho, USA",
+  "medium": "Photography",
+  "process": "Photographic survey of the cultivated Palouse landscape, made with a Nikon D800.",
+  "edition": "of 3, 2 APs",
+  "cta": "Inquire",
+  "visualDescription": "loess hills, wind-blown silt, rolling, corduroy furrows, green, brown, spare",
+  "descriptionSections": {
+    "scientific": "shot circa 2013 (artist recollection); Nikon D800; Palouse region; rolling loess hills up to ~500 ft over Columbia River Basalt; wind-deposited Pleistocene glacial silt; one of the most productive non-irrigated (dryland) farming regions in the world; largest U.S. lentil-growing region",
+    "visual": "rolling, contoured, striped, cultivated, seasonal, green-to-gold, sculpted, undulating, patterned",
+    "geographic": "Palouse region; southeastern Washington; northern Idaho; south of Spokane to the Snake River; Whitman County; Latah County",
+    "atmospheric": "open, pastoral, expansive, weathered, quiet, seasonal, sunlit",
+    "spatial": "rolling loess hills, contour-plowed slopes, field geometry, layered ridgelines, broad agricultural distance"
+  },
+  "artworkAtoms": {
+    "material": "Archival pigment print on Hahnemühle bright white baryta",
+    "printer": "Laumont Photographic, New York",
+    "dimensions": "60 x 40 inches"
+  },
+  "_imageDimensions": [
+    {
+      "file": "No 12 60X40 inches.jpg",
+      "px": "504x336",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "No 28.jpg",
+      "px": "1500x1000",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "No 36.jpg",
+      "px": "1500x1000",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "No13 60X40 inches.jpg",
+      "px": "504x336",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "No14 60X40 inches.jpg",
+      "px": "504x336",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "Road 4.jpg",
+      "px": "3120x2080",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "WIP 008 PRINT.jpg",
+      "px": "1500x1000",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "WIP 044.jpg",
+      "px": "1500x1000",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC0015.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0022.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0023.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0083.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0084.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0093.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0097.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0134.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0273.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0331.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0357.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC0362.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC0409.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0447.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0454.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0458.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0775.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0899.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC0904.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0907.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0918.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0959.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC0962.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1049.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1050.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1051.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1059.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1098.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1133.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1139.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1140.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1198.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1204.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1208.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1225.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1234.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1245.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1421.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1434.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1435.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1436.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1437.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1467.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1469.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC1557.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1607.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1613.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC1683.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC5748.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC9608.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC9739.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC9762.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC9766.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    },
+    {
+      "file": "_DSC9794.jpg",
+      "px": "4800x3200",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "_DSC9846.jpg",
+      "px": "3200x4800",
+      "aspect": "2:3 (0.67)"
+    }
+  ],
+  "_sources": [
+    "Lisa Wood (artist recollection: subject = farmed Palouse landscape; shot circa 2013; Nikon D800)",
+    "Research: https://en.wikipedia.org/wiki/Palouse",
+    "Research: https://www.historylink.org/File/21016",
+    "Research: https://www.historylink.org/File/21303"
+  ],
+  "_confidence": "assembled-from-fragments"
+}

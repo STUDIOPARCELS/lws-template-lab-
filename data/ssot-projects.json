@@ -12,6 +12,7 @@
       "process": "Aerial and ground-based photographic survey with medium-format Leica S007",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "ice, sand, lava, gypsum, granite, elemental, ambiguous scale",
       "descriptionSections": {
         "scientific": "2015-2019; six landscapes; four continents; medium-format Leica S007; aerial and ground-based surveys; three first artist-led aerial survey distinctions",
         "visual": "elemental, abstract, evidentiary, mineral, glacial, volcanic, granular, wind-shaped, line-driven",
@@ -37,6 +38,7 @@
       "process": "Aerial photographic survey and field observation of ice, meltwater, crevasses, sediment, and glacial surface systems",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "glacial, ice, meltwater pools, turquoise, cobalt, fine dark lines",
       "descriptionSections": {
         "scientific": "2015 and 2017; Greenland Ice Sheet; largest ice sheet outside Antarctica; Ilulissat Icefjord context; first woman to complete a photographic aerial survey of the Greenland Ice Sheet in 2017",
         "visual": "white, cobalt, turquoise, granular, fractured, pooled, veined, crystalline, sediment-speckled",
@@ -62,6 +64,7 @@
       "process": "Aerial photographic survey of gypsum dunes, restricted airspace, white mineral sand, basin systems, and glare",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "gypsum, plaster, blinding white, dripping plaster, meringue, soft folds",
       "descriptionSections": {
         "scientific": "2018; world's largest gypsum dunefield; about 275 square miles; Tularosa Basin; restricted airspace; first artist-led photographic aerial survey of the gypsum dunefield",
         "visual": "white, cool-toned, luminous, powdery, rippled, glaring, pale, wind-drawn",
@@ -87,6 +90,7 @@
       "process": "Ground-based desert field survey of wind-shaped sand, settlement routes, color, and surface movement",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "Wahiba Sands, golden, quartz, wind ripples, scribed circles, dry",
       "descriptionSections": {
         "scientific": "2017; Sharqiya / Wahiba Sands; about 180 km north-south by 80 km east-west; about 12,500 sq km; wind and monsoon-shaped sand sea",
         "visual": "golden, rust-red, orange, rippled, granular, wind-combed, open, dry",
@@ -112,6 +116,7 @@
       "process": "Aerial and ground-based survey of basaltic lava field, cinder cones, spatter cones, fissures, sagebrush plains, and dark-sky terrain",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "basalt, black, rust-red, gold lichen, lime, iron stain, pitted, cracked",
       "descriptionSections": {
         "scientific": "2018; Craters of the Moon National Monument; basaltic lava field; aerial and ground-based study; first known artist-led photographic aerial survey of the monument",
         "visual": "black, basaltic, fractured, matte, ridged, cooled, fissured, cratered, shadowed",
@@ -137,6 +142,7 @@
       "process": "Aerial photographic survey of long parallel dunes, red sand systems, desert scale, and dune-line repetition",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "red centre, iron-red, oxblood, trailing vines, vast",
       "descriptionSections": {
         "scientific": "2019; Simpson Desert / Munga-Thirri; about 176,500 sq km; parallel dunes; first known artist-led photographic aerial survey of the parallel dune field",
         "visual": "red, linear, repetitive, wind-carved, immense, striated, dry, rhythmic",
@@ -162,6 +168,7 @@
       "process": "Ground-based granite field survey of spires, fins, domes, monoliths, sagebrush, and weathered stone surfaces",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "granite, speckled grey, rust-orange, acid-yellow lichen, lime, pockmarked, cracked",
       "descriptionSections": {
         "scientific": "2017; City of Rocks National Reserve; protected 1988; Almo Pluton granite about 28 million years old; Green Creek Complex rocks over 2.5 billion years old",
         "visual": "granite, vertical, weathered, pale, sculptural, fissured, sagebrush-framed",
@@ -180,24 +187,303 @@
       "title": "Omani Landscapes",
       "type": "Project Page",
       "parent": "Photography",
-      "narrative": "Omani Landscapes extends the studio's photographic surface practice into the arid mountain and desert terrain of Oman. The project uses color intervention and digital layering to heighten landform, heat, culture, and visual memory rather than simply document place.",
-      "year": "2017 (source trip) / archive sequence",
-      "location": "Jebel Akhdar and desert landscapes, Oman",
-      "medium": "Photography / media",
-      "process": "Digital layering and color intervention over Omani landscape photographs",
+      "narrative": "Omani Landscapes began at the dawn of generative AI, asking a single question: what is a photograph when an image can be spun up from a prompt? Each work starts as a photograph Lisa made in Oman with a Leica, then strips that image down through software until only its underlying patterns remain — and rebuilds those patterns into something new that no longer looks anything like a photograph. The result is a body of work that is genuinely photographic in origin yet reads as pure abstraction. Where generative AI can now produce images that look like photographs but are not, these are photographs that do not look like photographs — posing the question at the center of the project: is a photograph defined by form (what it looks like) or by function (how it was made)?",
+      "year": "2024",
+      "location": "Oman; Jebel Akhdar and desert landscapes",
+      "medium": "Photography (Leica capture, software pattern-extraction and reconstruction)",
+      "process": "Photographs made in Oman with a Leica are reduced in software to their underlying patterns, then rebuilt into new, non-photographic abstractions.",
       "edition": "of 3, 2 APs",
       "cta": "Inquire",
+      "visualDescription": "pink, green, feminine, bread browns, earth tones, dissolved landform, form versus function",
       "descriptionSections": {
-        "scientific": "Oman archive sequence; Jebel Akhdar and desert landscape source folders; digital layering; color intervention over photographic landscape",
-        "visual": "pink, green, warm, saturated, arid, layered, graphic, mountain-shaped, dune-soft",
-        "geographic": "Jebel Akhdar; Oman; mountain and desert terrain",
-        "atmospheric": "warm, dry, vivid, spare, sunlit, heightened",
-        "spatial": "layered color fields, mountain faces, dune planes, constructed photographic surface"
+        "scientific": "2024; Oman (Leica source photographs); software pattern-extraction then reconstruction; made at the dawn of generative AI; interrogates form vs function in photography",
+        "visual": "saturated, pointillist, granular, graphic, abstract, pink, green, violet, dissolved",
+        "geographic": "Oman; Jebel Akhdar; desert and mountain terrain",
+        "atmospheric": "vivid, synthetic, dreamlike, heightened, uncanny",
+        "spatial": "dissolved landforms, dune and mountain silhouettes, panoramic abstraction, color-field pattern"
       },
       "artworkAtoms": {
-        "material": "Archival pigment print on Canson Baryta Photographique II",
+        "material": "Archival pigment print on Hahnemühle bright white baryta",
         "printer": "Laumont Photographic, New York",
-        "dimensions": "Variable by selected Omani Landscapes artwork"
+        "dimensions": "Variable / large-format by selected Omani Landscapes artwork (working files at 200 ppi)"
+      }
+    },
+    {
+      "id": "winterblue",
+      "title": "Winterblue",
+      "type": "Project Page",
+      "parent": "Photography",
+      "narrative": "Winterblue was born from a winter search for Lisa's missing family dog. For 11 days she and her community searched. Sleeping in her car, searching in whiteouts, she met the full force of winter in the form of fear, isolation, temperature, and overwhelming discomfort. The dog was found unharmed.\n\nWinterblue I is presented as a large-scale contact sheet — a grid of 125 individual photographs, one set of frames for each day spent on the Camas Prairie. The project carries regional character of embracing discomfort into winter atmosphere and emotional terrain.\n\nThe work demonstrates the practice — entering difficulty deliberately, staying long enough for perception to shift, and returning with images shaped by that exposure.",
+      "year": "2023",
+      "location": "Camas Prairie, Idaho, USA",
+      "medium": "Large-scale contact sheet, 125 photographs",
+      "process": "17 trips between January and April to the Camas Prairie under sub-zero conditions turned darkness, cold, isolation, and grief into a field of attention.",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "visualDescription": "midnight blue, indigo, ice blue, monochromatic, snow, wind-carved drifts, moonlight, sub-zero",
+      "descriptionSections": {
+        "scientific": "2023; Camas Prairie, Idaho; 17 trips January-April under sub-zero conditions; large-scale contact sheet of 125 photographs",
+        "visual": "blue, white, wintered, snow-bound, gridded, serial, sparse, cold-toned",
+        "geographic": "Camas Prairie; Idaho; high prairie; Wood River Valley character",
+        "atmospheric": "cold, isolated, severe, quiet, grief-marked, whiteout, sub-zero, enduring",
+        "spatial": "contact-sheet grid, 125 daily frames, large-scale wall field, 138 x 85 inch panel"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Hahnemühle bright white baryta; mounted on painted maple wood",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "138\" x 85\" (contact sheet panel)"
+      }
+    },
+    {
+      "id": "flipped",
+      "title": "Flipped",
+      "type": "Project Page",
+      "parent": "Photography",
+      "narrative": "A minimalist photographic work that renders a flipped iceberg as the visible inversion of class power: blue rises, white sinks.\n\nAI, robotics, and accelerated automation are redrawing social order. Blue-collar work gains status and leverage while routine white-collar roles compress. The iceberg becomes a clean grammar for that shift. Traditional ice shows white above and deep blue below. A flipped iceberg reverses those planes. The surface turns blue. White drops under the line.\n\nFLIPPED reads the present and projects the near future: AI and automation shift power from routine white-collar administration to blue work—build, repair, operate. LISA WOOD STUDIO grounds the argument in two sources: medium-format photographs from two Greenland expeditions and AI images authored through precise prompts. The pair creates a single visual grammar: a flipped iceberg where deep blue rises above the line and white drops below it. Ice and light carry the claim without rhetoric. The sequence lands the inversion in one clean beat and holds on the new order.",
+      "year": "2023-2026",
+      "location": "Greenland (source photographs)",
+      "medium": "Large format photographs (Leica Medium Format + AI Generated)",
+      "process": "I author prompts, lock seeds, and curate outputs as I would exposures. I treat AI as a controlled imaging instrument, not a theme. Medium-format RAW files from Greenland; high-resolution AI images generated from the artist’s prompts; unified tone curve, horizon, and color discipline to form one body.",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "visualDescription": "cinematic, monumental, icebergs, luminous blue-white, looming peaks, black mirror water, backlit, moody, otherworldly, inverted",
+      "descriptionSections": {
+        "scientific": "",
+        "visual": "",
+        "geographic": "",
+        "atmospheric": "",
+        "spatial": ""
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Hahnemühle bright white baryta",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": ""
+      }
+    },
+    {
+      "id": "palouse",
+      "title": "Palouse",
+      "type": "Project Page",
+      "parent": "Photography",
+      "narrative": "Palouse is a photographic study of the farmed landscape of the Palouse region of the inland Pacific Northwest, where wind-deposited loess has built a terrain of deep, rolling hills given almost entirely to dryland agriculture. The work reads the cultivated surface as a record of both elemental force and human labor — contour-plowed slopes, seasonal color, and the long geometry of wheat, barley, and legume fields shaped to the undulation of the land.",
+      "year": "2013",
+      "location": "Palouse region, southeastern Washington and northern Idaho, USA",
+      "medium": "Photography",
+      "process": "Photographic survey of the cultivated Palouse landscape, made with a Nikon D800.",
+      "edition": "of 3, 2 APs",
+      "cta": "Inquire",
+      "visualDescription": "loess hills, wind-blown silt, rolling, corduroy furrows, green, brown, spare",
+      "descriptionSections": {
+        "scientific": "shot circa 2013 (artist recollection); Nikon D800; Palouse region; rolling loess hills up to ~500 ft over Columbia River Basalt; wind-deposited Pleistocene glacial silt; one of the most productive non-irrigated (dryland) farming regions in the world; largest U.S. lentil-growing region",
+        "visual": "rolling, contoured, striped, cultivated, seasonal, green-to-gold, sculpted, undulating, patterned",
+        "geographic": "Palouse region; southeastern Washington; northern Idaho; south of Spokane to the Snake River; Whitman County; Latah County",
+        "atmospheric": "open, pastoral, expansive, weathered, quiet, seasonal, sunlit",
+        "spatial": "rolling loess hills, contour-plowed slopes, field geometry, layered ridgelines, broad agricultural distance"
+      },
+      "artworkAtoms": {
+        "material": "Archival pigment print on Hahnemühle bright white baryta",
+        "printer": "Laumont Photographic, New York",
+        "dimensions": "60 x 40 inches"
+      }
+    },
+    {
+      "id": "side-effects",
+      "title": "Side Effects",
+      "type": "Project Page",
+      "parent": "Installation",
+      "narrative": "SIDE EFFECTS introduces a prescribing cascade in which one drug is introduced to treat the side effect of another drug, connecting 4 prescription drugs.\nThe drugs profiled within the cascade are imaginary; their listed side effects are not. Each side effect is approved for one or more prescription drugs in the US by the United States Food and Drug Administration.\nSIDE EFFECTS looks at the FDA and Big Pharma’s role in perpetuating prescribing cascades in a society molded by increased expectations and diminished timelines.\nRather than invest in making current drugs safer let us regard side effects as symptoms and sell and consume new drugs to treat them.\nSIDE EFFECTS is not a negation of the pharmaceutical industry; it's a push for increased responsibility.",
+      "year": "2022",
+      "location": "",
+      "medium": "Two Text Murals",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "",
+        "visual": "",
+        "geographic": "",
+        "atmospheric": "",
+        "spatial": ""
+      },
+      "artworkAtoms": {
+        "material": "",
+        "printer": "",
+        "dimensions": "Two Wall Murals - 49ft W X 15ft H"
+      }
+    },
+    {
+      "id": "attention",
+      "title": "Attention",
+      "type": "Project Page",
+      "parent": "Installation",
+      "narrative": "We have limitless insight into the daily interests and activities of friends, acquaintances, and strangers alike thanks to the vast reach of social media. Our thoughts, interests, and attention form the coveted treasure at the end of the advertisers' rainbow.\nYet, when viewed in  the context of global events shaping the 21st century, how well do we understand the thoughts of others? ATTENTION chronicles the most popular search queries annually, starting from 2001, the first year of available data, through 2021.\nIn hindsight of significant national and global events, ATTENTION represents 20 years of allegorical insight into what's been on our minds.\nThe five-minute recording illuminates each of the twenty year's most popular keywords globally as well as the most common \"how-to\" and \"what-is\" queries within the United States.\nThe compilation reflects Google's advancement in data analytics over 2 decades: in 2001, Google released top keyword search data worldwide. Beginning in 2006, the company created Google Trends, introducing numerous sub-search categories such as top people search, news & entertainment stories, top searches by region & country, and others.",
+      "year": "2022",
+      "location": "",
+      "medium": "Gramophone + Mp3 Audio - 5:09 min",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "",
+        "visual": "",
+        "geographic": "",
+        "atmospheric": "",
+        "spatial": ""
+      },
+      "artworkAtoms": {
+        "material": "Acrylic, aluminum, stainless steel",
+        "printer": "",
+        "dimensions": "Gramophone: 6.25 sq ft X 6.85 ft H; Wall Text Decal: 30ft W X 22ft H; Mp3 Audio: 5:09 min"
+      }
+    },
+    {
+      "id": "ecs",
+      "title": "ECS",
+      "type": "Project Page",
+      "parent": "Installation",
+      "narrative": "In the clash between science and politics, an impossibly absurd anecdote reveals itself.\nServing as metaphor, ECS contemplates the history of the United States Controlled Substances Act as it relates to private vs. public interests, discrimination, and fear.\nThe endogenous cannabinoid system, named for the plant that led to its discovery, is one of the most important physiologic systems responsible for establishing and maintaining human health.",
+      "year": "2022",
+      "location": "",
+      "medium": "LED Screen, Animated Text",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "",
+        "visual": "",
+        "geographic": "",
+        "atmospheric": "",
+        "spatial": ""
+      },
+      "artworkAtoms": {
+        "material": "",
+        "printer": "",
+        "dimensions": "LED Screen: 13ft W X 4ft H X 3.5in D"
+      }
+    },
+    {
+      "id": "mind-the-gap",
+      "title": "Mind the Gap",
+      "type": "Project Page",
+      "parent": "Installation",
+      "narrative": "\"Between the conception\nAnd the creation\nBetween the emotion\nAnd the response\nFalls the Shadow\" - excerpt from The Hollow Men by T.S Eliot ,1925\n\nMIND | FIND THE GAP directs our attention toward the space that carries the energy of change - to the transient, inscrutable place between that which we know.\nto the realm that exists 'between the idea and the reality'\nto the place between life as we know it and life as we never imagined\nto the space between thought and action\nto the place that elevates or swallows\nwhere fortune & fortunes are lost and found\nto the place that 'Falls the Shadow'",
+      "year": "2022",
+      "location": "",
+      "medium": "Animated Neon",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "",
+        "visual": "",
+        "geographic": "",
+        "atmospheric": "",
+        "spatial": ""
+      },
+      "artworkAtoms": {
+        "material": "",
+        "printer": "",
+        "dimensions": "NEON: 15ft W X 26ft W X 4ft H"
+      }
+    },
+    {
+      "id": "luxuriate-in-discomfort",
+      "title": "Luxuriate in Discomfort",
+      "type": "Collection Page",
+      "parent": "Installation",
+      "narrative": "Luxuriate in discomfort is a central philosophy for Lisa Wood and a theme running through her practice — stepping into challenging conditions and staying there long enough for perception to change. It is a studio philosophy carried across three projects: a book, a one-night installation, and a public art project concept to improve teenage mental health.\n\nLuxuriate in Discomfort considers our relationship with discomfort, and how the relationship shapes our experience. Together, the works confront our pursuit of comfort and luxury via a double entendre: by living a life of luxury in day-to-day torment, and by seeking discomfort as a means toward contentment. Born out of a 2.5 year inquiry into the nature of pain, the work asks what is luxury's ultimate prize, is it freedom?",
+      "year": "2020–2024",
+      "location": "Sun Valley, Idaho",
+      "medium": "Studio philosophy across a book, a one-night installation, and a public art concept",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2020–2024; eight-year personal discomfort practice; three projects — book (2020), one-night installation (2020), LUX public art concept (2024); modalities: sauna, cold plunge, whole-body vibration",
+        "visual": "blue, lullaby-toned, mirrored, double-entendre, satirical, intimate",
+        "geographic": "Sun Valley, Idaho; Wood River Valley",
+        "atmospheric": "intimate, paradoxical, austere, tender, demanding",
+        "spatial": "bedroom installation, vending machines, neon, sculpture, book, poetry, painting, video"
+      },
+      "artworkAtoms": {
+        "material": "",
+        "printer": "",
+        "dimensions": ""
+      }
+    },
+    {
+      "id": "luxuriate-book",
+      "title": "Luxuriate in Discomfort: Book",
+      "type": "Project Page",
+      "parent": "Luxuriate in Discomfort",
+      "narrative": "Luxuriate In Discomfort is a 30-page digest that explores how regular engagement with discomfort can lead to long-term contentment, written by the artist in 2020 for her eldest son as he begins to navigate the world post college, graduating into a pandemic-induced lockdown. It is a compilation of thoughts and ideas that emerged during the artist's water sessions over the past 2.5 years.\n\nThe book is written one reflective line per page, building from \"cultivating a thirst for discomfort cultivates the way to personal fulfillment\" toward the closing line, \"ask a lot of yourself.\"",
+      "year": "2020",
+      "location": "Sun Valley, Idaho",
+      "medium": "Artist book, 30-page digest",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2020; 30-page digest; 7 inches square; one reflective line per page; written for the artist's eldest son",
+        "visual": "blue, spare, single-line-per-page, meditative",
+        "geographic": "Sun Valley, Idaho",
+        "atmospheric": "reflective, resolute, tender",
+        "spatial": "30-page sequence, 7-inch-square format"
+      },
+      "artworkAtoms": {
+        "material": "",
+        "printer": "",
+        "dimensions": "30 pages; 7 inches square"
+      }
+    },
+    {
+      "id": "luxuriate-installation",
+      "title": "Luxuriate in Discomfort: December, Sun Valley",
+      "type": "Project Page",
+      "parent": "Luxuriate in Discomfort",
+      "narrative": "Luxuriating In Discomfort is a group of works born out of a 2.5 year inquiry into the nature of sadness and pain. Comprised of poetry, a book, a large painting, and a video clip, the work is autobiographical in nature, and serves as the culmination of a period of grief and transformation that began on July 1, 2018, the day I resolved to approach my own self-care with sincerity.\n\nFrom use of the bedroom as installation space to employing a lullaby palette, Luxuriating In Discomfort dwells in double entendres, touching on both the multi-dimensionality and the potentiality of our experience. Water emerges as a primary theme, as both subject matter in the poems and as visual metaphor in the painting, memorializing the elemental medium that opened the pathway towards transformation.\n\nA one-night-only exhibition staged inside the artist's bedroom in Sun Valley, Idaho in December 2020 at the height of the pandemic, opened to a small masked, distanced audience. Works on view: a mixed media painting, poetry (HEAT and COLD), the book Luxuriate in Discomfort, and a video clip (Hedge Crawl, from Andy Goldsworthy's Leaning into the Wind).",
+      "year": "2020",
+      "location": "Artist's bedroom, Sun Valley, Idaho",
+      "medium": "One-night multimedia installation (mixed media painting, poetry, book, video)",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "December 2020; Sun Valley, Idaho; one-night-only bedroom installation; works: mixed media painting (begun as a year painting January 1, 2019), HEAT & COLD poems, book, video",
+        "visual": "blue, lullaby-palette, watery, layered, textured, intimate",
+        "geographic": "Sun Valley, Idaho; Wood River Valley",
+        "atmospheric": "intimate, grief-touched, tender, pandemic-distanced",
+        "spatial": "bedroom as gallery, painting above the bed, poems, book, projected video"
+      },
+      "artworkAtoms": {
+        "material": "Mixed media painting; poetry; artist book; video",
+        "printer": "",
+        "dimensions": "HEAT poem: 101in W X 131in H; COLD poem: 91.5in W X 87.5in H"
+      }
+    },
+    {
+      "id": "lux-public-art",
+      "title": "Luxuriate in Discomfort: LUX",
+      "type": "Project Page",
+      "parent": "Luxuriate in Discomfort",
+      "narrative": "LUX is a public art installation concept that addresses the teenage mental health crisis through an intentional discomfort practice: cold plunge, sauna, and whole-body vibration. Built on the artist's own eight-year practice, LUX offers young adults a constructive, approachable framework for building a working relationship with adversity — pairing physical rejuvenation with the psychological reward that follows.\n\nLUX is a metaphorical satire of the LAX sign found at the entrance to Los Angeles International Airport, and references Southern California's historical and current place as a global trendsetter in what it means to live an extraordinarily comfortable life. HEAT and COLD symbolize oppression and rejection personified by excessively hot and cold environments and present an alternate path toward achieving comfort and freedom. Two vending machines dispense the book Luxuriate in Discomfort.\n\nThe project is structured around three movements — Paradox, Practice, and Gesture — and grew from the artist's personal connection to the young adult mental health crisis.",
+      "year": "2024",
+      "location": "",
+      "medium": "Public art installation concept",
+      "process": "",
+      "edition": "",
+      "cta": "Inquire",
+      "descriptionSections": {
+        "scientific": "2024; public art concept; teenage mental health; three modalities — sauna, cold plunge, whole-body vibration; structured as Paradox / Practice / Gesture",
+        "visual": "blue, teardrop-diamond, mirrored-interior, luminous, commercial-satirical",
+        "geographic": "concept references LAX / Southern California; Sun Valley origin",
+        "atmospheric": "paradoxical, transformative, clinical-meets-luxurious",
+        "spatial": "stainless sculpture, vending machines, neon, book distribution, AR portal"
+      },
+      "artworkAtoms": {
+        "material": "Stainless Steel",
+        "printer": "",
+        "dimensions": "LUX Sculpture: 26.5ft L X 21ft W X 13ft H; Two Vending Machines: 4.5ft W X 6.5ft H X 3.5ft D; Luxuriate in Discomfort Neon: 111in W X 6.5in H"
       }
     }
   ]

@@ -1,0 +1,46 @@
+{
+  "id": "attention",
+  "title": "ATTENTION",
+  "type": "installation",
+  "parent": "Installation",
+  "narrative": "We have limitless insight into the daily interests and activities of friends, acquaintances, and strangers alike thanks to the vast reach of social media. Our thoughts, interests, and attention form the coveted treasure at the end of the advertisers' rainbow.\nYet, when viewed in  the context of global events shaping the 21st century, how well do we understand the thoughts of others? ATTENTION chronicles the most popular search queries annually, starting from 200, the first year of available data, through 2021.\nIn hindsight of significant national and global events, ATTENTION represents 20 years of allegorical insight into what's been on our minds.\nThe five-minute recording illuminates each of the twenty year's most popular keywords globally as well as the most common \"how-to\" and \"what-is\" queries within the United States.\nThe compilation reflects Google's advancement in data analytics over 2 decades: in 2001, Google released top keyword search data worldwide. Beginning in 2006, the company created Google Trends, introducing numerous sub-search categories such as top people search, news & entertainment stories, top searches by region & country, and others.",
+  "year": "2022",
+  "location": "",
+  "medium": "Gramophone + Mp3 Audio - 5:09 min",
+  "process": "",
+  "edition": "",
+  "cta": "Inquire",
+  "descriptionSections": {
+    "scientific": "",
+    "visual": "",
+    "geographic": "",
+    "atmospheric": "",
+    "spatial": ""
+  },
+  "artworkAtoms": {
+    "material": "Acrylic, aluminum, stainless steel",
+    "printer": "",
+    "dimensions": "Gramophone: 6.25 sq ft X 6.85 ft H; Wall Text Decal: 30ft W X 22ft H; Mp3 Audio: 5:09 min"
+  },
+  "_imageDimensions": [
+    {
+      "file": "ATT BACK  copy.jpg",
+      "px": "3072x1728",
+      "aspect": "16:9 (1.78)"
+    },
+    {
+      "file": "ATTENTION copy.webp",
+      "px": "4984x4984",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "ATTN 24 c3.jpg",
+      "px": "3840x2160",
+      "aspect": "16:9 (1.78)"
+    }
+  ],
+  "_sources": [
+    "ATTENTION/Content/ATTENTION.docx"
+  ],
+  "_confidence": "verbatim"
+}

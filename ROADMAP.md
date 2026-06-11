@@ -61,7 +61,7 @@ and sequences sections for editorial impact. This is the core differentiator.
 - **Title display:** store clean title case in SSOT; render ALL-CAPS via one CSS rule (matches the live site, e.g. "SURFACE SURVEYS").
 - **Image/folder architecture:** delegated to Claude → locked in `data/image-manifest.json` (manifest is the single source of truth; non-destructive; one folder per project/child).
 - **Installation years — ✅ CONFIRMED 2022** (Lisa, 06-11): Side Effects, Attention, Mind the Gap, 21st Century B&W, ECS all = **2022** ("2002" was a voice slip). Note: ECS's source doc read 2021 but Lisa grouped it at 2022 → using 2022; flag if ECS should be 2021. Luxuriate stays 2018–2020.
-- **Still open (non-blocking, proceeding on these defaults unless corrected):** Attention narrative "from 200" → "2001" (the data-start year in the text, separate from artwork year); Mind the Gap display title ("Mind the Gap" vs source "MIND | FIND THE GAP") + dimension typo (`26ft W`); Palouse 60×40&quot; print dims.
+- **Post-merge voice-review queue** (pages render now; refine on the preview — Lisa's voice, not final): Omani narrative was **rewritten** to the 2024 form-vs-function / generative-AI angle (year 2017→2024) — confirm voice; Palouse facts studio-assembled; all studio-**distilled** `descriptionSections` — confirm voice; Winterblue **2023** (well-sourced from the site) vs your earlier "2023–2025"; Mind the Gap title form ("Mind the Gap" vs "MIND | FIND THE GAP") + `26ft W` dimension typo. Attention "from 200"→"2001" ✓ fixed in merge.
 
 - **Viceroy: removed — not part of this site.**
 - **Writing / Conceptual / Apps:** nav links exist but disciplines are untouched for now.
