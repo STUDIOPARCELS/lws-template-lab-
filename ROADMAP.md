@@ -29,9 +29,10 @@ Same building blocks, different composition — the agent reads each project's c
 and sequences sections for editorial impact. This is the core differentiator.
 
 ### Ground truth from planning
-- **SSOT is complete** for all 8 current projects (narrative, year, location, all 5
-  description sections, all 3 artwork atoms). Generated pages will be rich; skip-if-empty
-  is a safety net, not a common case.
+- **SSOT covers 8 entries** (Surface Surveys + its 6 chapters, Omani Landscapes) with full
+  content. **8 roster projects have NO SSOT entry yet**: Winterblue, Flipped, Palouse
+  (Photographs) + Side Effects, Attention, ECS, Mind the Gap, Luxuriate in Discomfort
+  (Installation). Content must come from Lisa — Claude never invents narratives.
 - **Claude now has direct Supabase access** (MCP) — bucket/folder structure is verified
   ground truth, not assumption. Pages still fetch images **in-browser** at runtime from
   the public bucket; visual confirmation stays with Lisa on the sandbox preview.
@@ -110,9 +111,10 @@ Establish a **shared spatial system** and apply it across the whole template lib
 - Canonical **page margins**, **column grid**, and **vertical rhythm** (so any section
   order still aligns edge-to-edge — the foundation that makes agent-reordering look
   intentional, not random).
-- Fix inconsistencies (e.g. grid uses 23% outer margin vs 8% elsewhere; crude
-  `substring()` text truncation; ad-hoc vertical positions).
-- Tighten typography spacing within the SSOT (Inter + Space Mono, no serif).
+- ✅ Word-boundary text truncation (no more mid-word cuts) — shipped to sandbox.
+- ✅ Canonical 8/92 page margin enforced; drifters snapped. **Deliberate choices
+  preserved**: grid-8's doubled padding (Lisa's request), full-bleed images at 0/100.
+- Next: vertical rhythm + typography spacing within the SSOT (Inter + Space Mono, no serif).
 - **Outcome:** a beautiful, internally-consistent template library — the design
   language the agent will later compose with.
 
