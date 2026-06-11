@@ -14,6 +14,24 @@ Supabase into project pages. Goal: get every project's page composed from her sa
 templates, reviewable on a sandbox preview, promoted to production on her approval —
 and make "add a project → page appears for approval" a repeatable loop.
 
+═══ SINGLE SOURCE OF TRUTH — CURRENT STATE (DO THIS FIRST) ═══
+Content is split across 3 stores that are NOT in sync. Reconciling them is priority #1.
+  A. lws_template_pages.text_slots (78 rows) = the text that actually RENDERS on saved
+     template pages. Current/correct for what exists (e.g. White Sands).
+  B. lws_project_content (18 rows, Supabase) = the engine's structured per-project content.
+     STALE — last updated 2026-06-09, BEFORE Lisa's 06-11 content work. Verified gaps/errors:
+     NO 'flipped' row at all; palouse years="2026 source folder / TBC" (should be 2013,
+     Nikon D800); ecs & 21st-century years=2021 (should be 2022); Luxuriate children
+     (book / one-night-installation / lux-public-art) are NOT separate rows; narratives are
+     short early drafts, not Lisa's richer verbatim text.
+  C. GitHub branch content/local-intake + data/ssot-projects.json on lws-template-lab-
+     sandbox/claude = Lisa's NEWEST, verbatim, Lisa-reviewed content (19 entries: rich
+     narratives, corrected years, Luxuriate 3-child structure, visualDescriptions, equipment).
+  FIRST JOB: choose the canonical SSOT (recommend lws_project_content, since the engine reads
+  it) and MIGRATE C into it — verbatim narratives, corrected years (palouse 2013; ecs +
+  21st-century 2022; installations 2022), add the missing 'flipped' row, add the 3 Luxuriate
+  children. Get Lisa's approval on the merged content on a preview before it goes live.
+
 ═══ VERIFIED SYSTEM MAP ═══
 • ENGINE (this repo): Next.js 16. Routes incl. /templates, /template-preview/[...],
   /projects/[slug], /disciplines/[slug], /work/[slug] (~75 pages),
