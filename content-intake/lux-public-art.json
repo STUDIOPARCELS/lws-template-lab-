@@ -1,0 +1,78 @@
+{
+  "id": "lux-public-art",
+  "title": "LUX",
+  "type": "installation",
+  "parent": "Luxuriate in Discomfort",
+  "narrative": "LUX is a public art installation concept that addresses the teenage mental health crisis through an intentional discomfort practice: cold plunge, sauna, and whole-body vibration. Built on the artist's own eight-year practice, LUX offers young adults a constructive, approachable framework for building a working relationship with adversity — pairing physical rejuvenation with the psychological reward that follows.\n\nLUX is a metaphorical satire of the LAX sign found at the entrance to Los Angeles International Airport, and references Southern California's historical and current place as a global trendsetter in what it means to live an extraordinarily comfortable life. HEAT and COLD symbolize oppression and rejection personified by excessively hot and cold environments and present an alternate path toward achieving comfort and freedom. Two vending machines dispense the book Luxuriate in Discomfort.\n\nThe project is structured around three movements — Paradox, Practice, and Gesture — and grew from the artist's personal connection to the young adult mental health crisis.",
+  "year": "2024",
+  "location": "",
+  "medium": "Public art installation concept",
+  "process": "",
+  "edition": "",
+  "cta": "Inquire",
+  "descriptionSections": {
+    "scientific": "2024; public art concept; teenage mental health; three modalities — sauna, cold plunge, whole-body vibration; structured as Paradox / Practice / Gesture",
+    "visual": "blue, teardrop-diamond, mirrored-interior, luminous, commercial-satirical",
+    "geographic": "concept references LAX / Southern California; Sun Valley origin",
+    "atmospheric": "paradoxical, transformative, clinical-meets-luxurious",
+    "spatial": "stainless sculpture, vending machines, neon, book distribution, AR portal"
+  },
+  "artworkAtoms": {
+    "material": "Stainless Steel",
+    "printer": "",
+    "dimensions": "LUX Sculpture: 26.5ft L X 21ft W X 13ft H; Two Vending Machines: 4.5ft W X 6.5ft H X 3.5ft D; Luxuriate in Discomfort Neon: 111in W X 6.5in H"
+  },
+  "_imageDimensions": [
+    {
+      "file": "COLD POEM.jpg",
+      "px": "3529x4153",
+      "aspect": "0.85:1"
+    },
+    {
+      "file": "ChatGPT Image May 17, 2026, 01_03_38 PM (2).png",
+      "px": "1145x1374",
+      "aspect": "5:6 (0.83)"
+    },
+    {
+      "file": "ChatGPT Image May 17, 2026, 01_13_34 PM.png",
+      "px": "1254x1254",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "ChatGPT Image May 17, 2026, 01_41_20 PM.png",
+      "px": "1254x1254",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "HEAT POEM copy 2.jpg",
+      "px": "6208x5686",
+      "aspect": "1.09:1"
+    },
+    {
+      "file": "PUB ART.webp",
+      "px": "1448x1086",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "PUB ART2.webp",
+      "px": "1145x1374",
+      "aspect": "5:6 (0.83)"
+    },
+    {
+      "file": "back 3.png",
+      "px": "1442x1442",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "jp.jpg",
+      "px": "4984x3323",
+      "aspect": "1.50:1"
+    }
+  ],
+  "_sources": [
+    "https://observatory.lisawoodstudio.com/#luxuriate-in-discomfort",
+    "LUXURIATE IN DISCOMFORT/LUX Public Art/Content/LUX Public Art overview.pdf",
+    "LUXURIATE IN DISCOMFORT/LUX Public Art/Content/LUX.docx"
+  ],
+  "_confidence": "assembled-from-fragments"
+}

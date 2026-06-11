@@ -9,7 +9,7 @@
   "medium": "Two Text Murals",
   "process": "",
   "edition": "",
-  "cta": "",
+  "cta": "Inquire",
   "descriptionSections": {
     "scientific": "",
     "visual": "",
@@ -22,6 +22,28 @@
     "printer": "",
     "dimensions": "Two Wall Murals - 49ft W X 15ft H"
   },
+  "_imageDimensions": [
+    {
+      "file": "1.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "2.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "3.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "4.jpg",
+      "px": "3840x3840",
+      "aspect": "1:1 (1.00)"
+    }
+  ],
   "_sources": [
     "SIDE EFFECTS/Content/SIDE EFFECTS.docx"
   ],

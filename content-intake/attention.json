@@ -9,7 +9,7 @@
   "medium": "Gramophone + Mp3 Audio - 5:09 min",
   "process": "",
   "edition": "",
-  "cta": "",
+  "cta": "Inquire",
   "descriptionSections": {
     "scientific": "",
     "visual": "",
@@ -22,6 +22,23 @@
     "printer": "",
     "dimensions": "Gramophone: 6.25 sq ft X 6.85 ft H; Wall Text Decal: 30ft W X 22ft H; Mp3 Audio: 5:09 min"
   },
+  "_imageDimensions": [
+    {
+      "file": "ATT BACK  copy.jpg",
+      "px": "3072x1728",
+      "aspect": "16:9 (1.78)"
+    },
+    {
+      "file": "ATTENTION copy.webp",
+      "px": "4984x4984",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "ATTN 24 c3.jpg",
+      "px": "3840x2160",
+      "aspect": "16:9 (1.78)"
+    }
+  ],
   "_sources": [
     "ATTENTION/Content/ATTENTION.docx"
   ],

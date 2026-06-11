@@ -9,7 +9,7 @@
   "medium": "Animated Neon",
   "process": "",
   "edition": "",
-  "cta": "",
+  "cta": "Inquire",
   "descriptionSections": {
     "scientific": "",
     "visual": "",
@@ -22,6 +22,28 @@
     "printer": "",
     "dimensions": "NEON: 15ft W X 26ft W X 4ft H"
   },
+  "_imageDimensions": [
+    {
+      "file": "MTG FRONT copy.jpg",
+      "px": "3840x2160",
+      "aspect": "16:9 (1.78)"
+    },
+    {
+      "file": "ani 1.jpg",
+      "px": "3840x2160",
+      "aspect": "16:9 (1.78)"
+    },
+    {
+      "file": "f copy.jpg",
+      "px": "3840x2160",
+      "aspect": "16:9 (1.78)"
+    },
+    {
+      "file": "mind.jpg",
+      "px": "3840x2160",
+      "aspect": "16:9 (1.78)"
+    }
+  ],
   "_sources": [
     "MIND THE GAP/Content/MIND THE GAP.docx"
   ],

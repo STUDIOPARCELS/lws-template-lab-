@@ -3,25 +3,159 @@
   "title": "Winterblue",
   "type": "photography",
   "parent": "Photography",
-  "narrative": "",
-  "year": "",
-  "location": "",
-  "medium": "",
-  "process": "",
+  "narrative": "Winterblue was born from a winter search for Lisa's missing family dog. For 11 days she and her community searched. Sleeping in her car, searching in whiteouts, she met the full force of winter in the form of fear, isolation, temperature, and overwhelming discomfort. The dog was found unharmed.\n\nWinterblue I is presented as a large-scale contact sheet — a grid of 125 individual photographs, one set of frames for each day spent on the Camas Prairie. The project carries regional character of embracing discomfort into winter atmosphere and emotional terrain.\n\nThe work demonstrates the practice — entering difficulty deliberately, staying long enough for perception to shift, and returning with images shaped by that exposure.",
+  "year": "2023",
+  "location": "Camas Prairie, Idaho, USA",
+  "medium": "Large-scale contact sheet, 125 photographs",
+  "process": "17 trips between January and April to the Camas Prairie under sub-zero conditions turned darkness, cold, isolation, and grief into a field of attention.",
   "edition": "",
-  "cta": "",
+  "cta": "Inquire",
   "descriptionSections": {
-    "scientific": "",
-    "visual": "",
-    "geographic": "",
-    "atmospheric": "",
-    "spatial": ""
+    "scientific": "2023; Camas Prairie, Idaho; 17 trips January-April under sub-zero conditions; large-scale contact sheet of 125 photographs",
+    "visual": "blue, white, wintered, snow-bound, gridded, serial, sparse, cold-toned",
+    "geographic": "Camas Prairie; Idaho; high prairie; Wood River Valley character",
+    "atmospheric": "cold, isolated, severe, quiet, grief-marked, whiteout, sub-zero, enduring",
+    "spatial": "contact-sheet grid, 125 daily frames, large-scale wall field, 138 x 85 inch panel"
   },
   "artworkAtoms": {
-    "material": "",
-    "printer": "",
-    "dimensions": ""
+    "material": "Archival pigment print on Kodak Glossy; mounted on painted maple wood",
+    "printer": "Laumont Photographic, New York",
+    "dimensions": "138\" x 85\" (contact sheet panel)"
   },
-  "_sources": [],
-  "_confidence": "thin"
+  "_imageDimensions": [
+    {
+      "file": "WB COLLAGE 2 copy.jpg",
+      "px": "3840x2160",
+      "aspect": "16:9 (1.78)"
+    },
+    {
+      "file": "WINTERBLUE I PRINT THUMB.jpg",
+      "px": "4014x2408",
+      "aspect": "1.67:1"
+    },
+    {
+      "file": "1.22.23 (10).JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "1_Proxy_2.jpg",
+      "px": "4882x6165",
+      "aspect": "0.79:1"
+    },
+    {
+      "file": "2.JPEG",
+      "px": "1536x2048",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "2_Proxy_3.jpg",
+      "px": "4882x6165",
+      "aspect": "0.79:1"
+    },
+    {
+      "file": "8.JPEG",
+      "px": "2048x1535",
+      "aspect": "1.33:1"
+    },
+    {
+      "file": "9.JPEG",
+      "px": "1536x2048",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "File_006.png",
+      "px": "2316x3088",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "IMG_0584 copy.jpg",
+      "px": "4984x3628",
+      "aspect": "1.37:1"
+    },
+    {
+      "file": "IMG_0822.JPEG",
+      "px": "4032x3024",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_4512.JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_4857.JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_4962 copy.jpg",
+      "px": "2316x3088",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "IMG_5766_Proxy_1 copy.jpg",
+      "px": "1080x1440",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "IMG_5767_Proxy.jpg",
+      "px": "4882x6165",
+      "aspect": "0.79:1"
+    },
+    {
+      "file": "IMG_5882.JPEG",
+      "px": "1536x2048",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "IMG_5951.JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_5952.JPEG",
+      "px": "1536x2048",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "IMG_5974.JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_6263_Proxy.png",
+      "px": "1080x1440",
+      "aspect": "3:4 (0.75)"
+    },
+    {
+      "file": "IMG_6363.JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_7405.JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_7456.JPEG",
+      "px": "2048x1536",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_8313.JPEG",
+      "px": "8064x6048",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "IMG_9070.JPEG",
+      "px": "8064x6048",
+      "aspect": "4:3 (1.33)"
+    }
+  ],
+  "_sources": [
+    "https://observatory.lisawoodstudio.com/#winterblue"
+  ],
+  "_confidence": "assembled-from-fragments"
 }

@@ -4,12 +4,12 @@
   "type": "photography",
   "parent": "Photography",
   "narrative": "A minimalist photographic work that renders a flipped iceberg as the visible inversion of class power: blue rises, white sinks.\n\nAI, robotics, and accelerated automation are redrawing social order. Blue-collar work gains status and leverage while routine white-collar roles compress. The iceberg becomes a clean grammar for that shift. Traditional ice shows white above and deep blue below. A flipped iceberg reverses those planes. The surface turns blue. White drops under the line.\n\nFLIPPED reads the present and projects the near future: AI and automation shift power from routine white-collar administration to blue work—build, repair, operate. LISA WOOD STUDIO grounds the argument in two sources: medium-format photographs from two Greenland expeditions and AI images authored through precise prompts. The pair creates a single visual grammar: a flipped iceberg where deep blue rises above the line and white drops below it. Ice and light carry the claim without rhetoric. The sequence lands the inversion in one clean beat and holds on the new order.",
-  "year": "",
+  "year": "2023-2026",
   "location": "Greenland (source photographs)",
   "medium": "Large format photographs (Leica Medium Format + AI Generated)",
   "process": "I author prompts, lock seeds, and curate outputs as I would exposures. I treat AI as a controlled imaging instrument, not a theme. Medium-format RAW files from Greenland; high-resolution AI images generated from the artist’s prompts; unified tone curve, horizon, and color discipline to form one body.",
   "edition": "",
-  "cta": "",
+  "cta": "Inquire",
   "descriptionSections": {
     "scientific": "",
     "visual": "",
@@ -22,6 +22,118 @@
     "printer": "",
     "dimensions": ""
   },
+  "_imageDimensions": [
+    {
+      "file": "1 SUPER ZOOM.png",
+      "px": "1448x1086",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "1 ZOOM.webp",
+      "px": "4984x3320",
+      "aspect": "1.50:1"
+    },
+    {
+      "file": "1.png",
+      "px": "2688x1792",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "2 ZOOM.webp",
+      "px": "4984x2492",
+      "aspect": "2:1 (2.00)"
+    },
+    {
+      "file": "2.png",
+      "px": "3072x1536",
+      "aspect": "2:1 (2.00)"
+    },
+    {
+      "file": "3 zoom .webp",
+      "px": "4984x3320",
+      "aspect": "1.50:1"
+    },
+    {
+      "file": "3.png",
+      "px": "3072x1536",
+      "aspect": "2:1 (2.00)"
+    },
+    {
+      "file": "4 ZOOM.webp",
+      "px": "4984x1981",
+      "aspect": "2.52:1"
+    },
+    {
+      "file": "4.png",
+      "px": "3456x1376",
+      "aspect": "2.51:1"
+    },
+    {
+      "file": "5 ZOOM.png",
+      "px": "1536x1024",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "5.png",
+      "px": "3072x1536",
+      "aspect": "2:1 (2.00)"
+    },
+    {
+      "file": "6 zoom.webp",
+      "px": "4984x3320",
+      "aspect": "1.50:1"
+    },
+    {
+      "file": "6.png",
+      "px": "2688x1792",
+      "aspect": "3:2 (1.50)"
+    },
+    {
+      "file": "ChatGPT Image May 20, 2026, 02_40_40 PM.png",
+      "px": "1448x1086",
+      "aspect": "4:3 (1.33)"
+    },
+    {
+      "file": "ZOOM.webp",
+      "px": "4984x2492",
+      "aspect": "2:1 (2.00)"
+    },
+    {
+      "file": "iceberg10 copy.webp",
+      "px": "2004x2004",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "lisawoodstudio_httpss.mj.run0EJkpwC1ZvQ_This_long_exposure_phot_bdd86cb7-ad01-43a5-a6af-9e380f10e09d.webp",
+      "px": "2000x2000",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "lisawoodstudio_httpss.mj.run6JGgwGzSFlE_This_photograph_capture_57e1bafe-6727-46be-8fad-87f15f54a45e.webp",
+      "px": "2000x2000",
+      "aspect": "1:1 (1.00)"
+    },
+    {
+      "file": "lisawoodstudio_httpss.mj.runCQnZ_QVBdWg_a_vast_horizontal_lands_875d695d-8476-46b0-8b58-4466fcddea45.png",
+      "px": "3456x1376",
+      "aspect": "2.51:1"
+    },
+    {
+      "file": "lisawoodstudio_httpss.mj.runDp67xOoB8Kk_httpss.mj.runpKPe93jpFh_f31552f4-ccbf-4c1b-9853-332422300d55.webp",
+      "px": "2000x1000",
+      "aspect": "2:1 (2.00)"
+    },
+    {
+      "file": "lisawoodstudio_httpss.mj.runa5u0zfol4SM_httpss.mj.run-uoYAR8MLg_783e1c5b-b2e8-4463-9522-6b928640c269.webp",
+      "px": "2000x1000",
+      "aspect": "2:1 (2.00)"
+    },
+    {
+      "file": "lisawoodstudio_httpss.mj.runjYPZkRUqQ9U_This_photograph_capture_deb68c69-9884-44f9-9c11-50be23877d9d.webp",
+      "px": "2000x2000",
+      "aspect": "1:1 (1.00)"
+    }
+  ],
   "_sources": [
     "FLIPPED/Content/FLIPPED.docx",
     "FLIPPED/Content/MASTER PRODUCTION DOCUMENT_Flipped.docx"

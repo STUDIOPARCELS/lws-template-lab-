@@ -9,7 +9,7 @@
   "medium": "LED Screen, Animated Text",
   "process": "",
   "edition": "",
-  "cta": "",
+  "cta": "Inquire",
   "descriptionSections": {
     "scientific": "",
     "visual": "",
@@ -22,6 +22,13 @@
     "printer": "",
     "dimensions": "LED Screen: 13ft W X 4ft H X 3.5in D"
   },
+  "_imageDimensions": [
+    {
+      "file": "ecs 3 copy 2.jpg",
+      "px": "4396x2473",
+      "aspect": "1.78:1"
+    }
+  ],
   "_sources": [
     "ECS/Content/ECS.docx"
   ],
