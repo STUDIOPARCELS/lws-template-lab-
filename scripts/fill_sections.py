@@ -47,8 +47,8 @@ def build_sections(p):
     narr = p.get("narrative",""); year = p.get("year",""); loc = p.get("location","")
     ds = p.get("descriptionSections",{}) or {}; aa = p.get("artworkAtoms",{}) or {}
     title = p.get("title","");
-    sci = ds.get("scientific","") or p.get("process","")
-    vis = ds.get("visual","")    or p.get("visualDescription","")
+    sci = ds.get("scientific","")   # exact lab binding (no fallback)
+    vis = ds.get("visual","")       # exact lab binding (no fallback)
     atm = ds.get("atmospheric","")
     mat = aa.get("material",""); printer = aa.get("printer","")
     S = {}
@@ -121,13 +121,11 @@ def wire_images(pid, sections):
 
 # ------------------------------------------------- lab export math (buildComposedPageHTML)
 def render_section(layers):
-    ys=[l["y"] for l in layers]; bots=[l["y"]+l["h"] for l in layers]
-    minTop=min(ys); maxBot=max(bots); pad=max(minTop,3)
-    Hpx=((maxBot-minTop)+2*pad)/100*720
-    out=[f'<section style="width:100%;max-width:1280px;aspect-ratio:1280 / {Hpx:.1f};margin:0 auto;position:relative;background:#faf8f5;overflow:hidden;">']
+    # FIXED 1280x720 canvas — exactly as tuned in the lab. Exact x/y/w/h percentages,
+    # no fit/rescale. This is the canvas the user designs on (16:9, centered on page).
+    out=['<section style="width:100%;max-width:1280px;aspect-ratio:16 / 9;margin:0 auto;position:relative;background:#faf8f5;overflow:hidden;">']
     for l in layers:
-        topPx=(l["y"]-minTop+pad)/100*720
-        st=f'position:absolute;left:{l["x"]}%;top:{topPx/Hpx*100:.2f}%;width:{l["w"]}%;height:{(l["h"]/100*720)/Hpx*100:.2f}%;'
+        st=f'position:absolute;left:{l["x"]}%;top:{l["y"]}%;width:{l["w"]}%;height:{l["h"]}%;'
         if l["type"]=="text":
             out.append(f'<div style="{st}" class="lws-{l["role"]}">{H.escape(l["content"]).replace(chr(10),"<br>")}</div>')
         elif l.get("imageUrl"):
