@@ -155,14 +155,22 @@ Lisa asked that every **photography** project carry an ethereal prose descriptio
 so a blind visitor can picture the image (distinct from the keyword `descriptionSections.visual`). A new
 top-level field **`visualDescription`** was added to **winterblue, flipped, palouse**, written after
 viewing representative imagery from each project's folder. Per Lisa, the format is **short comma-separated fragments of one, two, or three words** — no uniform
-pattern, NOT sentences, NOT abstract art-jargon ("warm minimalism" was rejected). Each blends
-material/color/what-it-resembles with the **scientific fact that grounds it** for a non-seeing reader.
-Current text lives in each entry's `visualDescription` and in `visual-descriptions.json`. Examples:
-- **white-sands** — `gypsum, plaster, blinding white, dripping plaster, meringue peaks, melting wax, soft folds, pure mineral` (gypsum = the mineral that makes plaster)
-- **simpson** — `red centre, Australia, iron-red sand, oxblood, trailing vines, dark veins, black flecks, aerial, cracked leather`
-- **winterblue** — `midnight blue, indigo, cobalt, ice blue, monochromatic, snow, wind-carved drifts, moon, moonlight, distant ranges, sub-zero, still` (monochromatic blues)
-- **flipped** — `cinematic, monumental, icebergs, glacial ice, luminous blue-white, looming peaks, black mirror water, backlit glow, moody, suspended, widescreen, otherworldly, inverted`
-- **omani-landscapes** — `pink, green, feminine, bread browns, earth tones, speckled grain, dissolved landform, dunes, mountains, form versus function`
+pattern, NOT sentences, NOT abstract art-jargon ("warm minimalism" rejected), no redundant words ("wet"
+is implied by pools/meltwater/dripping; "crusty"/"haloed moon"/"gold horizon" removed). **The count varies
+by project** (5–10 fragments — some spare, some richer). Each blends material/color/what-it-resembles with
+the **scientific fact that grounds it** for a non-seeing reader. All eleven were reviewed against these
+rules in this pass (tracked as a 12-item to-do list). Current set:
+- **surface-surveys** (8) — `ice, sand, lava, gypsum, granite, red dune, elemental, ambiguous scale`
+- **greenland** (6) — `glacial ice, meltwater, turquoise, cobalt, crevasses, aerial`
+- **white-sands** (6) — `gypsum, plaster, blinding white, dripping plaster, meringue peaks, close or aerial`
+- **wahiba** (5) — `Wahiba Sands, honey-gold, quartz grains, wind ripples, scribed circles`
+- **craters** (8) — `basalt, cooled lava, black, rust-red, gold lichen, lime lichen, iron stain, aerial or close`
+- **simpson** (6) — `red centre, Australia, iron-red, oxblood, trailing vines, aerial`
+- **city-of-rocks** (5) — `granite, salt-and-pepper grey, rust-orange, acid-yellow lichen, pockmarked`
+- **omani-landscapes** (7) — `pink, green, feminine, bread browns, earth tones, dissolved landform, form versus function`
+- **winterblue** (8) — `midnight blue, indigo, ice blue, monochromatic, snow, wind-carved drifts, moonlight, sub-zero`
+- **flipped** (10) — `cinematic, monumental, icebergs, luminous blue-white, looming peaks, black mirror water, backlit, moody, otherworldly, inverted`
+- **palouse** (5) — `loess hills, wind-blown silt, rolling, plow-line corduroy, spare`
 
 **Excluded:** field / documentary / scouting images (people, vehicles, camps, establishing shots) are NOT
 artworks and are not described — only the abstract surface/landscape artworks.
