@@ -154,11 +154,13 @@ photographs.
 Lisa asked that every **photography** project carry an ethereal prose description of the terrain / subject,
 so a blind visitor can picture the image (distinct from the keyword `descriptionSections.visual`). A new
 top-level field **`visualDescription`** was added to **winterblue, flipped, palouse**, written after
-viewing representative imagery from each project's folder. Per Lisa, the format is **concrete, sensory, blind-accessible** comma-separated descriptors — materials,
-colors, and what each surface physically resembles — NOT abstract art-jargon ("warm minimalism" was
-rejected). Current text lives in each entry's `visualDescription` and in `visual-descriptions.json`. Example:
-- **winterblue** — `snow-covered prairie at night in deep midnight-blue and indigo, wind-carved ridges and crusty drifts catching faint silver light, a pale haloed moon…`
-- **palouse** — `smooth rolling farmland hills in soft waves of green and brown, fine parallel plow lines following the curves like combed corduroy…`
+viewing representative imagery from each project's folder. Per Lisa, the format is **short comma-separated fragments of one, two, or three words** — no uniform
+pattern, NOT sentences, NOT abstract art-jargon ("warm minimalism" was rejected). Each blends
+material/color/what-it-resembles with the **scientific fact that grounds it** for a non-seeing reader.
+Current text lives in each entry's `visualDescription` and in `visual-descriptions.json`. Examples:
+- **white-sands** — `gypsum, plaster, blinding white, dripping wet plaster, meringue peaks, melting wax, soft folds, pure mineral` (gypsum = the mineral that makes plaster)
+- **simpson** — `red centre, Australia, iron-red sand, oxblood, trailing vines, dark veins, black flecks, aerial, cracked leather`
+- **palouse** — `loess hills, wind-blown silt, rolling, green, brown, plow-line corduroy, furrows, pale sky, spare, sculpted`
 
 **Excluded:** field / documentary / scouting images (people, vehicles, camps, establishing shots) are NOT
 artworks and are not described — only the abstract surface/landscape artworks.
