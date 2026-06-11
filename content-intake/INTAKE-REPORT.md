@@ -154,10 +154,11 @@ photographs.
 Lisa asked that every **photography** project carry an ethereal prose description of the terrain / subject,
 so a blind visitor can picture the image (distinct from the keyword `descriptionSections.visual`). A new
 top-level field **`visualDescription`** was added to **winterblue, flipped, palouse**, written after
-viewing representative imagery from each project's folder:
-- **winterblue** — deep indigo/cobalt nocturnal snow prairie, wind-sculpted drifts, haloed moon, gold horizon seam, distant ranges.
-- **flipped** — luminous blue-white icebergs rising from near-black still water, glowing against a dark gradient sky.
-- **palouse** — rolling farmland hills in soft waves, green crop and tilled-earth bands in fine contour rows under a pale open sky.
+viewing representative imagery from each project's folder. Per Lisa, the format is short evocative
+words / two-word phrases separated by commas (6–8 max) — not sentences — meant to conjure the image:
+- **winterblue** — `nocturnal blue, snowbound prairie, wind-carved drifts, haloed moon, frozen minimalism, cold light, distant ranges`
+- **flipped** — `luminous icebergs, blue-white ice, near-black water, ethereal glow, stark minimalism, inverted planes`
+- **palouse** — `minimalist, monochromatic, Becher-esque typology, patterned fields, grain striations, rolling contours, spare horizon` (Bernd & Hilla Becher reference per Lisa)
 
 Installations were **not** given `visualDescription` (Lisa scoped this to photography). The existing SSOT
 photography in `data/ssot-projects.json` (Surface Surveys collection + 6 chapters, Omani Landscapes) does
