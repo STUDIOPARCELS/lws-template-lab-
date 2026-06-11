@@ -143,7 +143,14 @@ Stripe/Xero/WLT automation), `You are correct.docx` (AI chat transcript), `FLIPP
 - **Luxuriate split into 4 entries** (umbrella + book + "December, Sun Valley" + LUX) confirmed.
 - **All photography editions are identical: `of 3, 2 APs`** — applied to winterblue, flipped, palouse. (Installations carry no edition.)
 
+## Paper / fabrication (confirmed by Lisa)
+All photography now prints on **archival pigment, Hahnemühle bright white baryta** — applied to winterblue,
+flipped, and palouse. Lisa confirmed they switched all papers to this, so the earlier website-stated
+"Kodak Glossy" for Winterblue was superseded and replaced (Winterblue's "mounted on painted maple wood"
+mounting note retained). Printer not restated this round; Winterblue keeps "Laumont Photographic, New York"
+(from the site); flipped/palouse `printer` left empty pending confirmation (house printer is likely Laumont).
+
 ## Remaining open items
 1. Minor verbatim typos left as-is: Attention "from 200" (likely 2001); Mind the Gap "26ft W".
-2. **Palouse fabrication** (paper/printer) still unspecified — left empty (not assumed; differs per project, e.g. Winterblue uses Kodak Glossy).
+2. **Printer** for flipped/palouse unconfirmed (Laumont assumed elsewhere but not stated for these).
 3. Want a standalone **practice** entry from `/#practice`? Not created yet.
