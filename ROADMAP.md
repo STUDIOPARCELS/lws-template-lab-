@@ -60,7 +60,7 @@ and sequences sections for editorial impact. This is the core differentiator.
 - **CTA:** button label = "Inquire" (all). But the **post-click action differs by discipline** (Installation vs Photographs vs Conceptual) — wire per-discipline later.
 - **Title display:** store clean title case in SSOT; render ALL-CAPS via one CSS rule (matches the live site, e.g. "SURFACE SURVEYS").
 - **Image/folder architecture:** delegated to Claude → locked in `data/image-manifest.json` (manifest is the single source of truth; non-destructive; one folder per project/child).
-- **Installation years — ⚠️ NEEDS CONFIRM:** Lisa said "2002" for Attention, Mind the Gap, 21st Century B&W, Side Effects, ECS. But the source docs the intake read say **2022** (Side Effects, Attention, Mind the Gap) and **2021** (ECS) — and Attention's own narrative chronicles search data *through 2021*, which is impossible for a 2002 work. Strongly suspect "2002" is a voice slip for **2022**. HOLD until confirmed.
+- **Installation years — ✅ CONFIRMED 2022** (Lisa, 06-11): Side Effects, Attention, Mind the Gap, 21st Century B&W, ECS all = **2022** ("2002" was a voice slip). Note: ECS's source doc read 2021 but Lisa grouped it at 2022 → using 2022; flag if ECS should be 2021. Luxuriate stays 2018–2020.
 - **Still open (non-blocking, proceeding on these defaults unless corrected):** Attention narrative "from 200" → "2001" (the data-start year in the text, separate from artwork year); Mind the Gap display title ("Mind the Gap" vs source "MIND | FIND THE GAP") + dimension typo (`26ft W`); Palouse 60×40&quot; print dims.
 
 - **Viceroy: removed — not part of this site.**
