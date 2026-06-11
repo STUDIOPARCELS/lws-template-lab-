@@ -981,6 +981,12 @@
       const vis = p.descriptionSections?.visual || '';
       const mat = p.artworkAtoms?.material || '';
 
+      // ── Canonical spatial grid (1280-wide canvas) ───────────────────────────
+      // Page margin = 8% each side → content spans x:8 … x:92 (84% wide).
+      // Tab stop for metadata values = x:24. Full-bleed images intentionally
+      // break the margin to 0/100. The grid-8 keeps its wider, deliberately-set
+      // padding. Every text/content edge otherwise snaps to 8 / 92.
+      // ─────────────────────────────────────────────────────────────────────────
       if (name === 'full-image-hero') {
         // Full Image Hero 16:6 ~30% height as requested
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER (Supabase future)', x:0, y:35, w:100, h:30});
@@ -1007,8 +1013,8 @@
         layers.push({id:generateId(), type:'text', role:'description-section-value', content: (p.descriptionSections?.atmospheric || ''), x:8, y:36, w:84, h:12});
       } else if (name === 'full-bleed') {
         layers.push({id:generateId(), type:'image', role:'', content:'IMAGE PLACEHOLDER', x:0, y:0, w:100, h:72});
-        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:6, y:76, w:88, h:7});
-        layers.push({id:generateId(), type:'text', role:'metadata-value', content: `${year}  •  ${loc}`, x:6, y:88, w:88, h:5});
+        layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:76, w:84, h:7});
+        layers.push({id:generateId(), type:'text', role:'metadata-value', content: `${year}  •  ${loc}`, x:8, y:88, w:84, h:5});
       } else if (name === 'text-first') {
         layers.push({id:generateId(), type:'text', role:'project-title-h1', content: title, x:8, y:10, w:84, h:7});
         layers.push({id:generateId(), type:'text', role:'narrative-description-body', content: narr, x:8, y:20, w:74, h:30});
@@ -1046,19 +1052,19 @@
         for (let _r = 0; _r < 2; _r++) for (let _c = 0; _c < 4; _c++)
           layers.push({id:generateId(), type:'image', role:'', content:'IMAGE ' + (_r*4+_c+1), x:_gx + _c*(_gw+_ggx), y:_gy + _r*(_gh+_ggy), w:_gw, h:_gh});
       } else if (name === 'grid-4') {
-        const _qw = 19, _qx = 8.5, _qgx = 2.5;
+        const _qw = 19.125, _qx = 8, _qgx = 2.5; // 4 cells span x:8…92 symmetrically (8 + 4·19.125 + 3·2.5 = 92)
         for (let _c = 0; _c < 4; _c++)
           layers.push({id:generateId(), type:'image', role:'', content:'IMAGE ' + (_c+1), x:_qx + _c*(_qw+_qgx), y:22, w:_qw, h:56});
       } else if (name === 'quote') {
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE', x:6, y:22, w:30, h:50});
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE', x:8, y:22, w:30, h:50});
         layers.push({id:generateId(), type:'text', role:'pull-quote', content:'“The final film and image series didn’t just elevate our campaign — it redefined how our audience perceives us.”', x:42, y:24, w:50, h:34});
         layers.push({id:generateId(), type:'text', role:'description-section-label', content:'NAME — ROLE  /  COMPANY', x:42, y:62, w:50, h:5});
       } else if (name === 'annotated') {
-        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE', x:6, y:8, w:88, h:84});
-        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'DESIGN & STRATEGY', x:7, y:3.5, w:40, h:4});
-        layers.push({id:generateId(), type:'text', role:'description-section-label', content: title, x:54, y:3.5, w:39, h:4});
-        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'LISA WOOD STUDIO', x:7, y:92.5, w:40, h:4});
-        layers.push({id:generateId(), type:'text', role:'description-section-label', content: (loc || ''), x:54, y:92.5, w:39, h:4});
+        layers.push({id:generateId(), type:'image', role:'', content:'IMAGE', x:8, y:8, w:84, h:84});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'DESIGN & STRATEGY', x:8, y:3.5, w:40, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content: title, x:54, y:3.5, w:38, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content:'LISA WOOD STUDIO', x:8, y:92.5, w:40, h:4});
+        layers.push({id:generateId(), type:'text', role:'description-section-label', content: (loc || ''), x:54, y:92.5, w:38, h:4});
       } else if (name === 'blank') {
         // nothing
       }
