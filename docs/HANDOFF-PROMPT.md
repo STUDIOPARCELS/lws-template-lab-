@@ -1,71 +1,85 @@
-# HANDOFF PROMPT — paste into a NEW Claude Code session (Fable 5)
+# HANDOFF PROMPT — new Claude Code session (Fable 5)
 
-> **How to launch (PowerShell):**
-> ```
-> cd "D:\LWS\OBSERVATORY FINAL\WEBSITE\WEBSITE FOLDERS"
-> claude --model claude-fable-5
-> ```
-> Then paste everything in the block below. Starting LOCALLY matters: the missing
-> renderer code is most likely in this folder.
+> **Where to open:** repo **`STUDIOPARCELS/lisa-wood-studio`** (the engine). Branch
+> `rescue/unify-20260609` is the latest known-good (deployed 2026-06-09).
+> Paste the block below as the first message.
 
 ```
-You are picking up Lisa Wood Studio's website/template system. Read fully before acting.
-A prior cloud session wasted effort in the wrong system — these findings are VERIFIED, trust them.
+You are picking up Lisa Wood Studio's website engine. Read fully before acting.
+These findings are VERIFIED (2026-06-11) — trust them, don't re-derive.
 
 ═══ MISSION ═══
-Lisa already designed and saved ~78 filled template sections. Recover their renderer,
-assemble them into project pages, show Lisa rendered pages on a sandbox preview, iterate,
-and promote to production only on her approval. NEVER invent templates or freestyle HTML.
+THIS repo (lisa-wood-studio) is the engine: it renders Lisa's slot-based templates from
+Supabase into project pages. Goal: get every project's page composed from her saved
+templates, reviewable on a sandbox preview, promoted to production on her approval —
+and make "add a project → page appears for approval" a repeatable loop.
 
-═══ VERIFIED SYSTEM MAP (2026-06-11) ═══
-• Lisa's REAL templates = a SLOT-BASED system. 78 rows in Supabase table `lws_template_pages`
-  (project ref `aawnkxnnrymqbysgimqj`, "SURFACE SURVEYS" project, org STUDIO PARCELS).
-  Saved 2026-05-23 → 05-30 across 2 drafts. 10 template kinds:
-  project-hero · project-desktop · brand-splash · blackout-desktop · landscape-hero ·
-  split-hero · triptych · detail-grid · detail-grid-single-row · analysis-poster-pair
-  Each row: template_id, project_slug, sort_order, placement(hero|body), reveal(fade|up),
-  text_slots[] {slotId,label,value,style{role,weight},visible},
-  image_slots[] {slotId,label,fullSrc,assetSrc(/render/image/ transform),storagePath,
-                 crop{x,y},transform{flipX,flipY},visible}.
-  A page = all rows for one project_slug ordered by sort_order. EVERYTHING needed to
-  rebuild pages is in these rows EXCEPT the layout code per template kind.
-• templatelab.lisawoodstudio.com = Vercel project `lws-template-lab` = GitHub repo
-  STUDIOPARCELS/lws-template-lab- (main). That app is a NEWER canvas tool (13 hardcoded
-  absolute-position templates, saves to `lws_cloud_workspace`) — it is NOT the slot system
-  and did NOT write the 78 rows. Do not confuse them.
-• THE MISSING PIECE: the slot renderer (layout code for the 10 kinds). It is NOT in the
-  lws-template-lab repo, NOT in observatory.lisawoodstudio.com HTML, NOT in lisa-wood-studio's
-  HTML shell. STRONG LEAD: this local archive contains `template-lab/`, `template-lab-current/`,
-  and `TEMPLATE PAGES EXAMPLES/` folders. Also possible: a Figma Make app (the
-  `make-e667ad39-images` bucket + `kv_store_e667ad39` table suggest one existed).
-• Slot images were uploaded to bucket "LISA WOOD STUDIO WEBSITE" under
-  `template-lab/<project>/<template-id>/<slotId>/<timestamp>-<file>`.
-• `lws_project_content` (18 rows) = canonical project SSOT (narrative_description, years,
-  location, medium, all 5 *_description fields, artwork_atoms, cta...).
-• Content intake already done: branch `content/local-intake` in the GitHub repo (verbatim
-  extractions from this archive + INTAKE-REPORT.md). Confirmed facts: installations all 2022;
-  Flipped 2023–2026 (Ilulissat Icefjord, generative AI + Leica); Winterblue 2023 Camas Prairie
-  (125-photo contact sheet, Leica S007 + iPhone); Palouse 2013 Nikon D800; Luxuriate =
-  umbrella + 3 children (book, one-night installation, LUX public art); 21st Century in
-  Black & White = Installation; disciplines in scope = Photographs + Installation only.
+═══ VERIFIED SYSTEM MAP ═══
+• ENGINE (this repo): Next.js 16. Routes incl. /templates, /template-preview/[...],
+  /projects/[slug], /disciplines/[slug], /work/[slug] (~75 pages),
+  /project-section-organizer, APIs /api/template-pages, /api/template-pages/project-heroes,
+  /api/template-images, /api/template-user-images/[...path].
+  Vercel projects: lisa-wood-studio (+ lisa-wood-studio-sandbox for previews). Deployment
+  protection (Vercel Auth) is ON — Lisa can view previews in her browser.
+• DATA (Supabase "SURFACE SURVEYS", ref aawnkxnnrymqbysgimqj, org STUDIO PARCELS):
+  - lws_template_pages (78 rows, saved 2026-05-23→30, drafts: draft-1=53, hero=25) =
+    Lisa's filled slot templates. 10 kinds: project-hero, project-desktop, brand-splash,
+    blackout-desktop, landscape-hero, split-hero, triptych, detail-grid,
+    detail-grid-single-row, analysis-poster-pair. Rows: template_id, project_slug,
+    sort_order, placement(hero|body), reveal, text_slots[]{slotId,label,value,style,visible},
+    image_slots[]{slotId,fullSrc,assetSrc,storagePath,crop,transform,visible}.
+  - lws_project_content (18 rows) = canonical SSOT (narrative_description, years, location,
+    medium, process, dimensions, edition, cta, 5 *_description fields, poetic_words,
+    ethereal_description, artwork_atoms, field_images_path).
+  - Storage bucket "LISA WOOD STUDIO WEBSITE" (public) = all media; slot uploads under
+    template-lab/<project>/<template>/<slot>/; project folders incl.
+    surface-surveys/<chapter>/photos/full-res, flipped/final-photos/web-2000px,
+    WINTERBLUE/, OMANI LANDSCAPES/, SIDE EFFECTS/, ATTENTION/, ECS/, MIND THE GAP/,
+    LUXURIATE IN DISCOMFORT/, 21st Century/. PALOUSE has no folder yet.
+• RELATED REPOS (context, mostly hands-off):
+  - LWS_WEBSITE-sandbox → observatory.lisawoodstudio.com = current LIVE site (older gen).
+  - lws-template-lab- = canvas sketch tool @ templatelab.lisawoodstudio.com (superseded) BUT
+    holds valuable docs/data on branch sandbox/claude: ROADMAP.md, BUILD-PLAN.md,
+    docs/IMAGE-INVENTORY.md, data/ssot-projects.json (19 entries incl. new projects),
+    content-intake/ (verbatim local-archive extractions + INTAKE-REPORT.md).
+  - LWS_WEBSITE, STUDIO-WEBSITE, observatory-presentation = older generations (confirm, then archive).
+  - kohler-*, solokit-*, micron-*, budget-*, mission-control = unrelated ventures. IGNORE.
 
-═══ FIRST MOVES (in order) ═══
-1. INVENTORY this folder for the slot renderer: look in `template-lab-current/`, `template-lab/`,
-   `TEMPLATE PAGES EXAMPLES/` for code containing `text_slots` / `image_slots` / `project-hero` /
-   `lws_template_pages`. Report what each folder contains BEFORE changing anything.
-2. Show Lisa what you found; confirm which is the canonical renderer.
-3. Render ONE page from the real data: pull White Sands' 8 rows from `lws_template_pages`
-   (Supabase MCP or REST with her anon key) → render through the recovered renderer →
-   save HTML → show Lisa.
-4. If (and only if) no renderer exists anywhere: rebuild the 10 layouts faithfully from
-   Lisa's screenshots/examples, one at a time, with her sign-off per template.
-5. Then: assemble all projects' pages, deploy to the sandbox (repo branch `sandbox/claude`
-   → Vercel preview), Lisa approves → promote to production.
+═══ CONFIRMED CONTENT FACTS (from Lisa, 2026-06-11) ═══
+Disciplines in scope: Photographs + Installation ONLY (Writing/Conceptual/Apps later).
+Photographs: Surface Surveys (6 chapters; bespoke collection) · Omani Landscapes ·
+Winterblue (2023, Camas Prairie, 125-photo contact sheet, Leica S007 + iPhone) ·
+Flipped (2023–2026, Ilulissat Icefjord, generative AI + Leica) · Palouse (2013, Nikon D800).
+Installation: Side Effects · Attention · ECS · Mind the Gap · 21st Century in Black & White
+(ALL 2022) · Luxuriate in Discomfort (2018–2020 umbrella; children: book 2020, one-night
+installation "December, Sun Valley" 2020, LUX public art 2024; bespoke collection).
+Homepage features Surface Surveys + Luxuriate in Discomfort. About on homepage, not nav.
+"SUN VALLEY, IDAHO" corner tag. Titles display ALL-CAPS. CTA label "Inquire" everywhere
+(post-click differs per discipline, later). Lisa's narrative voice is sacred: verbatim or
+flagged-for-review only.
 
-═══ RULES (cost was paid for these) ═══
-1. Lisa's saved work in `lws_template_pages` is the source of truth. Query it; don't assume.
-2. Render templates EXACTLY as designed — recover the real renderer before any rebuilding.
-3. Never push to `main`/production without Lisa's explicit approval (sandbox preview first).
-4. Show Lisa RENDERED PAGES (files/URLs she can open) — never just tables or descriptions.
-5. Her voice: never rewrite her narratives; verbatim or flagged-for-review only.
+═══ GAPS TO CLOSE (the actual work) ═══
+1. lws_project_content has 18 rows but template coverage is uneven: rich for Surface Surveys
+   chapters + Flipped (7-8 templates each); thin (1 row, project-hero only) for winterblue,
+   mind-the-gap, luxuriate children, 21st-century. New projects may lack content rows —
+   reconcile with lws-template-lab-'s data/ssot-projects.json + content-intake/ (Lisa-approved).
+2. Render/QA every project page from existing rows; list which projects need more saved
+   templates; let Lisa fill those in her existing tools (or via the organizer).
+3. The "agent chooses section order per project" goal: /project-section-organizer exists —
+   evaluate it before building anything new.
+4. Sandbox→approve→production loop on lisa-wood-studio(-sandbox).
+
+═══ RULES (hard-won) ═══
+1. Lisa's saved work (lws_template_pages) is the source of truth — query, never assume.
+2. Render templates EXACTLY via this repo's real renderer. NEVER freestyle HTML/CSS.
+3. Never deploy to production without Lisa's explicit approval; preview first, always.
+4. Show Lisa RENDERED PAGES (URLs/files) — she judges visually, not from tables.
+5. Don't touch unrelated repos (kohler/solokit/micron/budget/mission-control).
+
+═══ FIRST MOVES ═══
+1. Map this repo: the template components (the 10 kinds), /api/template-pages, the
+   section organizer, how /projects/[slug] assembles rows.
+2. Show Lisa /templates and /projects/white-sands on the current preview — confirm this IS
+   the system she remembers building (May 23–30).
+3. Then execute the gap list above with her, one approved slice at a time.
 ```
