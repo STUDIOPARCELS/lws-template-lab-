@@ -158,9 +158,11 @@ viewing representative imagery from each project's folder. Per Lisa, the format 
 pattern, NOT sentences, NOT abstract art-jargon ("warm minimalism" was rejected). Each blends
 material/color/what-it-resembles with the **scientific fact that grounds it** for a non-seeing reader.
 Current text lives in each entry's `visualDescription` and in `visual-descriptions.json`. Examples:
-- **white-sands** — `gypsum, plaster, blinding white, dripping wet plaster, meringue peaks, melting wax, soft folds, pure mineral` (gypsum = the mineral that makes plaster)
+- **white-sands** — `gypsum, plaster, blinding white, dripping plaster, meringue peaks, melting wax, soft folds, pure mineral` (gypsum = the mineral that makes plaster)
 - **simpson** — `red centre, Australia, iron-red sand, oxblood, trailing vines, dark veins, black flecks, aerial, cracked leather`
-- **palouse** — `loess hills, wind-blown silt, rolling, green, brown, plow-line corduroy, furrows, pale sky, spare, sculpted`
+- **winterblue** — `midnight blue, indigo, cobalt, ice blue, monochromatic, snow, wind-carved drifts, moon, moonlight, distant ranges, sub-zero, still` (monochromatic blues)
+- **flipped** — `cinematic, monumental, icebergs, glacial ice, luminous blue-white, looming peaks, black mirror water, backlit glow, moody, suspended, widescreen, otherworldly, inverted`
+- **omani-landscapes** — `pink, green, feminine, bread browns, earth tones, speckled grain, dissolved landform, dunes, mountains, form versus function`
 
 **Excluded:** field / documentary / scouting images (people, vehicles, camps, establishing shots) are NOT
 artworks and are not described — only the abstract surface/landscape artworks.

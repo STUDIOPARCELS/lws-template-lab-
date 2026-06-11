@@ -2,15 +2,15 @@
   "_note": "visualDescription for every photography project: short comma-separated fragments of one, two or three words (no uniform pattern, not sentences), mixing material/color/what-it-resembles with the scientific fact that grounds it for a non-seeing reader (e.g. gypsum=the mineral in plaster; Simpson=the red centre of Australia, iron-red; Greenland=glacial ice & meltwater; Palouse=loess/wind-blown silt). winterblue/flipped/palouse carry this in their own files; merge surface-surveys + 6 chapters + omani-landscapes into data/ssot-projects.json as top-level `visualDescription`, rendered as image alt/longdesc. Aerial vs ground: Greenland & Simpson = aerial; Wahiba & City of Rocks = ground; White Sands & Craters = both; scale ambiguity is intentional. Field/documentary/scouting images (people, vehicles, camps) are NOT artworks and are excluded.",
   "visualDescription": {
     "surface-surveys": "ice, sand, lava, gypsum, granite, red dune, mineral surfaces, elemental, aerial or close, ambiguous scale",
-    "greenland": "glacial ice, meltwater, turquoise pools, cobalt, crevasses, shattered-glass cracks, white, wet, aerial, ice sheet",
-    "white-sands": "gypsum, plaster, blinding white, dripping wet plaster, meringue peaks, melting wax, soft folds, pure mineral",
+    "greenland": "glacial ice, meltwater, turquoise pools, cobalt, crevasses, shattered-glass cracks, white, aerial, ice sheet",
+    "white-sands": "gypsum, plaster, blinding white, dripping plaster, meringue peaks, melting wax, soft folds, pure mineral",
     "wahiba": "honey sand, quartz grains, wind ripples, scribed circles, seed-pods, soft dunes, golden, dry",
     "craters": "basalt, cooled lava, black, charcoal, rust-red, gold lichen, lime lichen, iron stain, cracked, pitted",
     "simpson": "red centre, Australia, iron-red sand, oxblood, trailing vines, dark veins, black flecks, aerial, cracked leather",
     "city-of-rocks": "granite, weathered stone, salt-and-pepper grey, rust-orange, acid-yellow lichen, lime lichen, pockmarked, cracked",
-    "omani-landscapes": "hot pink, acid green, yellow, violet, speckled grain, confetti, static, dissolved landform, dunes, mountains, synthetic, form versus function",
-    "winterblue": "midnight blue, indigo, snow, wind-carved drifts, crusty, haloed moon, gold horizon, black mountains, sub-zero, still",
-    "flipped": "icebergs, glacial ice, blue-white, jagged peaks, black water, glowing, ghostly, calm, inverted",
+    "omani-landscapes": "pink, green, feminine, bread browns, earth tones, speckled grain, dissolved landform, dunes, mountains, form versus function",
+    "winterblue": "midnight blue, indigo, cobalt, ice blue, monochromatic, snow, wind-carved drifts, moon, moonlight, distant ranges, sub-zero, still",
+    "flipped": "cinematic, monumental, icebergs, glacial ice, luminous blue-white, looming peaks, black mirror water, backlit glow, moody, suspended, widescreen, otherworldly, inverted",
     "palouse": "loess hills, wind-blown silt, rolling, green, brown, plow-line corduroy, furrows, pale sky, spare, sculpted"
   }
 }
