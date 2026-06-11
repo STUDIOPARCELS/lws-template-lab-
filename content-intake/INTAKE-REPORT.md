@@ -160,14 +160,36 @@ words / two-word phrases separated by commas (6–8 max) — not sentences — m
 - **flipped** — `luminous icebergs, blue-white ice, near-black water, ethereal glow, stark minimalism, inverted planes`
 - **palouse** — `minimalist, monochromatic, Becher-esque typology, patterned fields, grain striations, rolling contours, spare horizon` (Bernd & Hilla Becher reference per Lisa)
 
-Installations were **not** given `visualDescription` (Lisa scoped this to photography). The existing SSOT
-photography in `data/ssot-projects.json` (Surface Surveys collection + 6 chapters, Omani Landscapes) does
-**not** yet have `visualDescription` — see cloud-update instructions below.
+Installations were **not** given `visualDescription` (Lisa scoped this to photography).
+
+**Now drafted for ALL photography** (after viewing imagery from each chapter folder). The
+Surface Surveys collection, its six chapters, and Omani Landscapes were measured from their local images
+and given comma-phrase descriptions — collected in **`content-intake/visual-descriptions.json`** (a
+propagation map) for merging into `data/ssot-projects.json`:
+- **surface-surveys** — `aerial abstraction, elemental surface, mineral pattern, glacial-to-volcanic range, wind-shaped texture, serial chapters, Becher-like typology`
+- **greenland** — `aerial ice, cobalt meltwater, turquoise pools, white snowfield, crevasse veining, crystalline fracture`
+- **white-sands** — `powdery gypsum, near-white, mineral mottling, soft glare, bone-pale, rippled crust`
+- **wahiba** — `golden sand, fine grain, wind-combed lines, soft ridges, warm minimalism, desert hush`
+- **craters** — `black basalt, gold lichen, rust flecks, encrusted texture, volcanic crust, mineral density`
+- **simpson** — `rust-red expanse, parallel dunes, dendritic channels, aerial rhythm, speckled grain, immense scale`
+- **city-of-rocks** — `weathered granite, chartreuse lichen, fissured stone, speckled grey, sculptural surface, sagebrush-pale`
+- **omani-landscapes** — `saturated pattern, pointillist grain, dissolved landform, pink-green-violet, graphic abstraction, form-versus-function`
+
+### Omani Landscapes — enriched entry (NEW, `content-intake/omani-landscapes.json`)
+Lisa supplied the concept and a new source folder (`D:\LWS\ALL ARTWORKS\Omani Landscapes`, circa **2024**).
+**Concept — form vs. function:** Leica photographs of Oman are stripped in software to their underlying
+patterns, then rebuilt into something that no longer looks like a photograph. At the dawn of generative
+AI (which can spin up images that *look* like photographs but aren't), these are photographs that *don't*
+look like photographs — asking whether a photograph is defined by **form** (what it looks like) or
+**function** (how it was made). A full enriched entry was created (narrative studio-drafted from Lisa's
+spoken explanation — flagged inline; year 2024; medium = Leica capture + software pattern-extraction;
+edition of 3, 2 APs; Hahnemühle baryta / Laumont). This **supersedes the thinner existing
+`omani-landscapes` entry** in `data/ssot-projects.json` — merge/replace in the cloud session.
 
 ### Cloud-session instructions to propagate into `data/ssot-projects.json`
-1. Add a `visualDescription` (string) field to each **photography** project object. Copy the three from `content-intake/{winterblue,flipped,palouse}.json`.
-2. For the existing photography entries (`surface-surveys`, `greenland`, `white-sands`, `wahiba`, `craters`, `simpson`, `city-of-rocks`, `omani-landscapes`) add a `visualDescription` too — these currently only have the keyword `descriptionSections.visual`. Draft from each chapter's imagery (folders exist locally under `SURFACE SURVEYS/` and `OMANI LANDSCAPES/`); this Claude Code instance can generate them on request.
-3. Decide placement/rendering: render `visualDescription` as the image `alt`/longdesc for accessibility, and/or as a short on-page caption.
+1. Add a `visualDescription` (string) field to **every photography** project object, copying the values from `content-intake/visual-descriptions.json` (and from `{winterblue,flipped,palouse}.json`).
+2. Replace/merge the existing `omani-landscapes` object with `content-intake/omani-landscapes.json` (review the inline `[STUDIO-DRAFTED…]` narrative flag first).
+3. Render `visualDescription` as the image `alt`/longdesc for accessibility, and/or a short on-page caption.
 
 ## Remaining open items
 1. Minor verbatim typos left as-is: Attention "from 200" (likely 2001); Mind the Gap "26ft W".
