@@ -51,4 +51,5 @@ HTML/CSS.** (`demo-flipped.html` violated this — kept only as the lesson.)
 ## Learnings Log
 | # | From | Rule |
 |---|------|------|
-| 1 | Lisa, on demo-flipped | Compose ONLY from template-lab sections (geometry + `.lws-*` + lab export math). Never freestyle. |
+| 1 | Lisa, on demo-flipped | Compose ONLY from the lab's template sections — exact geometry + `.lws-*` type roles. Never freestyle HTML/CSS. |
+| 2 | Lisa, on review sheets | Render each section on the FIXED 1280×720 canvas (exact x/y/w/h %), as tuned in the lab — NOT the fit-to-content export (it distorted full-bleed + every section). |
