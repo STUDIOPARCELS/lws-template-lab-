@@ -167,7 +167,7 @@ reader. Current set (with per-fragment word-count pattern):
 - **white-sands** — `gypsum, plaster, blinding white, dripping plaster, meringue, soft folds`
 - **wahiba** — `Wahiba Sands, golden, quartz, wind ripples, scribed circles, dry`
 - **craters** — `basalt, black, rust-red, gold lichen, lime, iron stain, pitted, cracked`
-- **simpson** — `red centre, Australia, iron-red, oxblood, trailing vines, vast`
+- **simpson** — `red centre, iron-red, oxblood, trailing vines, vast`
 - **city-of-rocks** — `granite, speckled grey, rust-orange, acid-yellow lichen, lime, pockmarked, cracked`
 - **omani-landscapes** — `pink, green, feminine, bread browns, earth tones, dissolved landform, form versus function`
 - **winterblue** — `midnight blue, indigo, ice blue, monochromatic, snow, wind-carved drifts, moonlight, sub-zero`
