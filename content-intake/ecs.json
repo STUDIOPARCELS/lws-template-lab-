@@ -1,0 +1,29 @@
+{
+  "id": "ecs",
+  "title": "ECS",
+  "type": "installation",
+  "parent": "Installation",
+  "narrative": "In the clash between science and politics, an impossibly absurd anecdote reveals itself.\nServing as metaphor, ECS contemplates the history of the United States Controlled Substances Act as it relates to private vs. public interests, discrimination, and fear.\nThe endogenous cannabinoid system, named for the plant that led to its discovery, is one of the most important physiologic systems responsible for establishing and maintaining human health.",
+  "year": "2021",
+  "location": "",
+  "medium": "LED Screen, Animated Text",
+  "process": "",
+  "edition": "",
+  "cta": "",
+  "descriptionSections": {
+    "scientific": "",
+    "visual": "",
+    "geographic": "",
+    "atmospheric": "",
+    "spatial": ""
+  },
+  "artworkAtoms": {
+    "material": "",
+    "printer": "",
+    "dimensions": "LED Screen: 13ft W X 4ft H X 3.5in D"
+  },
+  "_sources": [
+    "ECS/Content/ECS.docx"
+  ],
+  "_confidence": "verbatim"
+}

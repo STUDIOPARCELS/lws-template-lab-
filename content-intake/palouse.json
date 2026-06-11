@@ -1,0 +1,27 @@
+{
+  "id": "palouse",
+  "title": "Palouse",
+  "type": "photography",
+  "parent": "Photography",
+  "narrative": "",
+  "year": "",
+  "location": "",
+  "medium": "",
+  "process": "",
+  "edition": "",
+  "cta": "",
+  "descriptionSections": {
+    "scientific": "",
+    "visual": "",
+    "geographic": "",
+    "atmospheric": "",
+    "spatial": ""
+  },
+  "artworkAtoms": {
+    "material": "",
+    "printer": "",
+    "dimensions": ""
+  },
+  "_sources": [],
+  "_confidence": "thin"
+}
